@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.http import HttpResponse
-from .models import BaiViet
+from .models import BaiViet,QuyDinhApDung
 from datetime import datetime
 
 def index(request):
@@ -25,6 +25,8 @@ def index(request):
         baiviet = baiviet[:2]
 
     return render(request, 'app/index.html', {'baiviet': baiviet, 'query': query, 'start_date': start_date, 'end_date': end_date})
-# def bai_viet_detail(request, mbv):
-#     bai_viet = get_object_or_404(BaiViet, MBV=mbv)
-#     return render(request, 'bai_viet_detail.html', {'bai_viet': bai_viet})
+def detail(request, mbv):
+    baiviet = get_object_or_404(BaiViet, MBV=mbv)
+    quydinhapdung = QuyDinhApDung.objects.select_related('MDT', 'MTC').filter(MBV=baiviet)
+    baivietkhac = BaiViet.objects.all()
+    return render(request, 'app/detail.html', {'baiviet': baiviet,'quydinhapdung': quydinhapdung, 'baivietkhac' : baivietkhac})

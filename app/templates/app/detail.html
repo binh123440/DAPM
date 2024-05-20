@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="initial-scale=1, width=device-width" />
-  <link rel="stylesheet" type="text/css" href=" {% static 'app/css/style.css' %} ">
+  <link rel="stylesheet" type="text/css" href=" {% static 'app/css/detail.css' %} ">
   <link rel="stylesheet" type="text/css" href=" {% static 'app/css/global.css' %} ">
   <script src="https://kit.fontawesome.com/a6d4c05032.js" crossorigin="anonymous"></script>
 </head>
@@ -46,71 +46,35 @@
     <section class="banner304015-1-wrapper">
       <img class="banner304015-1-icon" loading="lazy" alt="" src="{%static 'app/images/banner.png' %}" />
     </section>
-    <section class="index-user-inner">
-      <div class="frame-parent">
-        <div class="frame-wrapper">
-          <div class="divlanding-header-text-parent">
-            <div class="divlanding-header-text">
-              <div class="heading-2-welcome-to-parent">
-                <h1 class="heading-2">Chào mừng bạn đến với</h1>
-                <h1 class="heading-1">UTE University</h1>
-              </div>
-              <div class="ute-university-l">UTE University là nơi hỗ trợ mạnh mẽ cho sự phát triển cá nhân và học tập của sinh viên, chúng tôi hy vọng rằng trang web của chúng tôi sẽ đóng vai trò quan trọng trong việc thúc đẩy sự tiến bộ và thành công của cả cộng đồng sinh viên và nhà trường.</div>
-              <button class="link2">
-                <a href="" class="ng-k1">Đăng ký ngay</a>
-              </button>
+    <div class="content">
+        <div class="post-detail">
+            <p class="title bold">{{ baiviet.Noidung }}</p>
+            <div class="subtitle">
+                <p class="date">Ngày đăng: {{baiviet.Ngaydang | date:"d/m/Y H:i:s"}}</p>
+                <p class="author">Người đăng: {{baiviet.MNV.Hoten}}</p>
+            </div>   
+            <div class="time-application">
+                <p class="bold">- Thời gian: </p>
+                <p> từ ngày {{ baiviet.Ngaydang | date:"d/m/Y H:i:s" }} đến ngày {{ baiviet.NgayhetHieuluc | date:"d/m/Y H:i:s" }}</p>
             </div>
-            <div class="wrapper-divwistia-responsive-wrapper">
-              <div class="wrapper-divwistia-responsive-">
-                <img class="divwistia-responsive-padding-icon" loading="lazy" alt="" src="{%static 'app/images/banner1.png' %}" />
-              </div>
-            </div>
-          </div>
+            <p class="regulations bold">Quy Định Áp Dụng</p>
+            <p class="object bold">- Đối Tượng Chính Sách:</p>
+            {% for quydinh in quydinhapdung %} 
+                <p>+ {{quydinh.MDT.Mota }}</p>
+            {% endfor %}
+            <p class="criteria bold">- Tiêu Chí: </p>
+            {% for quydinh in quydinhapdung %}
+                <p>+ {{quydinh.MTC.Mota }}</p>
+            {% endfor %}
         </div>
-        <div class="frame-group">
-          <div class="fluent-emoji-high-contrastnew-parent">
-            <i class="fa-solid fa-newspaper"></i>
-            <div class="tin-tc-wrapper">
-              <h3 class="tin-tc">Bài viết</h3>
-            </div>
-          </div>
-          <div class="frame-container">
-            <div class="article-parent">
-              {% for bai in baiviet %}
-              <a href="{% url 'detail' bai.MBV %}" class="article">
-                <div class="before1"></div>
-                <div class="divcard-group">
-                  <img class="logo-ute-1-icon" loading="lazy" alt="" src="{%static 'app/images/logo_ute.png' %}" />
-                </div>
-                <div class="divcard-group1">
-                  <h1 class="heading-21">{{ bai.Noidung }}</h1>
-                  <div class="divcard-group-inner">
-                    <div class="frame-div">
-                      <div class="frame-wrapper1">
-                        <div class="image-1-parent">
-                          <img class="image-1-icon" alt="" src="{%static 'app/images/logo_ute.png' %}" />
-                          <div class="link-haris-butt-wrapper">
-                            <div class="link-haris">{{ bai.MNV.Hoten }}</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="svg-parent">
-                        <i class="fa-solid fa-clock"></i>
-                        <div class="wrapper">
-                          <div class="div">{{ bai.Ngaydang | date:"d/m/Y H:i:s" }}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-              {% endfor %}
-            </div>
-          </div>
+        <div class="post-other">
+            <p>Các bài khác</p>
+            {% for baikhac in baivietkhac %}
+                <a href="{% url 'detail' baikhac.MBV %}" class="purport">{{baikhac.Noidung}}</a>
+            {% endfor %}
         </div>
-      </div>
-    </section>
+       
+    </div>
     <section class="footer">
       <div class="footer-inner">
         <div class="frame-parent2">
