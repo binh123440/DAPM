@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký hồ sơ sinh viên thuộc viện chính sách</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ABeeZee:ital,wght@0,400;1,400&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap" />
+    <link rel="stylesheet" href="{%static 'app/css/DangKyHoSo.css' %}" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="cu-header-blob-wrapper">
+        <img class="cu-header-blob-blob" src="{%static 'app/assets/images/21fa571c-c502-4bee-a293-c624a002520c.png' %}" ></img>
+        <div class="cu-navigation-v-group">
+            <a href="{% url "DangKyHS" %}" class="dang-ky">Đăng ký</a
+            ><a href="" class="gioi-thieu">Giới thiệu</a
+            ><a href="" class="thong-bao">Thông báo</a
+            ><a href="" class="dao-tao">Đào tạo</a
+            ><a href="{% url "BaiViet" %}" class="bai-viet">Bài viết</a>
+        </div>
+        <button class="cu-navigation-v-group-7">
+          <img class="before" src="{%static 'app/assets/images/ad0cf9d6-26b8-4e5c-bde6-4db20838b6de.png' %}" >
+            <div class="after" src="{%static 'app/assets/images/64e67198-2cef-4030-8dca-2048976bfcfd.png' %}"><span class="dang-nhap">Đăng nhập</span></div>
+        </img></button
+        ><button class="cu-navigation-v-group-8">
+          <span class="contact-sales">Liên hệ</span></button
+        ><button class="cu-navigation-column">
+          <div class="link-picture-logo">
+            <div class="logo-fill">
+              <div class="logo">
+                <div class="flex-column">
+                  <img class="vector-9" src="{%static 'app/assets/images/b3417545-d965-4227-bc30-da22549b7a1b.png' %}"></img>
+                  <img class="vector-a" src="{%static 'app/assets/images/70afdb5f-25ca-41b5-a150-8464169961aa.png' %}"></img>
+                </div>
+                <img class="vector-b" src="{%static 'app/assets/images/3dbfd1eb-9259-434d-8c9e-8e6017905d51.png' %}"></img>
+              </div>
+            </div>
+          </div>
+        </button>
+        <div class="form">
+          <div class="flex-row">
+            <input class="input" name="ten"></input>
+            <span class="label-first-name">Họ và tên</span>
+            <span class="label-required">*</span>
+        </div>
+        <div class="flex-row-c">
+            <input class="input-d" name="msv"></input>
+            <span class="label-last-name">Mã sinh viên</span>
+            <span class="label-required-e">*</span>
+        </div>
+        <div class="flex-row-f">
+            <input class="input-10" name="email"></input>
+            <span class="label-work-email">Email sinh viên</span>
+            <span class="label-required-11">*</span>
+        </div>
+        <div class="flex-row-12">
+            <input class="input-13" name="sdt"></input>
+            <span class="label-company">Số điện thoại</span>
+            <span class="label-asterisk">*</span>
+        </div>
+        <div class="flex-row-ff">
+            <input class="input-13" name="dia_chi"></input>
+            <span class="label-company">Địa chỉ</span>
+            <span class="label-asterisk">*</span>
+        </div>
+        <div class="flex-row-ad">
+            <div class="options-15">
+                <input multiple class="image-jpg" name="anh_minh_chung" type="file" accept="image/*">
+            </div>
+            <span class="label-country-19">Ảnh minh chứng</span>
+            <span class="label-asterisk-1a">*</span>
+        </div>
+          <div class="mkto-button-row">
+            <div class="privacy-policy">
+              <span class="confirmation-text"
+                >Bằng cách gửi thông tin của mình, tôi xác nhận rằng tôi đã đọc
+                và hiểu </span
+              ><span class="clickup-privacy-policy"
+                >Chính sách bảo mật của ClickUp.h</span
+              >
+            </div>
+            <button class="button" id="dang-ky-ho-so">
+              <span class="span">Đăng ký xét hồ sơ</span>
+            </button>
+          </div>
+        </div>
+        {% comment %}  {% endcomment %}
+        <script>
+          var csrfToken = "{{ csrf_token }}";
+          document.getElementById('dang-ky-ho-so').addEventListener('click', function(event) {
+              event.preventDefault(); // Ngăn chặn hành vi mặc định của nút
+      
+              // Lấy dữ liệu từ form
+              var formData = new FormData();
+              formData.append('ten', document.querySelector('input[name="ten"]').value);
+              formData.append('msv', document.querySelector('input[name="msv"]').value);
+              formData.append('email', document.querySelector('input[name="email"]').value);
+              formData.append('sdt', document.querySelector('input[name="sdt"]').value);
+              formData.append('dia_chi', document.querySelector('input[name="dia_chi"]').value);
+              var anhMinhChung = document.querySelector('input[name="anh_minh_chung"]').files;
+              for (var i = 0; i < anhMinhChung.length; i++) {
+                  formData.append('anh_minh_chung', anhMinhChung[i]);
+              }
+      
+              // Gửi yêu cầu AJAX
+              fetch('{% url "dang-ky-ho-so" %}', {
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                      'X-CSRFToken': csrfToken,
+                      'X-Requested-With': 'XMLHttpRequest'
+                  }
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.success) {
+                      // Xử lý sau khi đăng ký thành công
+                      alert('Đăng ký hồ sơ thành công!');
+                  } else {
+                      // Xử lý lỗi
+                      alert('Đăng ký hồ sơ không thành công: ' + data.error);
+                  }
+              })
+              .catch(error => {
+                  console.error('Lỗi:', error);
+              });
+          });
+      </script>
+        {% comment %}  {% endcomment %}
+        <span class="span-1c">ĐĂNG KÝ HỒ SƠ SINH VIÊN CHÍNH SÁCH</span>
+        <img class="div-1d" src="{%static 'app/assets/images/3e126a30a512a2b9dac5ccea1e34fcd9390c6e3d.png' %}"></img>
+        <span class="span-1e"
+          >Chào mừng các bạn gia nhập cộng đồng sinh viên tại trường! Để hỗ trợ
+          các bạn tiếp cận chính sách học vụ và tài chính, chúng tôi cung cấp
+          nhiều dịch vụ và hỗ trợ, bao gồm chính sách ưu đãi cho sinh viên thuộc
+          viện chính sách.</span
+        >
+        <div class="div-1f">
+          <span class="span-20">
+            Chúng tôi luôn sẵn lòng hỗ trợ và giải đáp mọi thắc mắc của bạn.
+            Hoặc có thể truy cập trang web sau để tìm hiểu về các bước và thông
+            tin chi tiết về việc đăng ký : </span
+          ><span class="span-21">MIễn giảm học phí (udn.vn)</span>
+        </div>
+        <div class="div-22">
+          <div class="div-23"><img class="div-24" src="{%static 'app/assets/images/337d1146-965b-4828-a3d6-2ce8e22cd5e9.png' %}"></img></div>
+        </div>
+        <img class="div-25" src="{%static 'app/assets/images/10a5f8bf-896e-4ee4-82ed-2e972a12934e.png' %}" width = 24px height=24px></img>
+        <span class="span-26"
+          >Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng</span
+        >
+      </div>
+      <div class="div-27">
+        <img class="div-29" src="{%static 'app/assets/images/739a149e-0833-421a-a6fb-2e11a3b648eb.png' %}"></img>
+        <div class="div-2a"><img class="div-2b" src="{%static 'app/assets/images/8a158527-6d4e-4f0c-91a8-80fb4dc76c27.png' %}"></img></div>
+        <div class="div-2c"><img class="div-2d" src="{%static 'app/assets/images/660c3cfa-c3d2-483f-a958-d546711918fa.png' %}"></img></div>
+        <span class="span-2e">© 2024 ClickUp</span
+        ><span class="span-2f">Security</span
+        ><span class="privacy">Privacy</span><span class="terms">Terms</span>
+        <div class="component"><img class="vector-30" src="{%static 'app/assets/images/2861853e-8659-4bc4-a169-fbc9efe09edd.png' %}"></img></div>
+        <div class="component-31"><img class="vector-32" src="{%static 'app/assets/images/2861853e-8659-4bc4-a169-fbc9efe09edd.png' %}"></img></div>
+        <div class="component-33"><img class="vector-34" src="{%static 'app/assets/images/aae7392f-2fba-4dbd-8f08-c938b2544275.png' %}"></img></div>
+      </div>
+      <div class="aside">
+        <div class="cu-page-banner">
+          <button class="link">
+            <span class="discover-brain">Discover Brain</span>
+          </button>
+          <div class="icon-and-text-wrapper">
+            <div class="markdown-wrapper">
+              <span class="connect-clickup-brain"
+                >Connect all your tasks, docs, people, and knowledge with
+                ClickUp Brain</span
+              >
+            </div>
+            <div class="logo-clickup-brain-dark">
+              <div class="logo-clickup-brain-dark-fill">
+                <img class="logo-clickup-brain-dark-35" src="{%static 'app/assets/images/66415c64-7f2c-4c56-a4cb-715ad87e1db7.png' %}"></img>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="button-36">
+          <div class="banner-close-white">
+            <div class="banner-close-white-fill">
+              <img class="banner-close-white-37" src="{%static 'app/assets/images/ca7ad9db-27a6-4254-b874-705da4e5abde.png' %}"></img>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Generated by Codia AI - https://codia.ai/ -->
+  </body>
+</html>
