@@ -13,7 +13,8 @@
   <body>
     <div class="main-container">
       <div class="main-decoration">
-        {%for baiviet in baiviets %}
+        {%for baiviet in baiviets3 %}
+        {% if baiviet.MBV == 2 %}
         <div class="article">
           <div class="card-group"><image class="image" src="{{baiviet.AnhBia.url}}"></div>
           <div class="card-group-1">
@@ -28,6 +29,7 @@
           </div>
           <div class="before"></div>
         </div>
+        {% endif %}
         {% endfor %}
       </div>
       <div class="header">
@@ -66,6 +68,11 @@
               <div class="before-11"></div>
             </div>
             <span class="articles">Articles</span>
+            <form class="search_form" method="GET" action="">
+              <div class = "search_bar2"><input class="search_bar" type="text" name="search" placeholder="Tìm kiếm..."></div>
+              
+              <div class = "search_button2"><button class="search_button" type="submit">Tìm kiếm</button></div>
+            </form>
           </div>
           <div class="fieldset-button"><span class="recent">Recent</span></div>
           <div class="fieldset-button-12">
@@ -93,42 +100,8 @@
           </div>
           {% endif %}
           {% endfor %}
-          <div class="article-19">
-            <div class="before-1a"></div>
-            <div class="article-1b">
-              <img class="image-1c" src="{%static 'app/assets/images/79dcf21d2e81f5543087160cb80196d0b8d871d4.png' %}"><img class="image-1d" src="{%static 'app/assets/images/79dcf21d2e81f5543087160cb80196d0b8d871d4.png' %}"></img></img>
-              <div class="card-group-1e">
-                <span class="su-kien">Sự kiện</span
-                ><span class="le-tot-nghiep"
-                  >Trường ĐH Sư phạm Kỹ thuật – ĐH Đà Nẵng tổ chức Lễ tốt nghiệp
-                  và trao bằng Kỹ sư, Cử nhân năm 2024</span
-                ><span class="trung-tam-hoc-1f"
-                  >TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span
-                >
-                <div class="card-group-20">
-                  <span class="su-kien-21">Sự kiện</span
-                  ><span class="le-tot-nghiep-22"
-                    >Trường ĐH Sư phạm Kỹ thuật – ĐH Đà Nẵng tổ chức Lễ tốt
-                    nghiệp và trao bằng Kỹ sư, Cử nhân năm 2024</span
-                  >
-                  <div class="svg-23"><img class="icon-clock-24" src="{%static 'app/assets/images/fd46926c-c3d1-435f-a8d0-fc888dfb6b1d.png' %}"></img></div>
-                  <span class="date-25">27/04/2024</span>
-                  <img class="card-group-paints-26" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
-                  <span class="link-sarah-burner"
-                    >TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span
-                  >
-                </div>
-                <div class="svg-27"><img class="icon-clock-28" src="{%static 'app/assets/images/5ec115b0-d651-449d-9dca-34427ec054b2.png' %}"></img></div>
-                <span class="date-29">27/04/2024</span>
-              </div>
-              <div class="before-2a"></div>
-            </div>
-          </div>
-        </div>
-
-{% comment %} ---------------------------------------------------------------------- {% endcomment %}
-        <div class="flex-row-c-2b" id="articles-container">
           {% for baiviet in baiviets %}
+          {% if baiviet.MBV == 2 %}
           <div class="article-2c">
               <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
               <div class="card-group-2e">
@@ -143,6 +116,29 @@
               </div>
               <div class="before-34"></div>
           </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+
+{% comment %} ---------------------------------------------------------------------- {% endcomment %}
+        <div class="flex-row-c-2b" id="articles-container">
+          {% for baiviet in baiviets2 %}
+          {% if baiviet.MBV > 2 %}
+          <div class="article-2c">
+              <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
+              <div class="card-group-2e">
+                  <span class="link-productivity">Sự kiện</span>
+                  <span class="event">{{ baiviet.TieuDe }}</span>
+                  <div class="svg-2f">
+                      <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
+                  </div>
+                  <span class="date-31">{{ baiviet.Ngaydang }}</span>
+                  <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
+                  <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
+              </div>
+              <div class="before-34"></div>
+          </div>
+          {% endif %}
           {% endfor %}
         </div>
         <button class="button-6b">
@@ -152,7 +148,7 @@
 
         <script type="text/javascript">
           $(document).ready(function() {
-              var offset = 3;  // Bắt đầu từ bài viết thứ 4 (vì 3 bài viết đầu tiên đã được tải)
+              var offset = 5;  // Bắt đầu từ bài viết thứ 4 (vì 3 bài viết đầu tiên đã được tải)
 
               $('.button-6b').click(function() {
                   $.ajax({

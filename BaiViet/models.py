@@ -8,12 +8,19 @@ class LoaiDoiTuongChinhSach(models.Model):
     MLDT = models.IntegerField(primary_key=True)
     Mota = models.TextField()
 
+# Tạo danh sách đối tượng cho LoaiDoiTuongChinhSach
+
+
+
 class DoiTuongChinhSach(models.Model):
     MDT = models.AutoField(primary_key=True)
     Mota = models.TextField()
     Mucmiengiam = models.BigIntegerField()
     Thoigianhuong = models.IntegerField()
     MLDT = models.ForeignKey(LoaiDoiTuongChinhSach, on_delete=models.CASCADE, related_name='doituongchinhsach')
+
+
+
 
 class TieuChi(models.Model):
     MTC = models.AutoField(primary_key=True)
@@ -76,18 +83,20 @@ class HoSoDangKy(models.Model):
     TrangthaiXetduyet = models.IntegerField(null=True, blank=True)
     Ngayxetduyet = models.DateField(null=True, blank=True)
     Hocki = models.CharField(max_length=3)
-    # MDT = models.ForeignKey(DoiTuongChinhSach, on_delete=models.CASCADE, related_name='hosodangky')
+    MDT = models.ForeignKey(DoiTuongChinhSach, on_delete=models.CASCADE, related_name='hosodangky', null=True, blank=True)
 
 class ChiTietHoSo(models.Model):
     MHSDK = models.ForeignKey(HoSoDangKy, on_delete=models.CASCADE)
-    MTC = models.ForeignKey(TieuChi, on_delete=models.CASCADE)
+    MTC = models.ForeignKey(TieuChi, on_delete=models.CASCADE, null=True, blank=True)
     MHA = models.ForeignKey(HinhAnh, on_delete=models.CASCADE)
     class Meta:
         unique_together = ('MHSDK', 'MTC', 'MHA')
 
 class QuyDinhApDung(models.Model):
     MBV = models.ForeignKey(BaiViet, on_delete=models.CASCADE)
-    MDT = models.ForeignKey(DoiTuongChinhSach, on_delete=models.CASCADE)
+    MDT = models.ForeignKey(DoiTuongChinhSach, on_delete=models.CASCADE, null=True, blank=True)
     MTC = models.ForeignKey(TieuChi, on_delete=models.CASCADE)
     class Meta:
         unique_together = ('MBV', 'MDT', 'MTC')
+
+        

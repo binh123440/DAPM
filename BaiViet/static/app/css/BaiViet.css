@@ -634,6 +634,7 @@ html, body {
   text-align: left;
   white-space: nowrap;
   z-index: 19;
+  margin-left: 10px;
 }
 .fieldset-button {
   position: absolute;
@@ -701,7 +702,7 @@ html, body {
   align-items: center;
   justify-content: space-between;
   position: relative;
-  width: 79%;
+  width: wrap;
   height: 18%;
   margin: 30px 0 0 10%;
   z-index: 39;
@@ -715,6 +716,7 @@ html, body {
   z-index: 28;
   border-radius: 9px;
   box-shadow: 0 5px 5px 5px #c7c7c771;
+  
 }
 .image-14 {
   position: absolute;
@@ -727,6 +729,7 @@ html, body {
   background-size: cover;
   z-index: 38;
   border-radius: 17px;
+  
 }
 .card-group-15 {
   position: absolute;

@@ -26,7 +26,7 @@ urlpatterns = [
     path('', baiviet.get_BaiViet , name="BaiViet"),
     path('DangKyHoSo/', baiviet.get_DangKyHoSo , name="DangKyHS"),
     path('load-more-posts/', baiviet.load_more_posts, name='load_more_posts'),
-     path('dang-ky-ho-so/', baiviet.dang_ky_ho_so, name='dang-ky-ho-so'),
-    
+    path('luu-ho-so-dang-ky/', baiviet.luu_ho_so_dang_ky, name='luu-ho-so-dang-ky'),
+
 ]
 urlpatterns +=static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

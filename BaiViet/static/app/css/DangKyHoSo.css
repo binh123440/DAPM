@@ -387,7 +387,7 @@ button {
 .form {
   position: absolute;
   width: 600px;
-  height: 575px;
+  height: 670px;
   top: 132px;
   left: 50%;
   background: #ffffff;
@@ -400,7 +400,7 @@ button {
   position: relative;
   width: 520px;
   height: 42px;
-  margin: 40px 0 0 40px;
+  margin: 25px 0 0 40px;
   z-index: 17;
 }
 .input {
@@ -409,9 +409,10 @@ button {
   height: 42px;
   top: 0;
   right: 0;
+  padding-left: 15px;
   background: #ffffff;
   border: 1px solid #b9bec7;
-  z-index: 17;
+  z-index: 25;
   border-radius: 10px;
 }
 .label-first-name {
@@ -457,6 +458,7 @@ button {
   position: absolute;
   width: 288.89px;
   height: 42px;
+  padding-left: 15px;
   top: 0;
   right: 0;
   background: #ffffff;
@@ -509,6 +511,7 @@ button {
   height: 42px;
   top: 0;
   right: 0;
+  padding-left: 15px;
   background: #ffffff;
   border: 1px solid #b9bec7;
   z-index: 25;
@@ -557,6 +560,7 @@ button {
   position: absolute;
   width: 288.89px;
   height: 42px;
+  padding-left: 15px;
   top: 0;
   right: 0;
   background: #ffffff;
@@ -581,6 +585,7 @@ button {
   white-space: nowrap;
   z-index: 28;
 }
+
 .label-asterisk {
   display: flex;
   align-items: center;
@@ -589,6 +594,36 @@ button {
   height: 17px;
   top: 11px;
   left: 94px;
+  color: #d41b69;
+  font-family: ABeeZee, var(--default-font-family);
+  font-size: 17px;
+  font-weight: 400;
+  text-align: left;
+  z-index: 27;
+}
+.label-asterisk2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  height: 17px;
+  top: 11px;
+  left: 150px;
+  color: #d41b69;
+  font-family: ABeeZee, var(--default-font-family);
+  font-size: 17px;
+  font-weight: 400;
+  text-align: left;
+  z-index: 27;
+}
+.label-asterisk3 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  position: absolute;
+  height: 17px;
+  top: 11px;
+  left: 170px;
   color: #d41b69;
   font-family: ABeeZee, var(--default-font-family);
   font-size: 17px;
@@ -671,6 +706,76 @@ button {
   text-align: left;
   z-index: 31;
 }
+.flex-row-combo{
+  margin-top: 20px;
+  margin-left: 20px;
+  position: relative;
+  width: 520px;
+  height: 42px;
+  margin: 24px 0 0 40px;
+  z-index: 33;
+}
+.combo-box {
+  /* font-family: Arial, sans-serif;
+  color: #333;
+  margin-left: 230px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none; */
+  position: absolute;
+  width: 288.89px;
+  height: 42px;
+  top: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #b9bec7;
+  z-index: 29;
+  border-radius: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none
+}
+.combo-box2 {
+  position: absolute;
+  width: 288.89px;
+  height: 42px;
+  top: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #b9bec7;
+  z-index: 29;
+  border-radius: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none
+}
+
+/* Kiểu mũi tên cho combobox */
+.combo-box {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23999" d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+  padding-left: 12px;
+}
+.combo-box2 {
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="%23999" d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 12px;
+  padding-left: 12px;
+}
+
+/* Hiệu ứng hover cho combobox */
+.combo-box:hover {
+  border-color: #999;
+}
+
+/* Khoảng cách giữa 2 combobox */
 .flex-row-ad {
   position: relative;
   width: 520px;
@@ -1072,37 +1177,15 @@ button {
 .form {
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.flex-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-.flex-row input {
-  flex: 1;
-  padding: 8px;
-  margin-right: 10px;
 }
 .flex-row span {
   flex-shrink: 0;
 }
 .mkto-button-row {
   text-align: center;
-}
-@media (max-width: 600px) {
-  .flex-row {
-      flex-direction: column;
-      align-items: flex-start;
-  }
-  .flex-row input {
-      margin-right: 0;
-      margin-bottom: 5px;
-  }
 }
 .span-2e {
   display: flex;

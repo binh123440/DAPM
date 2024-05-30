@@ -66,6 +66,47 @@
             <span class="label-company">Địa chỉ</span>
             <span class="label-asterisk">*</span>
         </div>
+        
+        <div class="flex-row-combo">
+          <select class="combo-box" name="loai_doi_tuong">
+            <option value="">-- Chọn loại đối tượng chính sách --</option>
+            {% for loai in loai_doi_tuong_chinh_sach %}
+              <option value="{{ loai.MLDT }}">{{ loai.MLDT }} - {{ loai.Mota|truncatechars:35 }}</option>
+            {% endfor %}
+          </select>
+          <span class="label-company">Loại đối tượng chính sách</span>
+          <span class="label-asterisk3">*</span>
+        </div>
+        <div class="flex-row-combo">
+          <select class="combo-box2" name="doi_tuong_chinh_sach">
+            <option value="">-- Chọn đối tượng chính sách --</option>
+            {% for doi_tuong in doi_tuong_chinh_sach %}
+                <option value="{{ doi_tuong.MDT }}" data-mldt="{{ doi_tuong.MLDT.MLDT }}">{{ doi_tuong.MDT }} - {{ doi_tuong.Mota|truncatechars:35 }}</option>
+            {% endfor %}
+          </select>
+          <span class="label-company">Đối tượng chính sách</span>
+          <span class="label-asterisk2">*</span>
+        </div>
+        {% comment %}  {% endcomment %}
+        <script>
+          var combobox1 = document.querySelector('select[name="loai_doi_tuong"]');
+          var combobox2 = document.querySelector('select[name="doi_tuong_chinh_sach"]');
+        
+          combobox1.addEventListener('change', function() {
+            var selectedValue = this.value;
+            filterCombobox2(selectedValue);
+          });
+        
+          function filterCombobox2(selectedValue) {
+            var options = combobox2.options;
+            for (var i = 0; i < options.length; i++) {
+              var option = options[i];
+              var shouldShow = selectedValue === '' || option.dataset.mldt === selectedValue;
+              option.style.display = shouldShow ? 'block' : 'none';
+            }
+          }
+        </script>
+        {% comment %}  {% endcomment %}
         <div class="flex-row-ad">
             <div class="options-15">
                 <input multiple class="image-jpg" name="anh_minh_chung" type="file" accept="image/*">
@@ -90,45 +131,48 @@
         {% comment %}  {% endcomment %}
         <script>
           var csrfToken = "{{ csrf_token }}";
-          document.getElementById('dang-ky-ho-so').addEventListener('click', function(event) {
-              event.preventDefault(); // Ngăn chặn hành vi mặc định của nút
-      
-              // Lấy dữ liệu từ form
-              var formData = new FormData();
-              formData.append('ten', document.querySelector('input[name="ten"]').value);
-              formData.append('msv', document.querySelector('input[name="msv"]').value);
-              formData.append('email', document.querySelector('input[name="email"]').value);
-              formData.append('sdt', document.querySelector('input[name="sdt"]').value);
-              formData.append('dia_chi', document.querySelector('input[name="dia_chi"]').value);
-              var anhMinhChung = document.querySelector('input[name="anh_minh_chung"]').files;
-              for (var i = 0; i < anhMinhChung.length; i++) {
-                  formData.append('anh_minh_chung', anhMinhChung[i]);
+          document.querySelector('.button').addEventListener('click', function(event) {
+            event.preventDefault();
+        
+            // Ngăn chặn hành vi mặc định của nút
+            // Lấy dữ liệu từ form
+            var formData = new FormData();
+            formData.append('ho_ten', document.querySelector('input[name="ten"]').value);
+            formData.append('ma_sinh_vien', document.querySelector('input[name="msv"]').value);
+            formData.append('email', document.querySelector('input[name="email"]').value);
+            formData.append('so_dien_thoai', document.querySelector('input[name="sdt"]').value);
+            formData.append('dia_chi', document.querySelector('input[name="dia_chi"]').value);
+            var doiTuongChinhSach = document.querySelector('select[name="doi_tuong_chinh_sach"]').value;
+            formData.append('doi_tuong_chinh_sach', doiTuongChinhSach);
+            var anhMinhChung = document.querySelector('input[name="anh_minh_chung"]').files;
+            for (var i = 0; i < anhMinhChung.length; i++) {
+              formData.append('hinh_anh', anhMinhChung[i]);
+            }
+        
+            // Gửi yêu cầu AJAX
+            fetch('{% url "luu-ho-so-dang-ky" %}', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'X-CSRFToken': csrfToken,
+                'X-Requested-With': 'XMLHttpRequest'
               }
-      
-              // Gửi yêu cầu AJAX
-              fetch('{% url "dang-ky-ho-so" %}', {
-                  method: 'POST',
-                  body: formData,
-                  headers: {
-                      'X-CSRFToken': csrfToken,
-                      'X-Requested-With': 'XMLHttpRequest'
-                  }
-              })
-              .then(response => response.json())
-              .then(data => {
-                  if (data.success) {
-                      // Xử lý sau khi đăng ký thành công
-                      alert('Đăng ký hồ sơ thành công!');
-                  } else {
-                      // Xử lý lỗi
-                      alert('Đăng ký hồ sơ không thành công: ' + data.error);
-                  }
-              })
-              .catch(error => {
-                  console.error('Lỗi:', error);
-              });
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // Xử lý sau khi đăng ký thành công
+                alert('Đăng ký hồ sơ thành công!');
+              } else {
+                // Xử lý lỗi
+                alert('Đăng ký hồ sơ không thành công: ' + data.error);
+              }
+            })
+            .catch(error => {
+              console.error('Lỗi:', error);
+            });
           });
-      </script>
+        </script>
         {% comment %}  {% endcomment %}
         <span class="span-1c">ĐĂNG KÝ HỒ SƠ SINH VIÊN CHÍNH SÁCH</span>
         <img class="div-1d" src="{%static 'app/assets/images/3e126a30a512a2b9dac5ccea1e34fcd9390c6e3d.png' %}"></img>
