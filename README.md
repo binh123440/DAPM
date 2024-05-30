@@ -2,9 +2,7 @@ Trong code của tôi có sửa dụng tesseract để chuyển từ ảnh sang 
 
 ****![image](https://github.com/binh123440/DAPM/assets/144503606/79dd7a82-a631-4efe-834c-d68e1a9b0f75)
 
-Hãy tải và cài đặt Tesseract ở đường link sau: https://github.com/UB-Mannheim/tesseract/wiki 
-
-![image](https://github.com/binh123440/DAPM/assets/144503606/9ec8dc7d-7327-41e1-8e13-ef584bdc7d2e)
+Hãy tải và cài đặt Tesseract ở đường link sau: https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.4.20240503.exe
 
 và điều chỉnh trong file view thành đường dẫn tới file tesseract.exe mà bạn đã cài
 
