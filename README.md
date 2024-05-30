@@ -4,7 +4,9 @@ Trong code của tôi có sửa dụng tesseract để chuyển từ ảnh sang 
 
 Hãy tải và cài đặt Tesseract ở đường link sau: https://digi.bib.uni-mannheim.de/tesseract/tesseract-ocr-w64-setup-5.3.4.20240503.exe
 
-Trang chủ của Tesseract : https://github.com/UB-Mannheim/tesseract/wiki
+Hoặc bạn có thể tải ở Trang chủ của Tesseract : https://github.com/UB-Mannheim/tesseract/wiki
+
+![image](https://github.com/binh123440/DAPM/assets/144503606/583c69f3-e656-4dcf-bc14-276a45bcecad)
 
 và điều chỉnh trong file view thành đường dẫn tới file tesseract.exe mà bạn đã cài
 
