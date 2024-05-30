@@ -8,7 +8,7 @@ from django.db.models import Q
 import pytesseract
 from django.shortcuts import render
 # Create your views here.
-pytesseract.pytesseract.tesseract_cmd = r'D:\TestWebPython\test1\tesseract\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'D:\TestWebPython\tesseract\tesseract.exe'
 
 def get_BaiViet(request):
     hinhanhs = HinhAnh.objects.all()
