@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="actor">Sinh viên</div>
-      <input class="name-avt" name="Hoten" value="{{ sinhvien.Hoten }}">
+      <input class="name-avt" name="Hoten" disabled value="{{ sinhvien.Hoten }}">
       </div>
       <img class="wrapper-icon" alt="" src="{% static 'images/divcuheaderblob-wrapper--klbah@2x.png' %}">
       <div class="menu">
@@ -48,13 +48,13 @@
       <input class="check-male" name="Gioitinh" value="0" {% if sinhvien.Gioitinh == 0 %}checked{% endif %} type="radio">
       <div class="female">Nữ</div>
       <input class="check-female" name="Gioitinh" value="1" {% if sinhvien.Gioitinh == 1 %}checked{% endif %} type="radio">
-      <input class="somsv" name="MSV" value="{{ sinhvien.MSV }}">
+      <input class="somsv" name="MSV" disabled value="{{ sinhvien.MSV }}">
       <div class="id-st">Mã sinh viên</div>
-      <input class="name-st" name="Hoten" value="{{ sinhvien.Hoten }}">
-      <div class="nk">Niên khóa</div>
-      <input class="nk-sv" name="Nienkhoa" value="{{ sinhvien.Nienkhoa }}">
-      <div class="ngay-sinh">Ngày sinh</div>
-      <input class="dob-st" name="Ngaysinh" value="{{ sinhvien.Ngaysinh|date:'Y-m-d' }}">
+      <input class="name-st" name="Hoten" disabled value="{{ sinhvien.Hoten }}">
+      <div class="ngay-sinh">Niên khóa</div>
+      <input class="dob-st" name="Nienkhoa" disabled value="{{ sinhvien.Nienkhoa }}">
+      <div class="nk">Ngày sinh</div>
+      <input class="nk-sv" name="Ngaysinh" disabled value="{{ sinhvien.Ngaysinh|date:'Y-m-d' }}">
       <div class="dn-tc1">Dân tộc</div>
       <div class="lp1">Lớp</div>
       <div class="khoa1">Khoa</div>
@@ -99,7 +99,7 @@
       {% endif %}
       <input class="select-pic" name="Image" autofocus type="file">
       <div class="dung-lng-file1">Dung lượng file tối đa 1 MB.<br> Định dạng:.JPEG, .PNG</div>
-      <button class="lu-parent" autofocus type="submit"><b class="lu1">Lưu</b><div><b class="lu2">Lưu</b></div></button>
+      <button class="lu-parent" autofocus type="submit"><div><b class="lu2">Lưu</b></div></button>
     </form>
   </div>
 </body>

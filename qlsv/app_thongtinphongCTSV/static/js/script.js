@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 messageContainer.style.display = "block";
                 overlay.style.display = "block";
             } else {
-                messageContainer.textContent = "Cập nhật thông tin thất bại!"; // Hoặc thông báo lỗi cụ thể từ server
+                messageContainer.textContent = "Cập nhật thông tin thất bại!"; 
                 messageContainer.style.display = "block";
                 overlay.style.display = "block";
             }

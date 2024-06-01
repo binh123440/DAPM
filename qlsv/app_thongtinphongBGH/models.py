@@ -13,13 +13,13 @@ class BanGiamHieu(models.Model):
     
     MNV = models.CharField(max_length=15, primary_key=True)
     Hoten = models.CharField(max_length=50)
-    Ngaysinh = models.DateField()
-    Gioitinh = models.IntegerField(choices=GIOI_TINH_CHOICES)  # Sử dụng choices
-    SDT = models.CharField(max_length=12)
-    Email = models.EmailField(unique=True)
-    Roles = models.IntegerField(choices=ROLES_CHOICES)
-    Matkhau = models.CharField(max_length=50)  
-    Image = models.ImageField(upload_to='avt/%y', null=True)
+    Ngaysinh = models.DateField(null=True, blank=True)  
+    Gioitinh = models.IntegerField(choices=GIOI_TINH_CHOICES, default=0)
+    SDT = models.CharField(max_length=12, null=True, blank=True)  
+    Email = models.EmailField(null=True, blank=True)  
+    Roles = models.IntegerField(choices=ROLES_CHOICES, null=False)
+    Matkhau = models.CharField(max_length=50, null=False)
+    Image = models.ImageField(upload_to='avt/%y', null=True, blank=True)
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['Roles'], condition=models.Q(Roles=0), name='unique_hieu_truong')

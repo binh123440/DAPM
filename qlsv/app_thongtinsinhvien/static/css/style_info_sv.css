@@ -658,8 +658,9 @@
   left: 458px;
   font-weight: 500;
   color: var(--color-dimgray);
-  display: flex;
-  align-items: center;
+
+
+
 }
 .ngay-sinh {
   top: 258px;

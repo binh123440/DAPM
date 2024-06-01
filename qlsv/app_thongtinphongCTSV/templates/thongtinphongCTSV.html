@@ -51,7 +51,7 @@
     <input class="check-male" name="Gioitinh" value="0" {% if phongctvs.Gioitinh == 0 %}checked{% endif %} type="radio">
     <div class="female">Nữ</div>
     <input class="check-female" name="Gioitinh" value="1" {% if phongctvs.Gioitinh == 1 %}checked{% endif %} type="radio">
-    <input class="somsv" name="MSV" value="{{ phongctvs.MNV }}">
+    <input class="somsv" name="MNV" value="{{ phongctvs.MNV }}">
     <div class="id-st">Mã nhân viên</div>
     <input class="name-st" name="Hoten" value="{{ phongctvs.Hoten }}">
     <div class="ngay-sinh">Ngày sinh</div>
@@ -63,7 +63,7 @@
           <option value="{{ value }}" {% if phongctvs.Roles == value %}selected{% endif %}>{{ label }}</option>
       {% endfor %}
     </select>
-    <input class="khoa" type="text" name="Pass" value="{{ phongctvs.Matkhau }}">
+    <input class="khoa" type="text" name="Matkhau" value="{{ phongctvs.Matkhau }}">
     <input class="email" type="text" name="Email" value="{{ phongctvs.Email }}">
     <input class="tel" type="text" name="SDT" value="{{ phongctvs.SDT }}">
     <div class="footer">
@@ -90,11 +90,11 @@
       <img class="footer-child" alt="">
       <img class="social-media-icon" alt="" src="{% static 'images/social-media@2x.png' %}">
     </div>
-    {% if sinhvien.Image %}
-    <img class="avt" src="{{ sinhvien.Image.url}}">
+    {% if phongctvs.Image %}
+    <img class="avt" src="{{ phongctvs.Image.url}}">
     {% endif %}
     <input class="select-pic" name="Image" autofocus type="file">
-    <button class="lu-parent" autofocus type="submit"><b class="lu1">Lưu</b><div><b class="lu2">Lưu</b></div></button>
+    <button class="lu-parent" autofocus type="submit"><div><b class="lu2">Lưu</b></div></button>
     </form>
     <div class="dung-lng-file1">Dung lượng file tối đa 1 MB.<br> Định dạng:.JPEG, .PNG</div>
   </div>

@@ -8,14 +8,14 @@ def thongtinphongBGH(request, MNV):
     bgh = get_object_or_404(BanGiamHieu, MNV=MNV)
     if request.method == 'POST':
         
-        mnv = request.POST['MNV']
-        hoten = request.POST['Hoten']
-        ngaysinh_str = request.POST['Ngaysinh']
-        gioitinh = request.POST['Gioitinh']
-        sdt = request.POST['SDT']
-        email = request.POST['Email']
-        chucvu = request.POST['Roles']
-        matkhau = request.POST['Matkhau']
+        mnv = request.POST.get('MNV')
+        hoten = request.POST.get('Hoten')
+        ngaysinh_str = request.POST.get('Ngaysinh')
+        gioitinh = request.POST.get('Gioitinh')
+        sdt = request.POST.get('SDT')
+        email = request.POST.get('Email')
+
+        matkhau = request.POST.get('Matkhau')
         image = request.FILES.get('Image')
         try:
             ngaysinh = datetime.strptime(ngaysinh_str, '%Y-%m-%d').date()
@@ -30,7 +30,7 @@ def thongtinphongBGH(request, MNV):
         bgh.Gioitinh = int(gioitinh)
         bgh.SDT = sdt
         bgh.Email = email
-        bgh.Roles = chucvu
+
         bgh.Matkhau = matkhau
         if image:
             bgh.Image = image

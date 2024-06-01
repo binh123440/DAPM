@@ -36,7 +36,7 @@
       <button class="dangkyhoso" autofocus><div class="ng-k-h1">Duyệt hồ sơ chính sách</div></button>
       <button class="danhsachdadangky" autofocus><div class="danh-sch1">Đăng bài</div></button>
     </div>
-    <form action="{% url 'thongtinphongBGH' MNV=BGH.MNV %}" method="POST" enctype="multipart/form-data">  
+    <form action="{% url 'thongtinphongBGH' MNV=bgh.MNV %}" method="POST" enctype="multipart/form-data">  
       {% csrf_token %}
       {{ form.as_p }}
     <div class="cp-nht-thng1">Cập nhật thông tin cá nhân nhân viên</div>
@@ -50,7 +50,7 @@
     <input class="check-male" name="Gioitinh" value="0" {% if bgh.Gioitinh == 0 %}checked{% endif %} type="radio">
     <div class="female">Nữ</div>
     <input class="check-female" name="Gioitinh" value="1" {% if bgh.Gioitinh == 1 %}checked{% endif %} type="radio">
-    <input class="somsv" name="MSV" value="{{ bgh.MNV }}">
+    <input class="somsv" name="MNV" value="{{ bgh.MNV }}">
     <div class="id-st">Mã nhân viên</div>
     <input class="name-st" name="Hoten" value="{{ bgh.Hoten }}">
     <div class="ngay-sinh">Ngày sinh</div>
@@ -63,7 +63,7 @@
         {% endfor %}
     </select>
   
-    <input class="khoa" type="text" name="Pass" value="{{ bgh.Matkhau }}">
+    <input class="khoa" type="text" name="Matkhau" value="{{ bgh.Matkhau }}">
     <input class="email" type="text" name="Email" value="{{ bgh.Email }}">
     <input class="tel" type="text" name="SDT" value="{{ bgh.SDT }}">
     <div class="footer">
@@ -90,11 +90,11 @@
       <img class="footer-child" alt="">
       <img class="social-media-icon" alt="" src="{% static 'images/social-media@2x.png' %}">
     </div>
-    {% if sinhvien.Image %}
-    <img class="avt" src="{{ sinhvien.Image.url}}">
+    {% if bgh.Image %}
+    <img class="avt" src="{{ bgh.Image.url}}">
     {% endif %}
     <input class="select-pic" name="Image" autofocus type="file">
-    <button class="lu-parent" autofocus type="submit"><b class="lu1">Lưu</b><div><b class="lu2">Lưu</b></div></button>
+  <button class="lu-parent" autofocus type="submit"><div><b class="lu2">Lưu</b></div></button>
   </form>
     <div class="dung-lng-file1">Dung lượng file tối đa 1 MB.<br> Định dạng:.JPEG, .PNG</div>
   </div>
