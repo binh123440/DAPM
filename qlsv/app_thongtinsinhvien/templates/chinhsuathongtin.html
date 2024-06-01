@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="{% static 'css/style_info_sv.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ABeeZee:wght@400&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap">
+    <script src="{% static 'js/script.js' %}"></script> 
+  </head>
+<body>
+  <div class="bgr">
+    <div class="header">
+      <button class="home">
+        <img class="logo" alt="" src="{% static 'images/logov3clickuplightsvg-fill.svg' %}">
+      </button>
+      <div class="wrapper">
+        <div class="wrapper1">
+          <div class="wrapper2">
+            <button class="button-menu1" autofocus><div class="span1"><div class="gii-thiu1">Giới thiệu</div></div><img class="svg-icon3" alt="" src="{% static 'images/svg.svg' %}"></button>
+            <button class="button-menu2" autofocus><div class="span2"><div class="bi-vit1">Bài viết</div></div><img class="icon-v3-caret" alt="" src="{% static 'images/svg-1.svg' %}"></button>
+            <button class="button-menu3" autofocus><div class="span3"><div class="thng-bo1">Thông báo</div></div><img class="icon-v3-caret1" alt="" src="{% static 'images/svg-2.svg' %}"></button>
+            <button class="button-menu4" autofocus><div class="o-to1">Đào tạo</div></button>
+          </div>
+        </div>
+      </div>
+      <div class="actor">Sinh viên</div>
+      <input class="name-avt" name="Hoten" value="{{ sinhvien.Hoten }}">
+      </div>
+      <img class="wrapper-icon" alt="" src="{% static 'images/divcuheaderblob-wrapper--klbah@2x.png' %}">
+      <div class="menu">
+      <div class="menu-wrapper"><b class="menu-sv">MENU SINH VIÊN</b></div>
+      <button class="capnhatthongtin" autofocus><div class="cp-nht-thng-container1">Cập nhật thông tin cá nhân</div></button>
+      <button class="dangkyhoso" autofocus><div class="ng-k-h1">Đăng ký hồ sơ chính sách</div></button>
+      <button class="danhsachdadangky" autofocus><div class="danh-sch1">Danh sách đã đăng ký hồ sơ chính sách</div></button>
+    </div>
+    <form action="{% url 'chinhsuathongtin' MSV=sinhvien.MSV %}" method="POST" enctype="multipart/form-data">  
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="cp-nht-thng1">Cập nhật thông tin cá nhân sinh viên</div>
+      <div class="fullname">Họ và tên</div>
+      <div class="email1">Email</div>
+      <div class="phone">Số điện thoại</div>
+      <div class="gender">Giới tính</div>
+      <div class="male">Nam</div>
+      <input class="check-male" name="Gioitinh" value="0" {% if sinhvien.Gioitinh == 0 %}checked{% endif %} type="radio">
+      <div class="female">Nữ</div>
+      <input class="check-female" name="Gioitinh" value="1" {% if sinhvien.Gioitinh == 1 %}checked{% endif %} type="radio">
+      <input class="somsv" name="MSV" value="{{ sinhvien.MSV }}">
+      <div class="id-st">Mã sinh viên</div>
+      <input class="name-st" name="Hoten" value="{{ sinhvien.Hoten }}">
+      <div class="nk">Niên khóa</div>
+      <input class="nk-sv" name="Nienkhoa" value="{{ sinhvien.Nienkhoa }}">
+      <div class="ngay-sinh">Ngày sinh</div>
+      <input class="dob-st" name="Ngaysinh" value="{{ sinhvien.Ngaysinh|date:'Y-m-d' }}">
+      <div class="dn-tc1">Dân tộc</div>
+      <div class="lp1">Lớp</div>
+      <div class="khoa1">Khoa</div>
+      <div class="qu-qun1">Quê quán</div>
+      <div class="mk">Mật khẩu</div>
+      <div id="message-container"></div>
+      <div id="overlay"></div>
+      <input class="dantoc" type="text" name="Dantoc" value="{{ sinhvien.Dantoc }}">
+      <input class="email" type="text" name="Email" value="{{ sinhvien.Email }}">
+      <input class="tel" type="text" name="SDT" value="{{ sinhvien.SDT }}">
+      <input class="class" type="text" name="Lopsinhhoat" value="{{ sinhvien.Lopsinhhoat }}">
+      <input class="khoa" type="text" name="Khoa" value="{{ sinhvien.Khoa }}">
+      <input class="que" type="text" name="Quequan" value="{{ sinhvien.Quequan }}">
+      <input class="in-mk" type="text" name="Matkhau" value="{{ sinhvien.Matkhau }}">
+      
+      <div class="footer">
+      <div class="trng-i-hc-s-phm-k-thu-parent">
+        <div class="trng-i-hc1">Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng</div>
+        <img class="link-svg1" alt="" src="{% static 'images/link--svg1@2x.png' %}">
+      </div>
+      <div class="footer1">
+        <div class="divrow">
+          <div class="span">
+            <div class="clickup1">© 2024 ClickUp</div>
+          </div>
+          <div class="link1">
+            <div class="security1">Security</div>
+          </div>
+          <div class="link2">
+            <div class="privacy1">Privacy</div>
+          </div>
+          <div class="link3">
+            <div class="terms1">Terms</div>
+          </div>
+        </div>
+      </div>
+      <img class="footer-child" alt="">
+      <img class="social-media-icon" alt="" src="{% static 'images/social-media@2x.png' %}">
+      </div>
+      {% if sinhvien.Image %}
+      <img class="avt" src="{{ sinhvien.Image.url}}">
+      {% endif %}
+      <input class="select-pic" name="Image" autofocus type="file">
+      <div class="dung-lng-file1">Dung lượng file tối đa 1 MB.<br> Định dạng:.JPEG, .PNG</div>
+      <button class="lu-parent" autofocus type="submit"><b class="lu1">Lưu</b><div><b class="lu2">Lưu</b></div></button>
+    </form>
+  </div>
+</body>
+</html>
