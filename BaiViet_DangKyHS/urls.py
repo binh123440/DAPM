@@ -23,7 +23,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', baiviet.get_BaiViet , name="BaiViet"),
+    path('', baiviet.index, name='index'),
+    path('index/<int:mbv>/', baiviet.detail, name='detail'),
+    path('BaiViet/', baiviet.get_BaiViet , name="BaiViet"),
     path('DangKyHoSo/', baiviet.get_DangKyHoSo , name="DangKyHS"),
     path('load-more-posts/', baiviet.load_more_posts, name='load_more_posts'),
     path('luu-ho-so-dang-ky/', baiviet.luu_ho_so_dang_ky, name='luu-ho-so-dang-ky'),

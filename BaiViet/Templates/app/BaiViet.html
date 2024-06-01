@@ -15,11 +15,11 @@
       <div class="main-decoration">
         {%for baiviet in baiviets3 %}
         {% if baiviet.MBV == 2 %}
-        <div class="article">
+        <div class="article" >
           <div class="card-group"><image class="image" src="{{baiviet.AnhBia.url}}"></div>
           <div class="card-group-1">
-            <span class="heading-link-announcing"
-              >{{baiviet.TieuDe}}</span>
+            <a class="heading-link-announcing" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none"
+              >{{baiviet.TieuDe}}</a>
             <div class="flex-row">
               <button class="svg"><img class="icon-clock" src="{%static 'app/assets/images/7e5657f7-c444-4159-8197-cfefaa9cc0bf.png' %}"></img></button>
               <img class="image-2" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
@@ -35,19 +35,14 @@
       <div class="header">
         <div class="header-3">
           <div class="cu-navigation-group">
-            <a href="{% url "DangKyHS" %}" class="dang-ky">Đăng ký</a
-            ><a href="" class="gioi-thieu">Giới thiệu</a
-            ><a href="" class="thong-bao">Thông báo</a
-            ><a href="" class="dao-tao">Đào tạo</a
-            ><a href="{% url "BaiViet" %}" class="bai-viet">Bài viết</a>
+            <a href="{% url 'index' %}" class="dang-ky">Trang chủ</a
+              ><a href="{% url "DangKyHS" %}" class="gioi-thieu">Đăng ký</a
+              ><a href="{% url "BaiViet" %}" class="bai-viet">Bài viết</a>
+              <a href="" class="thong-bao">Thông báo</a
+              ><a href="" class="dao-tao">Đào tạo</a>
           </div>
-          <div class="form-input"></div>
-          <div class="icon-search-fill">
-            <div class="icon-search"></div>
-            <input class="input" />
-          </div>
+          
           <button class="button">
-            <div class="before-b"></div>
             <span class="dang-nhap">Đăng nhập</span>
           </button>
           <div class="svg-c">
@@ -86,8 +81,8 @@
             <img class="image-14" src="{{baiviet.AnhBia.url}}"></img>
             <div class="card-group-15">
               <span class="tin-tuc">TIN TỨC</span
-                ><span class="ngan-hang-tmcp"
-                >{{baiviet.TieuDe}}</span
+                ><a class="ngan-hang-tmcp" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none"
+                >{{baiviet.TieuDe}}</a
               >
               <div class="after"></div>
               <div class="svg-16"><img class="icon-clock-17" src="{%static 'app/assets/images/1869067c-d976-4efa-957a-4beaad8b51f2.png' %}"></img></div>
@@ -106,7 +101,7 @@
               <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
               <div class="card-group-2e">
                   <span class="link-productivity">Sự kiện</span>
-                  <span class="event">{{ baiviet.TieuDe }}</span>
+                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.TieuDe }}</a>
                   <div class="svg-2f">
                       <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
                   </div>
@@ -128,7 +123,7 @@
               <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
               <div class="card-group-2e">
                   <span class="link-productivity">Sự kiện</span>
-                  <span class="event">{{ baiviet.TieuDe }}</span>
+                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.TieuDe }}</a>
                   <div class="svg-2f">
                       <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
                   </div>

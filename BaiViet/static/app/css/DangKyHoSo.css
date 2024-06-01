@@ -241,7 +241,7 @@ button {
 .before {
   position: relative;
   width: 147.31px;
-  height: 36px;
+  height: 40px;
 
   background-size: cover;
   z-index: 114;
@@ -265,8 +265,8 @@ button {
   position: absolute;
   width: 123px;
   height: 14px;
-  top: 10px;
-  left: 12px;
+  top: 13px;
+  left: 17px;
   color: #ffffff;
   font-family: Inter, var(--default-font-family);
   font-size: 14px;
@@ -357,7 +357,6 @@ button {
   position: relative;
   width: 17.463px;
   height: 10.872px;
-  margin: 0 0 0 0.4px;
   background: url(/static/app/assets/images/b3417545-d965-4227-bc30-da22549b7a1b.png)
     no-repeat center;
   background-size: 100% 100%;
@@ -367,7 +366,6 @@ button {
   position: relative;
   width: 18.226px;
   height: 7.722px;
-  margin: 3.498px 0 0 0;
   background: url(/static/app/assets/images/70afdb5f-25ca-41b5-a150-8464169961aa.png)
     no-repeat center;
   background-size: 100% 100%;

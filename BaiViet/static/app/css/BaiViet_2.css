@@ -463,6 +463,12 @@ button {
   transform: translate(300.04%, -63.33%);
   z-index: 195;
   border-radius: 6px;
+  transition-duration: 0.5s;
+}
+.button:hover{
+  color: #ffffff;
+  border: 1px solid #af0072;
+  background-color: #ee55b9;
 }
 .before-b {
   position: absolute;
@@ -480,11 +486,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  width: 84.76px;
-  height: 16px;
-  top: 14px;
-  left: 31.72px;
+  position: relative;
+  width: 100%;
+  height: 100%;
   color: #eb3dae;
   font-family: ABeeZee, var(--default-font-family);
   font-size: 14px;
@@ -493,6 +497,10 @@ button {
   text-align: center;
   white-space: nowrap;
   z-index: 197;
+  transition-duration: 0.5s;
+}
+.dang-nhap:hover{
+  color: #ffffff;
 }
 .svg-c {
   position: absolute;
@@ -525,7 +533,7 @@ button {
   position: relative;
   width: 30.561px;
   height: 12.946px;
-  margin: 5.865px 0 0 0;
+  margin: 0;
   background: url(./assets/images/7ee37e05-abdf-45db-bdac-c891b49815b7.png)
     no-repeat center;
   background-size: 100% 100%;
