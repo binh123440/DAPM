@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+  <link rel="stylesheet" type="text/css" href=" {% static 'app/css/detail.css' %} ">
+  <link rel="stylesheet" type="text/css" href=" {% static 'app/css/global.css' %} ">
+  <script src="https://kit.fontawesome.com/a6d4c05032.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="divheader">
+      <a href="{% url 'index' %}" class="link-wrapper">
+        <img class="link-icon" loading="lazy" alt="" src="{%static 'app/assets/images/logo.png'%}" />
+      </a>
+      <div class="nav">
+        <ul>
+          <li><a href="{% url 'index' %}">Trang chủ</a></li>
+          <li><a href="{% url 'DangKyHS' %}">Đăng ký</a></li>
+          <li><a href="{% url 'BaiViet' %}">Bài viết</a></li>
+          <li><a href="">Thông báo</a></li>
+          <li><a href="">Đào tạo</a></li>
+        </ul>
+        
+      </div>
+      <div class="cu-navigation-v-group-8">
+        <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width = 27px height =27px></img>
+        <a class="input2" href="{% url 'chinhsuathongtin' '21115053120138' %}" style="text-decoration:none">Hello !<b>{{ username.Hoten }}</b></a>
+    </div>
+      <div class="form-input-parent">
+        <form method="GET" class="form-input">
+          <input type="text" name="q" id="searchInput" class="tm-kim" placeholder="Tìm kiếm..." onclick="toggleVisibility()">
+          <button type="submit" class="icon-searchfafbd90bsvg-wrapper"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></button>
+        </form>
+        <form method="GET" class="form-input" id="form-filter">
+          <input type="date" class="date-input" name="start_date" placeholder="Từ ngày">
+          <input type="date" class="date-input" name="end_date" placeholder="Đến ngày">
+          <button type="submit" class="icon-searchfafbd90bsvg-wrapper"><i class="fa-solid fa-filter"></i></button>
+        </form>
+        <button class="button" id="login-button">
+          <div class="before"></div>
+          <a href="" class="ng-nhp">Đăng nhập</a>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="banner304015-1-wrapper">
+      <img class="banner304015-1-icon" loading="lazy" alt="" src="{%static 'app/assets/images/banner.png' %}" />
+    </section>
+    <div class="content">
+        <div class="post-detail">
+            <p class="title bold">{{ baiviet.Noidung }}</p>
+            <div class="subtitle">
+                <p class="date">Ngày đăng: {{baiviet.Ngaydang }}</p>
+                <p class="author">Người đăng: {{baiviet.MNV.Hoten}}</p>
+            </div>   
+            <div class="time-application">
+                <p class="bold">- Thời gian: </p>
+                <p> từ ngày {{ baiviet.Ngaydang }} đến ngày {{ baiviet.NgayhetHieuluc }}</p>
+            </div>
+            <p class="regulations bold">Quy Định Áp Dụng</p>
+            <p class="object bold">- Đối Tượng Chính Sách:</p>
+            {% for quydinh in quydinhapdung %} 
+                <p>+ {{quydinh.MDT.Mota }}</p>
+            {% endfor %}
+            <p class="criteria bold">- Tiêu Chí: </p>
+            {% for quydinh in quydinhapdung %}
+                <p>+ {{quydinh.MTC.Mota }}</p>
+            {% endfor %}
+        </div>
+        <div class="post-other">
+            <p>Các bài khác</p>
+            {% for baikhac in baivietkhac %}
+                <a href="{% url 'detail' baikhac.MBV %}" class="purport">{{baikhac.Noidung}}</a>
+            {% endfor %}
+        </div>
+       
+    </div>
+    <section class="footer">
+      <div class="footer-inner">
+        <div class="frame-parent2">
+          <div class="trng-i-hc-s-phm-k-thu-wrapper">
+            <div class="trng-i-hc">
+              Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-inner1">
+        <div class="frame-parent3">
+          <div class="frame-parent4">
+            <div class="component-6-wrapper">
+              <i class="fa-brands fa-facebook"></i>
+            </div>
+            <div class="component-7-wrapper">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <div class="component-8-wrapper">
+              <i class="fa-brands fa-linkedin"></i>
+            </div>
+            <div class="component-9-wrapper">
+              <i class="fa-brands fa-twitter"></i>
+            </div>
+            <div class="component-10-wrapper">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+          <div class="clickup-parent">
+            <div class="clickup">© 2024 ClickUp</div>
+            <div class="security">Security</div>
+            <div class="privacy">Privacy</div>
+            <div class="terms">Terms</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+      var searchClicked = false;
+      function toggleVisibility() {
+        var nav = document.querySelector('.nav');
+        var loginButton = document.getElementById('login-button');
+        var filter = document.getElementById('form-filter');
+    
+        if (!searchClicked) {
+          loginButton.style.display = 'none';
+          filter.style.display = 'flex';
+          nav.classList.toggle('hidden');
+          searchClicked = true;
+        } else { 
+          var searchInput = document.getElementById('searchInput');
+          searchInput.value = ''; 
+        }
+      }
+  </script>
+</body>
+
+</html>
