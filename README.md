@@ -1,5 +1,7 @@
 Tesseract là thư viện OCR(Optical Character Recognition), Chuyên dùng để đọc các ký tự trong ảnh rồi chuyển thành text để giảm công sức đánh máy. Trong đó phổ biến nhất là nhận diện văn bản bằng Tesseract. nổi tiếng do độ chính xác cao hơn hẳn các thư viên khác. Tesseract có thể chạy độc lập hoặc tích hợp với OpenCV đều được. Nếu chạy độc lập thì Tesseract sử dụng thư viện leptonica để đọc hình ảnh.
-Trong code của tôi có sửa dụng tesseract để chuyển từ ảnh sang text:
+
+
+Trong code của tôi có sửa dụng tesseract để chuyển từ ảnh sang text:(phía dưới là ảnh liên kết với tesseract được cài trong máy của tôi, hãy nhớ chỉnh đường dẫn này trong file view.py của bạn)
 
 ****![image](https://github.com/binh123440/DAPM/assets/144503606/79dd7a82-a631-4efe-834c-d68e1a9b0f75)
 
