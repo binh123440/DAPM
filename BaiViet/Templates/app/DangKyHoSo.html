@@ -22,13 +22,23 @@
             ><a href="" class="dao-tao">Đào tạo</a>
         </div>
         
-        <button class="cu-navigation-v-group-7">
+        {% if sinh_vien == null  %}
+        <button class="cu-navigation-v-group-7" >
           <img class="before" src="{%static 'app/assets/images/ad0cf9d6-26b8-4e5c-bde6-4db20838b6de.png' %}" >
-            <div class="after" src="{%static 'app/assets/images/64e67198-2cef-4030-8dca-2048976bfcfd.png' %}"><span class="dang-nhap">Đăng nhập</span></div>
+            <div class="after" src="{%static 'app/assets/images/64e67198-2cef-4030-8dca-2048976bfcfd.png' %}"><a class="dang-nhap"href="{% url 'signin' %}" style="text-decoration:none">Đăng nhập</a></div>
         </img></button>
+        {% else %}
+        <button class="cu-navigation-v-group-7" >
+          <img class="before" src="{%static 'app/assets/images/ad0cf9d6-26b8-4e5c-bde6-4db20838b6de.png' %}" >
+            <div class="after" src="{%static 'app/assets/images/64e67198-2cef-4030-8dca-2048976bfcfd.png' %}"><a class="dang-nhap" href="{% url 'logout' %}" style="text-decoration:none">Đăng xuất</a></div>
+        </img></button>
+        {% endif %}
+        
         <div class="cu-navigation-v-group-8">
-            <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width = 27px height =27px></img>
-            <a class="input2" href="{% url 'chinhsuathongtin' '21115053120138' %}" style="text-decoration:none">Hello !<b>{{ username.Hoten }}</b></a>
+            <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" ></img>
+            {% if sinh_vien %}
+            <a class="input2" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}" style="text-decoration:none"><b>{{ sinh_vien.Hoten }}</b></a>
+            {% endif %}
         </div>
           <button class="cu-navigation-column">
           <div class="link-picture-logo">
@@ -126,9 +136,15 @@
                 >Chính sách bảo mật của ClickUp.h</span
               >
             </div>
+            {% if sinh_vien == null  %}
+            <div class="button2" id="dang-ky-ho-so">
+              <a class="span">Đăng nhập để có thể đăng ký xét hồ sơ</a>
+            </div>
+            {% else %}
             <button class="button" id="dang-ky-ho-so">
-              <span class="span">Đăng ký xét hồ sơ</span>
+              <a class="span">Đăng ký xét hồ sơ</a>
             </button>
+            {% endif %}
           </div>
         </div>
         {% comment %}  {% endcomment %}
@@ -190,7 +206,7 @@
             Chúng tôi luôn sẵn lòng hỗ trợ và giải đáp mọi thắc mắc của bạn.
             Hoặc có thể truy cập trang web sau để tìm hiểu về các bước và thông
             tin chi tiết về việc đăng ký : </span
-          ><span class="span-21">MIễn giảm học phí (udn.vn)</span>
+          ><a class="span-21" href = "http://sotaysinhvien.ute.udn.vn/ChuyenMuc/MIen-giam-hoc-phi_1207.html">Miễn giảm học phí (udn.vn)</a>
         </div>
         <div class="div-22">
           <div class="div-23"><img class="div-24" src="{%static 'app/assets/images/337d1146-965b-4828-a3d6-2ce8e22cd5e9.png' %}"></img></div>

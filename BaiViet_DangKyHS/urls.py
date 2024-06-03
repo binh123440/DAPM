@@ -32,6 +32,14 @@ urlpatterns = [
     path('sinhvien/<str:MSV>/chinhsua', baiviet.chinhsuathongtin, name='chinhsuathongtin'), 
     path('phongCTSV/<str:MNV>/chinhsua', baiviet.thongtinphongCTSV, name='thongtinphongCTSV'), 
     path('phongBGH/<str:MNV>/chinhsua', baiviet.thongtinphongBGH, name='thongtinphongBGH'), 
+    path('base/', baiviet.base, name="base"),
+    path('charts/', baiviet.charts, name="charts"),
+    path('status/', baiviet.status, name="status"),
+    #path('login/', baiviet.login, name="login"),
+    path('signin/', baiviet.signin, name="signin"),
+    path('signup/', baiviet.signup, name="signup"),
+    path('logout/', baiviet.logout, name="logout")
+    
 
 ]
 urlpatterns +=static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

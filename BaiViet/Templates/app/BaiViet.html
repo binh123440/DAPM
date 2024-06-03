@@ -44,10 +44,15 @@
           <div class="form-input"></div>
           <div class="icon-search-fill">
             <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" ></img>
-            <a class="input" href="{% url 'chinhsuathongtin' '21115053120138' %}" style="text-decoration:none">Hello !<b>{{ username.Hoten }}</b></a>
+            {% if sinh_vien %}
+            <a class="input2" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}" style="text-decoration:none"><b>{{ sinh_vien.Hoten }}</b></a>
+            {% endif %}
           </div>
           <button class="button">
-            <span class="dang-nhap">Đăng nhập</span>
+            <a class="dang-nhap" href="{% url 'signin' %}"  style="text-decoration:none">Đăng nhập</a>
+          </button>
+          <button class="button2">
+            <a class="dang-xuat" href="{% url "logout" %}"  style="text-decoration:none">Đăng xuất</a>
           </button>
           <div class="svg-c">
             <div class="flex-column">

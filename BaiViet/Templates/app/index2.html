@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+  <link rel="stylesheet" type="text/css" href=" {% static 'app/css/style.css' %} ">
+  <link rel="stylesheet" type="text/css" href=" {% static 'app/css/global.css' %} ">
+  <script src="https://kit.fontawesome.com/a6d4c05032.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="divheader">
+      <a href="{% url 'index' %}" class="link-wrapper">
+        <img class="link-icon" loading="lazy" alt="" src="{%static 'app/assets/images/logo.png'%}" />
+      </a>
+      <div class="nav">
+        <ul>
+          <li><a href="{% url 'index' %}">Trang chủ</a></li>
+          <li><a href="{% url 'DangKyHS' %}">Đăng ký</a></li>
+          <li><a href="{% url 'BaiViet' %}">Bài viết</a></li>
+          <li><a href="">Thông báo</a></li>
+          <li><a href="">Đào tạo</a></li>
+        </ul>
+      </div>
+      <div class="cu-navigation-v-group-8">
+        <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
+        {% if sinh_vien %}
+        <a class="input2" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}" style="text-decoration:none"><b>{{ sinh_vien.Hoten }}</b></a>
+        {% endif %}
+    </div>
+      <div class="form-input-parent">
+        <form method="GET" class="form-input">
+          <input type="text" name="q" id="searchInput" class="tm-kim" placeholder="Tìm kiếm..." onclick="toggleVisibility()">
+          <button type="submit" class="icon-searchfafbd90bsvg-wrapper"><i class="fa-solid fa-magnifying-glass fa-rotate-90"></i></button>
+        </form>
+        <form method="GET" class="form-input" id="form-filter">
+          <input type="date" class="date-input" name="start_date" placeholder="Từ ngày">
+          <input type="date" class="date-input" name="end_date" placeholder="Đến ngày">
+          <button type="submit" class="icon-searchfafbd90bsvg-wrapper"><i class="fa-solid fa-filter"></i></button>
+        </form>
+        <button class="button" id="login-button">
+          <div class="before"></div>
+          <a href="{% url 'signin' %}" class="ng-nhp">Đăng nhập</a>
+          
+        </button>
+        <button class="button" id="login-button">
+          <div class="before"></div>
+          <a href="{% url 'logout' %}" class="ng-nhp">Đăng xuất</a>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="banner304015-1-wrapper">
+      <img class="banner304015-1-icon" loading="lazy" alt="" src="{%static 'app/assets/images/banner.png' %}" />
+    </section>
+    <section class="index-user-inner">
+      <div class="frame-parent">
+        <div class="frame-wrapper">
+          <div class="divlanding-header-text-parent">
+            <div class="divlanding-header-text">
+              <div class="heading-2-welcome-to-parent">
+                <h1 class="heading-2">Chào mừng bạn đến với</h1>
+                <h1 class="heading-1">UTE University</h1>
+              </div>
+              <div class="ute-university-l">UTE University là nơi hỗ trợ mạnh mẽ cho sự phát triển cá nhân và học tập của sinh viên, chúng tôi hy vọng rằng trang web của chúng tôi sẽ đóng vai trò quan trọng trong việc thúc đẩy sự tiến bộ và thành công của cả cộng đồng sinh viên và nhà trường.</div>
+              <button class="link2">
+                <a href="" class="ng-k1">Đăng ký ngay</a>
+              </button>
+            </div>
+            <div class="wrapper-divwistia-responsive-wrapper">
+              <div class="wrapper-divwistia-responsive-">
+                <img class="divwistia-responsive-padding-icon" loading="lazy" alt="" src="{%static 'app/assets/images/banner1.png' %}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-group">
+          <div class="fluent-emoji-high-contrastnew-parent">
+            <i class="fa-solid fa-newspaper"></i>
+            <div class="tin-tc-wrapper">
+              <h3 class="tin-tc">Bài viết</h3>
+            </div>
+          </div>
+          <div class="frame-container">
+            <div class="article-parent">
+              {% for bai in baiviet %}
+              <a href="{% url 'detail' bai.MBV %}" class="article">
+                <div class="before1"></div>
+                <div class="divcard-group">
+                  <img class="logo-ute-1-icon" loading="lazy" alt="" src="{{bai.AnhBia.url}}" />
+                </div>
+                <div class="divcard-group1">
+                  <h1 class="heading-21">{{ bai.Noidung }}</h1>
+                  <div class="divcard-group-inner">
+                    <div class="frame-div">
+                      <div class="frame-wrapper1">
+                        <div class="image-1-parent">
+                          <img class="image-1-icon" alt="" src="{%static 'app/assets/images/logo_ute.png' %}" />
+                          <div class="link-haris-butt-wrapper">
+                            <div class="link-haris">{{ bai.MNV.Hoten }}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="svg-parent">
+                        <i class="fa-solid fa-clock"></i>
+                        <div class="wrapper">
+                          <div class="div">{{ bai.Ngaydang  }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="footer-inner">
+        <div class="frame-parent2">
+          <div class="trng-i-hc-s-phm-k-thu-wrapper">
+            <div class="trng-i-hc">
+              Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-inner1">
+        <div class="frame-parent3">
+          <div class="frame-parent4">
+            <div class="component-6-wrapper">
+              <i class="fa-brands fa-facebook"></i>
+            </div>
+            <div class="component-7-wrapper">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <div class="component-8-wrapper">
+              <i class="fa-brands fa-linkedin"></i>
+            </div>
+            <div class="component-9-wrapper">
+              <i class="fa-brands fa-twitter"></i>
+            </div>
+            <div class="component-10-wrapper">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+          </div>
+          <div class="clickup-parent">
+            <div class="clickup">© 2024 ClickUp</div>
+            <div class="security">Security</div>
+            <div class="privacy">Privacy</div>
+            <div class="terms">Terms</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+      var searchClicked = false;
+      function toggleVisibility() {
+        var nav = document.querySelector('.nav');
+        var loginButton = document.getElementById('login-button');
+        var filter = document.getElementById('form-filter');
+    
+        if (!searchClicked) {
+          loginButton.style.display = 'none';
+          filter.style.display = 'flex';
+          nav.classList.toggle('hidden');
+          searchClicked = true;
+        } else { 
+          var searchInput = document.getElementById('searchInput');
+          searchInput.value = ''; 
+        }
+      }
+  </script>
+</body>
+
+</html>

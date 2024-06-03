@@ -430,7 +430,8 @@ button {
   border: none;
   z-index: 193;
   outline: none;
-  margin: 12px 0 0 10px;
+  margin: 10px 0 0 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .label-first-name {
   display: flex;
@@ -938,6 +939,18 @@ button {
   text-align: left;
 }
 .button {
+  position: relative;
+  width: 520px;
+  height: 58px;
+  margin: 20px 0 0 0;
+  cursor: pointer;
+  background: #7b68ee;
+  border: 1px solid #7b68ee;
+  z-index: 40;
+  border-radius: 9.01px;
+  box-shadow: 0 10px 25.008px 0 rgba(123, 104, 238, 0.5);
+}
+.button2 {
   position: relative;
   width: 520px;
   height: 58px;

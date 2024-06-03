@@ -28,7 +28,9 @@
       </div>
       <div class="cu-navigation-v-group-8">
         <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width = 27px height =27px></img>
-        <a class="input2" href="{% url 'chinhsuathongtin' '21115053120138' %}" style="text-decoration:none">Hello !<b>{{ username.Hoten }}</b></a>
+        {% if sinh_vien %}
+        <a class="input2" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}" style="text-decoration:none"><b>{{ sinh_vien.Hoten }}</b></a>
+        {% endif %}
     </div>
       <div class="form-input-parent">
         <form method="GET" class="form-input">
@@ -42,7 +44,12 @@
         </form>
         <button class="button" id="login-button">
           <div class="before"></div>
-          <a href="" class="ng-nhp">Đăng nhập</a>
+          <a href="{% url 'signin' %}" class="ng-nhp">Đăng nhập</a>
+          
+        </button>
+        <button class="button" id="login-button">
+          <div class="before"></div>
+          <a href="{% url 'logout' %}" class="ng-nhp">Đăng xuất</a>
         </button>
       </div>
     </div>

@@ -71,7 +71,7 @@ class DaiDienPhongBan(models.Model):
     Gioitinh = models.IntegerField(choices=GIOI_TINH_CHOICES, null=True, blank=True)
     SDT = models.CharField(max_length=12, null=True, blank=True)
     Email = models.EmailField(null=True, blank=True)
-    Roles = models.IntegerField(choices=ROLES_CHOICES)  # 0: Hiệu trưởng, 1: Hiệu phó, 2: Phòng CTSV
+    Roles = models.IntegerField(choices=ROLES_CHOICES) 
     Pass = models.CharField(max_length=50)
     Image = models.ImageField(null=True, blank=True)
 
@@ -96,8 +96,8 @@ class HoSoDangKy(models.Model):
     MNV = models.ForeignKey(DaiDienPhongBan, on_delete=models.CASCADE, null=True, blank=True, related_name='hosodangky')
     MotaHoancanhKhokhan = models.CharField(max_length=3000)
     TrangthaiXacnhan = models.IntegerField()
-    Ngaydangky = models.DateField()
-    Ngayxacnhan = models.DateField(null=True, blank=True)
+    Ngaydangky = models.DateTimeField()
+    Ngayxacnhan = models.DateTimeField(null=True, blank=True)
     TrangthaiXetduyet = models.IntegerField(null=True, blank=True)
     Ngayxetduyet = models.DateField(null=True, blank=True)
     Hocki = models.CharField(max_length=3)
