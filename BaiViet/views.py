@@ -589,7 +589,7 @@ def base(request):
             user = DaiDienPhongBan.objects.get(MNV=username)
             print(f"Found nhan_vien: {user}")
             request.session['user_type'] = 'nhan_vien'
-            request.session['user_id'] = user.id
+            request.session['user_id'] = user.MNV
         except DaiDienPhongBan.DoesNotExist:
             print("Không có nhân viên có mnv tồn tại")
         except DaiDienPhongBan.MultipleObjectsReturned:
