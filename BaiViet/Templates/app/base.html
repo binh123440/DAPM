@@ -12,9 +12,21 @@
 	
 	<link href="{%static  'vendor/jquery-nice-select/css/nice-select.css'%}" rel="stylesheet">
     <link href="{%static 'vender/nouislider/nouislider.min.css'%}" rel="stylesheet">
+	
 	<!-- Style css -->
     <link href="{%static 'css/style.css'%}" rel="stylesheet">
+	<link href="{%static 'css/button_detail.css'%}" rel="stylesheet">
 
+	<!-- Bootstrap CSS -->
+	{% comment %} <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
+	<!-- Bootstrap JS and dependencies -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+	
 	<style>
 		#chart-container {
 			width: 30%;
@@ -72,7 +84,7 @@
 		  
 			var chart = new ApexCharts(document.querySelector("#polarChart"), options);
 			chart.render();
-		  });		  
+		  });		
 	</script>
 
 </head>
@@ -208,35 +220,35 @@
                     </li>	
                     <li><a href="javascript:void()" aria-expanded="false">
 						<i class="flaticon-050-info"></i>
-							<span class="nav-text">Apps</span>
+							<span class="nav-text">Thông tin cá nhân</span>
 						</a>
                     </li>
                     <li><a href="{% url "charts" %}" aria-expanded="false">
 							<i class="flaticon-041-graph"></i>
-							<span class="nav-text">Charts</span>
+							<span class="nav-text">Biểu đồ</span>
 						</a>
                     </li>
                     <li><a href="{% url "logout" %}" aria-expanded="false">
 							<i class="flaticon-086-star"></i>
-							<span class="nav-text">Log Out</span>
+							<span class="nav-text">Đăng xuất</span>
 						</a>
                     </li>
-                    <li><a href="javascript:void()" aria-expanded="false">
+                    <li><a href="{% url "status" %}" aria-expanded="false">
+							<i class="flaticon-072-printer"></i>
+							<span class="nav-text">Bài Viết</span>
+						</a>
+                    </li>
+					{% comment %} <li><a href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-045-heart"></i>
 							<span class="nav-text">Plugins</span>
 						</a>
-                    </li>
-                    <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
+					</li>
+					<li><a href="javascript:void()" class="ai-icon" aria-expanded="false">
 							<i class="flaticon-013-checkmark"></i>
 							<span class="nav-text">Widget</span>
 						</a>
-					</li>
-                    <li><a href="{% url "status" %}" aria-expanded="false">
-							<i class="flaticon-072-printer"></i>
-							<span class="nav-text">Forms</span>
-						</a>
-                    </li>
-                    <li><a href="javascript:void()" aria-expanded="false">
+					</li> {% endcomment %}
+                    {% comment %} <li><a href="javascript:void()" aria-expanded="false">
 							<i class="flaticon-043-menu"></i>
 							<span class="nav-text">Table</span>
 						</a>
@@ -245,7 +257,7 @@
 							<i class="flaticon-022-copy"></i>
 							<span class="nav-text">Pages</span>
 						</a>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
 			</div>
         </div>
@@ -525,6 +537,37 @@
 											<tbody>
 												<tr>
 													<td>
+														<label for="Tháng">Tháng:</label>
+														<select id="Tháng" name="Tháng">
+															<option value="Tháng 1"><button>Tháng 1</button></option>
+															<option value="Tháng 2">Tháng 2</option>
+															<option value="Tháng 3">Tháng 3</option>
+															<option value="Tháng 4">Tháng 4</option>
+															<option value="Tháng 5">Tháng 5</option>
+															<option value="Tháng 6">Tháng 6</option>
+															<option value="Tháng 7">Tháng 7</option>
+															<option value="Tháng 8">Tháng 8</option>
+															<option value="Tháng 9">Tháng 9</option>
+															<option value="Tháng 10">Tháng 10</option>
+															<option value="Tháng 11">Tháng 11</option>
+															<option value="Tháng 12">Tháng 12</option>
+														</select>
+													</td>
+													<td>
+														<label for="Năm">Năm:</label>
+														<select id="Năm" name="Năm">
+															<option value="Năm 2024"><button>Năm 2024</button></option>
+															<option value="Năm 2023">Năm 2023</option>
+															<option value="Năm 2022">Năm 2022</option>
+															<option value="Năm 2021">Năm 2021</option>
+															<option value="Năm 2020">Năm 2020</option>
+															<option value="Năm 2019">Năm 2019</option>
+															<option value="Năm 2018">Năm 2018</option>															
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>
 														
 													</td>
 													<td>
@@ -577,9 +620,18 @@
 														<td>
 															{% if hs.TrangthaiXetduyet == 0 %}
 																<span class="text-success fs-16 font-w500 text-start d-block">Thành công</span>
-															{% else %}
+															{% elif hs.TrangthaiXetduyet == 1 %}
 																<span class="text-light fs-16 font-w500 text-start d-block">Thất bại</span>
+															{% else %}
+																<span class="text-light fs-16 font-w500 text-start d-block">Chưa xét</span>
 															{% endif %}
+														</td>
+														<td>
+															<div class="container-detail">
+																<button class="btn" data-mahs="{{ hs.MaHS }}" onclick="showModal(this)" >
+																	<span class="button-content">Chi tiết</span>
+																</button>																
+															</div>
 														</td>
 													</tr>
 												{% endfor %}
@@ -843,11 +895,44 @@
         <!--**********************************
             Footer end
         ***********************************-->
-
-		
-
-
 	</div>
+
+	<!--**********************************
+            Cửa sổ chi tiết hồ sơ đăng ký
+        ***********************************-->
+	<div class="overlay-detail" onclick="hideModal()">
+        
+    </div>
+
+    <div class="modal-detail" id="modal">
+        <span class="close" onclick="hideModal()">&times;</span>
+        <div id="modal-content" class="modal-content"></div>
+    </div>
+
+    <script>
+        function showModal(button) {
+			var mahs = button.getAttribute('data-mahs');
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					document.getElementById("modal-content").innerHTML = this.responseText;
+					document.getElementById('modal').style.display = 'block';
+					document.querySelector('.overlay-detail').style.display = 'block';
+				}
+			};
+			xhttp.open("GET", "/view_detail/" + mahs + "/", true);
+			xhttp.send();
+		}
+		
+        
+        function hideModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.querySelector('.overlay-detail').style.display = 'none';
+            // Reset các kiểu dáng của modal
+            document.getElementById("modal-content").innerHTML = ""; // Xóa nội dung modal
+        }        
+    </script>
+
     <!--**********************************
         Main wrapper end
     ***********************************-->

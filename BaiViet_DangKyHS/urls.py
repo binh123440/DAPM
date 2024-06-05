@@ -38,8 +38,9 @@ urlpatterns = [
     #path('login/', baiviet.login, name="login"),
     path('signin/', baiviet.signin, name="signin"),
     path('signup/', baiviet.signup, name="signup"),
-    path('logout/', baiviet.logout, name="logout")
-    
+    path('logout/', baiviet.logout, name="logout"),
+    path('view_detail/<str:mahs>/', baiviet.view_detail, name='view_detail'),
+    path('update_hs/<str:mahs>/', baiviet.update_hs, name='update_hs'),
 
 ]
 urlpatterns +=static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)

@@ -99,7 +99,7 @@ class HoSoDangKy(models.Model):
     Ngaydangky = models.DateTimeField()
     Ngayxacnhan = models.DateTimeField(null=True, blank=True)
     TrangthaiXetduyet = models.IntegerField(null=True, blank=True)
-    Ngayxetduyet = models.DateField(null=True, blank=True)
+    Ngayxetduyet = models.DateTimeField(null=True, blank=True)
     Hocki = models.CharField(max_length=3)
     MDT = models.ForeignKey(DoiTuongChinhSach, on_delete=models.CASCADE, related_name='hosodangky', null=True, blank=True)
 

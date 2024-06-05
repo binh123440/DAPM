@@ -223,6 +223,7 @@ def luu_ho_so_dang_ky(request):
         so_dien_thoai = request.POST.get('so_dien_thoai')
         dia_chi = request.POST.get('dia_chi')
         hinh_anh = request.FILES.getlist('hinh_anh')
+        ma_nhan_vien = DaiDienPhongBan.objects.get(MNV='01')
         ma_doi_tuong = request.POST.get('doi_tuong_chinh_sach')
        
        
@@ -256,6 +257,7 @@ def luu_ho_so_dang_ky(request):
             TrangthaiXacnhan=0,
             Ngaydangky=timezone.now().date(),
             Hocki='223',
+            MNV=ma_nhan_vien,
             MDT = doi_tuong
         )
 
@@ -516,6 +518,42 @@ def signup(request):
     
     return render(request, "app/signup.html", context)
 
+def update_hs(request, mahs):
+    if request.method == "POST":
+        hs = HoSoDangKy.objects.get(MHSDK = mahs)
+        hs.MNV = DaiDienPhongBan.objects.get(pk=request.session.get('username'))
+        hs.TrangthaiXetduyet = 0
+        hs.Ngayxetduyet = datetime.now()
+        hs.save()
+        return redirect('base')
+    else:
+        print('Hồ sơ chưa cập nhật thành công')
+
+def view_detail(request, mahs):
+    hs = HoSoDangKy.objects.get(MHSDK = mahs)
+    sv = hs.MSV
+    nv_xet_duyet = hs.MNV
+    nv = DaiDienPhongBan.objects.get(MNV = request.session.get('username'))
+    dt = hs.MDT
+        
+    hs_object = {
+        'date': hs.Ngaydangky.date().strftime('%Y-%m-%d'),
+        'time': hs.Ngaydangky.time().strftime('%H:%M:%S')
+    }
+    
+    print(hs.Ngaydangky.date())
+    print(hs.Ngaydangky.time())
+              
+    context = {
+        'hs' : hs,
+        'sv' : sv,
+        'nv' : nv,
+        'dt' : dt,
+        'hs_object' : hs_object,
+        'nv_xet_duyet' : nv_xet_duyet
+    }
+    return render(request, 'app/view_detail.html', context)
+
 # def login(request):
 #     if request.method == 'POST':
 #         form = SinhVienForm(request.POST)
@@ -597,6 +635,7 @@ def base(request):
     
     hs_objects = []
     for hs in hs_s:
+        mahs = hs.MHSDK
         sinh_vien = hs.MSV
         ten_sinh_vien = sinh_vien.Hoten
         trang_thai_xac_nhan = hs.TrangthaiXacnhan
@@ -618,6 +657,7 @@ def base(request):
 
 
         hs_objects.append({
+            'MaHS' : mahs,
             'TenSV' : ten_sinh_vien,
             'TrangthaiXacnhan' : trang_thai_xac_nhan,
             'Ngaydangky' : ngay_dang_ky,
