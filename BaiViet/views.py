@@ -372,7 +372,8 @@ def chinhsuathongtin(request, MSV):
         sinhvien.Khoa = khoa
         sinhvien.Nienkhoa = nienkhoa
         sinhvien.Quequan = quequan
-        sinhvien.Pass = matkhau
+        if matkhau:
+            sinhvien.Pass = matkhau
         if image:
             sinhvien.Image = image
         sinhvien.save()
@@ -470,6 +471,7 @@ def signin(request):
             try:
                 sinh_vien = SinhVien.objects.get(MSV=username_login, Pass=password_login)
                 request.session['username'] = sinh_vien.MSV
+                
                 return redirect('base')
             except SinhVien.DoesNotExist:
                 print("Không có sinh viên có mã sv tồn tại")
@@ -614,7 +616,9 @@ def base(request):
             user = SinhVien.objects.get(MSV=username)
             print(f"Found sinh_vien: {user}")
             request.session['username'] = user.MSV
+            Baiviets2 = BaiViet.objects.all()[:2]
             context = {
+                'baiviet': Baiviets2,
                 'sinh_vien': user,
             }
             return render(request, 'app/Index2.html', context)
