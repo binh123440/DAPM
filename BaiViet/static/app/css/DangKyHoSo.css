@@ -335,7 +335,6 @@ button {
   height: 23.34px;
   margin: 0px 0 0 7px;
   z-index: 79;
-  overflow: hidden;
 }
 .logo-fill {
   position: absolute;
@@ -344,7 +343,6 @@ button {
   top: 0;
   left: 0;
   z-index: 80;
-  overflow: hidden;
 }
 .logo {
   position: relative;
@@ -352,7 +350,6 @@ button {
   height: 23.34px;
   margin: 0 0 0 0.03px;
   z-index: 81;
-  overflow: hidden;
 }
 .flex-column {
   position: absolute;
@@ -361,6 +358,7 @@ button {
   top: 0;
   left: 0;
   z-index: 83;
+  row-gap: 0px;
 }
 .vector-9 {
   position: relative;

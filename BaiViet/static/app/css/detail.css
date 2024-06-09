@@ -37,6 +37,7 @@
     padding: var(--padding-10xs) 4px var(--padding-10xs) var(--padding-7xs);
     gap: 5.5px;
     max-width: 100%;
+    transition-duration: 0.5s;
 }
 
 .nav ul {

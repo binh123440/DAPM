@@ -197,9 +197,7 @@ button {
 .header {
   position: absolute;
   height: 134px;
-  top: 0;
-  right: 0;
-  left: 0;
+
   background: rgba(255, 255, 255, 0);
   z-index: 184;
   box-shadow: 0 4px 94px 0 rgba(41, 45, 52, 0.14);

@@ -492,7 +492,7 @@ def logout(request):
     request.session.flush()
     if 'username' in request.session:
         del request.session['username']
-    return redirect('signin')     
+    return redirect('index')     
             
 def signup(request):
     if request.method == 'POST':
