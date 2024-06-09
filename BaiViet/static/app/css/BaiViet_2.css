@@ -23,8 +23,8 @@ button {
 
 .main-container {
   position: relative;
-  width: 1440px;
-  height: 3003px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   background: #ffffff;
   overflow: visible;
@@ -193,14 +193,6 @@ button {
   z-index: 9;
   border-radius: 6px;
   box-shadow: 0 10px 25px 0 #292d34;
-}
-.header {
-  position: absolute;
-  height: 134px;
-
-  background: rgba(255, 255, 255, 0);
-  z-index: 184;
-  box-shadow: 0 4px 94px 0 rgba(41, 45, 52, 0.14);
 }
 .header-3 {
   position: relative;
@@ -456,25 +448,8 @@ button {
   white-space: nowrap;
   z-index: 192;
 }
-.button {
-  position: absolute;
-  width: 150px;
-  height: 45px;
-  top: 50%;
-  left: 45%;
-  cursor: pointer;
-  background: #ffffff;
-  border: 1px solid #eb3dae;
-  transform: translate(300.04%, -63.33%);
-  z-index: 195;
-  border-radius: 6px;
-  transition-duration: 0.5s;
-}
-.button:hover{
-  color: #ffffff;
-  border: 1px solid #af0072;
-  background-color: #ee55b9;
-}
+
+
 .button2 {
   position: absolute;
   width: 150px;

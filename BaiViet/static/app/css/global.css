@@ -54,10 +54,11 @@ body {
   --padding-10xs: 3px;
   --padding-7xs: 6px;
 }
-.cu-navigation-v-group-8 {
-  position: relative;
+.profile {
+  display: flex;
+  align-items: center;
   width: 150px;
-  height: 46px;
+  height: 43px;
   cursor: pointer;
   background: #ffffff;
   border: 1px solid #ceceea;
@@ -65,23 +66,24 @@ body {
   border-radius: 14px;
   box-shadow: 0 4px 6px 0 rgba(67, 46, 134, 0.04);
 }
-.icon-search {
-  position: relative;
+.image-profile {
   width: 20px;
   height: 20px;
-  margin: 10px 0 0 10px;
+  padding-left: 10px;
+  align-self: center;
   background-size: cover;
   z-index: 190;
   overflow: hidden;
 }
-.input2 {
-  position: absolute;
-  width: 173.06px;
-  height: 45px;
+.name-profile {
+  text-decoration: none;
   background: transparent;
   border: none;
   z-index: 193;
   outline: none;
-  margin: 10px 0 0 10px;
+  flex: 1; 
+  text-align: center; 
+  align-self: center;
+  font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

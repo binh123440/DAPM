@@ -4,6 +4,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <title>Trang chủ</title>
   <meta name="viewport" content="initial-scale=1, width=device-width" />
   <link rel="stylesheet" type="text/css" href=" {% static 'app/css/style.css' %} ">
   <link rel="stylesheet" type="text/css" href=" {% static 'app/css/global.css' %} ">
@@ -22,14 +23,8 @@
           <li><a href="{% url 'DangKyHS' %}">Đăng ký</a></li>
           <li><a href="{% url 'BaiViet' %}">Bài viết</a></li>
           <li><a href="">Thông báo</a></li>
-          <li><a href="">Đào tạo</a></li>
+          <li><a href="http://daotao.ute.udn.vn/">Đào tạo</a></li>
         </ul>
-      </div>
-      <div class="cu-navigation-v-group-8">
-        <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
-        {% if sinh_vien %}
-        <a class="input2" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}" style="text-decoration:none"><b>{{ sinh_vien.Hoten }}</b></a>
-        {% endif %}
       </div>
       <div class="form-input-parent">
         <form method="GET" class="form-input">
@@ -42,6 +37,10 @@
           <button type="submit" class="icon-searchfafbd90bsvg-wrapper"><i class="fa-solid fa-filter"></i></button>
         </form>
         {% if sinh_vien %}
+        <div class="profile">
+          <img class="image-profile" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img> 
+          <a class="name-profile" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}">{{ sinh_vien.Hoten }}</a> 
+        </div>
         <button class="button" id="login-button">
           <div class="before"></div>
           <a href="{% url 'logout' %}" class="ng-nhp">Đăng xuất</a>
@@ -70,7 +69,7 @@
               </div>
               <div class="ute-university-l">UTE University là nơi hỗ trợ mạnh mẽ cho sự phát triển cá nhân và học tập của sinh viên, chúng tôi hy vọng rằng trang web của chúng tôi sẽ đóng vai trò quan trọng trong việc thúc đẩy sự tiến bộ và thành công của cả cộng đồng sinh viên và nhà trường.</div>
               <button class="link2">
-                <a href="" class="ng-k1">Đăng ký ngay</a>
+                <a href="{% url 'DangKyHS' %}" class="ng-k1">Đăng ký ngay</a>
               </button>
             </div>
             <div class="wrapper-divwistia-responsive-wrapper">

@@ -429,6 +429,7 @@ button {
   z-index: 193;
   outline: none;
   margin: 10px 0 0 10px;
+  text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .label-first-name {

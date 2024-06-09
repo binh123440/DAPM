@@ -8,9 +8,45 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700;800&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ABeeZee:ital,wght@0,400;1,40&display=swap" />
     <link rel="stylesheet" href="{%static 'app/css/BaiViet_2.css' %}" />
+    <link rel="stylesheet" type="text/css" href=" {% static 'app/css/style.css' %} ">
+    <link rel="stylesheet" type="text/css" href=" {% static 'app/css/global.css' %} ">
+    <script src="https://kit.fontawesome.com/a6d4c05032.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body>
+    <header class="header">
+      <div class="divheader">
+        <a href="{% url 'index' %}" class="link-wrapper">
+          <img class="link-icon" loading="lazy" alt="" src="{%static 'app/assets/images/logo.png'%}" />
+        </a>
+        <div class="nav">
+          <ul>
+            <li><a href="{% url 'index' %}">Trang chủ</a></li>
+            <li><a href="{% url 'DangKyHS' %}">Đăng ký</a></li>
+            <li><a href="{% url 'BaiViet' %}">Bài viết</a></li>
+            <li><a href="">Thông báo</a></li>
+            <li><a href="http://daotao.ute.udn.vn/">Đào tạo</a></li>
+          </ul>
+        </div>
+        <div class="form-input-parent">
+          {% if sinh_vien %}
+          <div class="profile">
+            <img class="image-profile" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
+            <a class="name-profile" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}">{{ sinh_vien.Hoten }}</a> 
+          </div>
+          <button class="button" id="login-button">
+            <div class="before"></div>
+            <a href="{% url 'logout' %}" class="ng-nhp">Đăng xuất</a>
+          </button>
+          {% else %}
+          <button class="button" id="login-button">
+            <div class="before"></div>
+            <a href="{% url 'signin' %}" class="ng-nhp">Đăng nhập</a>
+          </button>
+          {% endif %}
+        </div>
+      </div>
+    </header>
     <div class="main-container">
       <div class="main-decoration">
         {%for baiviet in baiviets3 %}
@@ -31,37 +67,6 @@
         </div>
         {% endif %}
         {% endfor %}
-      </div>
-      <div class="header">
-        <div class="header-3">
-          <div class="cu-navigation-group">
-            <a href="{% url 'index' %}" class="dang-ky">Trang chủ</a
-              ><a href="{% url "DangKyHS" %}" class="gioi-thieu">Đăng ký</a
-              ><a href="{% url "BaiViet" %}" class="bai-viet">Bài viết</a>
-              <a href="" class="thong-bao">Thông báo</a
-              ><a href="" class="dao-tao">Đào tạo</a>
-          </div>
-          <div class="form-input"></div>
-          <div class="icon-search-fill">
-            <img class="icon-search" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" ></img>
-            {% if sinh_vien %}
-            <a class="input2" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}" style="text-decoration:none"><b>{{ sinh_vien.Hoten }}</b></a>
-            {% endif %}
-          </div>
-          <button class="button">
-            <a class="dang-nhap" href="{% url 'signin' %}"  style="text-decoration:none">Đăng nhập</a>
-          </button>
-          <button class="button2">
-            <a class="dang-xuat" href="{% url "logout" %}"  style="text-decoration:none">Đăng xuất</a>
-          </button>
-          <div class="svg-c">
-            <div class="flex-column">
-              <img class="vector-d" src="{%static 'app/assets/images/f5571f11-2b98-406c-add6-8907f48d927d.png' %}">
-              <img class="vector-e" src="{%static 'app/assets/images/7ee37e05-abdf-45db-bdac-c891b49815b7.png' %}">
-            </div>
-            <img class="vector-f" src="{%static 'app/assets/images/6b53b291-c3b3-4f28-a1bf-e939f84b901a.png' %}">
-          </div>
-        </div>
       </div>
       <div class="main-paints">
         <span class="thong-tin-va-bai-viet">Thông tin và bài viết</span>
@@ -242,6 +247,7 @@
   <button class="link">
     <span class="watch-more">Watch More</span>
   </button>
+  
   <img class="svg-7d" src="{%static 'app/assets/images/ed759f3f-31b4-4449-8009-8db52e33dbcd.png' %}"></img>
   <span class="truong-dai-hoc-su-pham-ky-thuat">
     Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng

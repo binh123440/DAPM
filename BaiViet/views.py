@@ -45,7 +45,6 @@ def get_BaiViet(request):
     }
     return render(request, 'app/BaiViet.html', context)
 
-
 def get_DangKyHoSo(request):
     loai_doi_tuong_chinh_sach = LoaiDoiTuongChinhSach.objects.all()
     doi_tuong_chinh_sach = DoiTuongChinhSach.objects.all()

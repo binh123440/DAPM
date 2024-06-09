@@ -193,7 +193,6 @@
 }
 
 .form-input-parent {
-    width: 438.1px;
     justify-content: flex-start;
     gap: var(--gap-mini);
 }
