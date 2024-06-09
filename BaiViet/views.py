@@ -256,7 +256,7 @@ def luu_ho_so_dang_ky(request):
             MSV=sinh_vien,
             MotaHoancanhKhokhan=mota_hoan_canh_kho_khan,
             TrangthaiXacnhan=0,
-            Ngaydangky=timezone.now().date(),
+            Ngaydangky=datetime.now(),
             Hocki='223',
             MNV=ma_nhan_vien,
             MDT = doi_tuong
