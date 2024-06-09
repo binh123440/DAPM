@@ -86,6 +86,7 @@ def load_more_posts(request):
         data = []
         for baiviet in baiviets:
             data.append({
+                'MBV': baiviet.MBV,
                 'AnhBia': baiviet.AnhBia.url,
                 'TieuDe': baiviet.TieuDe,
                 'Ngaydang': baiviet.Ngaydang.strftime('%d/%m/%Y'),
