@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>RChi tiết hồ sơ</title>
+        
+        <link rel="stylesheet" href="{% static "css/view_detail.css" %}" />
+    </head>
+    <body>
+        <section class="container modal2-content">
+            <div class="div-btn-logout">
+                <button class="Btn" onclick="hideModal()">
+                    <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>        
+                    <div class="text">Trở về</div>
+                </button>
+            </div>
+            <header>Chi tiết hồ sơ đăng ký</header>
+            <form action="{% url "update_hs" mahs=hs.MHSDK %}" class="form" method="post">
+                {% csrf_token %}
+                {% if sv %}
+                    <div class="input-box">
+                        <label>Tên sinh viên đăng ký</label>
+                        <input type="text" value="{{ sv.Hoten }}" readonly required />
+                    </div>
+
+                    <div class="input-box">
+                        <label>Mã sinh viên</label>
+                        <input type="text" value="{{ sv.MSV }}" readonly required />
+                    </div>
+    
+                    {% if hs %}
+                        <div class="input-box">
+                            <label>Mô tả hoàn cảnh khó khăn</label>
+                            <textarea placeholder="{{ hs.MotaHoancanhKhokhan }}" rows="10" cols="80" readonly required></textarea>
+                        </div>
+        
+                        {% if hs.TrangthaiXacnhan == 0 %}
+                            <div class="input-box">
+                                <label>Trạng thái xác nhận</label>
+                                <input type="text" value="Hợp lệ" readonly required />
+                            </div>
+                        {% else %}
+                            <div class="input-box">
+                                <label>Trạng thái xác nhận</label>
+                                <input type="text" value="Không hợp lệ" readonly required />
+                            </div>
+                        {% endif %}
+                        
+                        <div class="column">
+                            <div class="input-box">
+                                <label>Ngày đăng ký</label>
+                                <!-- value="2000-01-02" -->
+                                <input type="date" value="{{ hs_object.date }}" readonly required />
+                            </div>
+                            <div class="input-box">
+                                <label>Thời gian đăng ký</label>
+                                <!-- value="23:00" -->
+                                <input type="time" value="{{ hs_object.time }}" readonly required />
+                            </div>
+                        </div>
+                        
+                        <div class="input-box">
+                            <label>Thuộc đối tượng</label>
+                            <textarea placeholder="{{ dt.Mota }}" rows="10" cols="80" readonly required></textarea>
+                        </div>
+                    {% endif %}
+                        
+                    {% if hs.TrangthaiXetduyet == 2 %}
+                        <div class="input-box">
+                            <label>Cán bộ xét duyệt</label>
+                            <input type="text" value="Tên người xét duyệt" readonly required />
+                        </div>
+                    {% else %}
+                        <div class="input-box">
+                            <label>Cán bộ xét duyệt</label>
+                            <input type="text" value="{{ nv_xet_duyet.Hoten }}" readonly required />
+                        </div>
+                    {% endif %}
+                    
+                    <button type="submit">Submit</button>
+                {% else %} 
+                    <div class="input-box">
+                        <label>Tên sinh viên đăng ký</label>
+                        <input type="text" value="Họ và tên" readonly required />
+                    </div>
+
+                    <div class="input-box">
+                        <label>Mã sinh viên</label>
+                        <input type="text" placeholder="Email" value="21115053120128" readonly required />
+                    </div>
+    
+                    <div class="input-box">
+                        <label>Mô tả hoàn cảnh khó khăn</label>
+                        <textarea placeholder="Nội dung" value="" rows="10" cols="80" readonly required></textarea>
+                    </div>
+    
+                    <div class="input-box">
+                        <label>Trạng thái xác nhận</label>
+                        <input type="textarea" placeholder="Nội dung" value="" readonly required />
+                    </div>
+    
+                    <div class="column">
+                    <div class="input-box">
+                        <label>Ngày đăng ký</label>
+                        <input type="date" placeholder="Ngày đăng ký" readonly required />
+                    </div>
+                    <div class="input-box">
+                        <label>Thời gian đăng ký</label>
+                        <input type="time" placeholder="Thời gian đăng ký" readonly required />
+                    </div>
+                    </div>
+    
+                    <div class="input-box">
+                        <label>Thuộc đối tượng</label>
+                        <input type="text" placeholder="Đối tượng" value="" readonly required />
+                    </div>
+    
+                    <div class="input-box">
+                        <label>Cán bộ xét duyệt</label>
+                        <input type="text" placeholder="Tên người xét duyệt" value="" readonly required />
+                    </div>
+                    <button type="submit">Submit</button>
+                {% endif %}                  
+            </form>
+        </section>
+    </body>
+</html>

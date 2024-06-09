@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="initial-scale=1, width=device-width">
+  {% load static %}
+    <link rel="stylesheet" href="{% static 'app/css/style_info_bgh.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/global_bgh.css' %}">
+    <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css2?family=ABeeZee:wght@400&display=swap' %}">
+    <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css2?family=Roboto:wght@500;600;700&display=swap' %}">
+    <link rel="stylesheet" href="{% static 'https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap' %}">
+    <script src="{% static 'app/js/script_bgh.js' %}"></script> 
+  </head>
+<body>
+  <div class="bgr">
+    <div class="header">
+      <button class="home">
+        <img class="logo" alt="" src="{% static 'app/assets/images/logov3clickuplightsvg-fill.svg' %}">
+      </button>
+      <div class="wrapper">
+        <div class="wrapper1">
+          <div class="wrapper2">
+            <div class="button-menu1" autofocus ><div class="span1"><a class="gii-thiu1" href="{% url 'index' %}"  >Trang chủ</a></div></div>
+            <div class="button-menu2" autofocus><div class="span2"><a class="bi-vit1" href="{% url 'BaiViet' %}">Bài viết</a></div></div>
+            <div class="button-menu3" autofocus><div class="span3"><a class="thng-bo1" href="{% url 'DangKyHS' %}">Đăng ký</a></div></div>
+            <button class="button-menu4" autofocus><div class="o-to1">Đào tạo</div></button>
+          </div>
+        </div>
+      </div>
+      <div class="actor">Phòng BGH</div>
+      <input class="name-avt" name="Hoten" value="{{ bgh.Hoten }}">
+    </div>
+    <img class="wrapper-icon" alt="" src="{% static 'app/assets/images/divcuheaderblob-wrapper--klbah@2x.png' %}">
+    <div class="menu">
+      <div class="menu-wrapper"><b class="menu-sv">MENU P.BGH</b></div>
+      <button class="capnhatthongtin" autofocus><div class="cp-nht-thng-container1">Cập nhật thông tin cá nhân</div></button>
+      <button class="dangkyhoso" autofocus><div class="ng-k-h1">Duyệt hồ sơ chính sách</div></button>
+      <button class="danhsachdadangky" autofocus><div class="danh-sch1">Đăng bài</div></button>
+    </div>
+    <form action="{% url 'thongtinphongBGH' MNV=BGH.MNV %}" method="POST" enctype="multipart/form-data">  
+      {% csrf_token %}
+      {{ form.as_p }}
+    <div class="cp-nht-thng1">Cập nhật thông tin cá nhân nhân viên</div>
+    <div class="fullname">Họ và tên</div>
+    <div class="email1">Email</div>
+    <div class="phone">Số điện thoại</div>
+    <div class="gender">Giới tính</div>
+    <div class="male">Nam</div>
+    <div class="khoa1">Mật khẩu</div>
+    <div class="lp1">Chức vụ</div>
+    <input class="check-male" name="Gioitinh" value="0" {% if bgh.Gioitinh == 0 %}checked{% endif %} type="radio">
+    <div class="female">Nữ</div>
+    <input class="check-female" name="Gioitinh" value="1" {% if bgh.Gioitinh == 1 %}checked{% endif %} type="radio">
+    <input class="somsv" name="MSV" value="{{ bgh.MNV }}">
+    <div class="id-st">Mã nhân viên</div>
+    <input class="name-st" name="Hoten" value="{{ bgh.Hoten }}">
+    <div class="ngay-sinh">Ngày sinh</div>
+    <input class="dob-st" name="Ngaysinh" value="{{ bgh.Ngaysinh|date:'Y-m-d' }}">
+    <div id="message-container"></div>
+    <div id="overlay"></div>
+    <select class="class" id="Roles" name="Roles" disabled>
+        {% for value, label in bgh.ROLES_CHOICES %}
+            <option value="{{ value }}" {% if bgh.Roles == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+  
+    <input class="khoa" type="text" name="Pass" value="{{ bgh.Matkhau }}">
+    <input class="email" type="text" name="Email" value="{{ bgh.Email }}">
+    <input class="tel" type="text" name="SDT" value="{{ bgh.SDT }}">
+    <div class="footer">
+      <div class="trng-i-hc-s-phm-k-thu-parent">
+        <div class="trng-i-hc1">Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng</div>
+        <img class="link-svg1" alt="" src="{% static 'app/assets/images/link--svg1@2x.png' %}">
+      </div>
+      <div class="footer1">
+        <div class="divrow">
+          <div class="span">
+            <div class="clickup1">© 2024 ClickUp</div>
+          </div>
+          <div class="link1">
+            <div class="security1">Security</div>
+          </div>
+          <div class="link2">
+            <div class="privacy1">Privacy</div>
+          </div>
+          <div class="link3">
+            <div class="terms1">Terms</div>
+          </div>
+        </div>
+      </div>
+      <img class="footer-child" alt="">
+      <img class="social-media-icon" alt="" src="{% static 'app/assets/images/social-media@2x.png' %}">
+    </div>
+    {% if sinhvien.Image %}
+    <img class="avt" src="{{ sinhvien.Image.url}}">
+    {% endif %}
+    <input class="select-pic" name="Image" autofocus type="file">
+    <button class="lu-parent" autofocus type="submit"><b class="lu1">Lưu</b><div><b class="lu2">Lưu</b></div></button>
+  </form>
+    <div class="dung-lng-file1">Dung lượng file tối đa 1 MB.<br> Định dạng:.JPEG, .PNG</div>
+  </div>
+</body>
+</html>

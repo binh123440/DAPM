@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài Viết</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ABeeZee:ital,wght@0,400;1,40&display=swap" />
+    <link rel="stylesheet" href="{%static 'app/css/BaiViet_2.css' %}" />
+    <link rel="stylesheet" type="text/css" href=" {% static 'app/css/style.css' %} ">
+    <link rel="stylesheet" type="text/css" href=" {% static 'app/css/global.css' %} ">
+    <script src="https://kit.fontawesome.com/a6d4c05032.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="divheader">
+        <a href="{% url 'index' %}" class="link-wrapper">
+          <img class="link-icon" loading="lazy" alt="" src="{%static 'app/assets/images/logo.png'%}" />
+        </a>
+        <div class="nav">
+          <ul>
+            <li><a href="{% url 'index' %}">Trang chủ</a></li>
+            <li><a href="{% url 'DangKyHS' %}">Đăng ký</a></li>
+            <li><a href="{% url 'BaiViet' %}">Bài viết</a></li>
+            <li><a href="">Thông báo</a></li>
+            <li><a href="http://daotao.ute.udn.vn/">Đào tạo</a></li>
+          </ul>
+        </div>
+        <div class="form-input-parent">
+          {% if sinh_vien %}
+          <div class="profile">
+            <img class="image-profile" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
+            <a class="name-profile" href="{% url 'chinhsuathongtin' sinh_vien.MSV %}">{{ sinh_vien.Hoten }}</a> 
+          </div>
+          <button class="button" id="login-button">
+            
+            <a href="{% url 'logout' %}" class="ng-nhp">Đăng xuất</a>
+          </button>
+          {% else %}
+          <button class="button" id="login-button">
+            
+            <a href="{% url 'signin' %}" class="ng-nhp">Đăng nhập</a>
+          </button>
+          {% endif %}
+        </div>
+      </div>
+    </header>
+    <div class="main-container">
+      <div class="main-decoration">
+        {%for baiviet in baiviets3 %}
+        {% if baiviet.MBV == 2 %}
+        <div class="article" >
+          <div class="card-group"><image class="image" src="{{baiviet.AnhBia.url}}"></div>
+          <div class="card-group-1">
+            <a class="heading-link-announcing" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none"
+              >{{baiviet.TieuDe}}</a>
+            <div class="flex-row">
+              <button class="svg"><img class="icon-clock" src="{%static 'app/assets/images/7e5657f7-c444-4159-8197-cfefaa9cc0bf.png' %}"></img></button>
+              <img class="image-2" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
+              <span class="date">{{baiviet.Ngaydang}}</span
+              ><span class="link-haris-butt">Phòng CTSV</span>
+            </div>
+          </div>
+          <div class="before"></div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="main-paints">
+        <span class="thong-tin-va-bai-viet">Thông tin và bài viết</span>
+        <div class="flex-row-c">
+          <div class="regroup">
+            <div class="icon-title-icon">
+              <div class="svg-10"><img class="icon-articles" src="{%static 'app/assets/images/c3847d44-d260-415f-8653-b52846f34cbf.png' %}"></img></div>
+              <div class="before-11"></div>
+            </div>
+            <span class="articles">Articles</span>
+            <form class="search_form" method="GET" action="">
+              <div class = "search_bar2"><input class="search_bar" type="text" name="search" placeholder="Tìm kiếm..."></div>
+              
+              <div class = "search_button2"><button class="search_button" type="submit">Tìm kiếm</button></div>
+            </form>
+          </div>
+          <div class="fieldset-button"><span class="recent">Recent</span></div>
+          <div class="fieldset-button-12">
+            <span class="popular">Popular</span>
+          </div>
+        </div>
+        <div class="flex-row-dd">
+          {%for baiviet in baiviets %}
+          {% if baiviet.MBV == 1 %}
+          <div class="article-13">
+            <img class="image-14" src="{{baiviet.AnhBia.url}}"></img>
+            <div class="card-group-15">
+              <span class="tin-tuc">TIN TỨC</span
+                ><a class="ngan-hang-tmcp" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none"
+                >{{baiviet.TieuDe}}</a
+              >
+              <div class="after"></div>
+              <div class="svg-16"><img class="icon-clock-17" src="{%static 'app/assets/images/1869067c-d976-4efa-957a-4beaad8b51f2.png' %}"></img></div>
+              <span class="date-18">{{baiviet.Ngaydang}}</span>
+              <img class="card-group-paints" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
+              <span class="trung-tam-hoc"
+                >TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span
+              >
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% for baiviet in baiviets %}
+          {% if baiviet.MBV == 2 %}
+          <div class="article-2c">
+              <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
+              <div class="card-group-2e">
+                  <span class="link-productivity">Sự kiện</span>
+                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.TieuDe }}</a>
+                  <div class="svg-2f">
+                      <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
+                  </div>
+                  <span class="date-31">{{ baiviet.Ngaydang }}</span>
+                  <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
+                  <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
+              </div>
+              <div class="before-34"></div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+
+{% comment %} ---------------------------------------------------------------------- {% endcomment %}
+        <div class="flex-row-c-2b" id="articles-container">
+          {% for baiviet in baiviets2 %}
+          {% if baiviet.MBV > 2 %}
+          <div class="article-2c">
+              <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
+              <div class="card-group-2e">
+                  <span class="link-productivity">Sự kiện</span>
+                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.TieuDe }}</a>
+                  <div class="svg-2f">
+                      <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
+                  </div>
+                  <span class="date-31">{{ baiviet.Ngaydang }}</span>
+                  <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
+                  <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
+              </div>
+              <div class="before-34"></div>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        <button class="button-6b">
+          <span class="load-more">Load More</span>
+          <div class="before-6c"></div>
+        </button>
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+              var offset = 5;  // Bắt đầu từ bài viết thứ 4 (vì 3 bài viết đầu tiên đã được tải)
+      
+              $('.button-6b').click(function() {
+                  $.ajax({
+                      url: '{% url "load_more_posts" %}',
+                      data: {
+                          'offset': offset,
+                      },
+                      dataType: 'json',
+                      success: function(data) {
+                          if (data.length > 0) {
+                              data.forEach(function(post) {
+                                  // Construct the detail URL dynamically
+                                  var detailUrl = '{% url "detail" 0 %}'.replace('/0/', '/' + post.MBV + '/');
+                                  var article = `<div class="article-2c">
+                                      <img class="image-2d" src="${post.AnhBia}" alt="Bài viết"></img>
+                                      <div class="card-group-2e">
+                                          <span class="link-productivity">Sự kiện</span>
+                                          <a class="event" href="${detailUrl}" style="text-decoration:none">${post.TieuDe}</a>
+                                          <div class="svg-2f"><img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}" alt="Clock"></img></div>
+                                          <span class="date-31">${post.Ngaydang}</span>
+                                          <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24" alt="Icon"></img>
+                                          <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
+                                      </div>
+                                      <div class="before-34"></div>
+                                  </div>`;
+                                  $('#articles-container').append(article);
+                              });
+                              offset += 3;
+                          } else {
+                              $('.button-6b').hide();
+                          }
+                      }
+                  });
+              });
+          });
+      </script>
+      
+{% comment %} --------------------------------------------- {% endcomment %}
+<div class="gradient-section">
+  <div class="before-6d"></div>
+  <div class="section">
+    <div class="svg-6e">
+      <img class="icon-top-videos" src="{%static 'app/assets/images/8e4d31ea-7604-423e-8d2d-7ede62593013.png' %}"></img>
+    </div>
+    <div class="before-6f"></div>
+  </div>
+  <span class="top-videos">Top Videos</span>
+  <div class="list-item-button">
+    <img class="image-70" src="{%static 'app/assets/images/b5069c8430cedb15f519dad87455d3a824c63f02.png' %}"></img>
+  </div>
+  <div class="section-71">
+    <div class="top-videos-video">
+      <div class="figure">
+        <div class="button-72">
+          <div class="svg-73">
+            <div class="icon-play">
+              <img class="vector-74" src="{%static 'app/assets/images/e2b97df1-f4e0-445f-b6d1-9e50082f47a0.png' %}"></img>
+            </div>
+          </div>
+          <div class="before-75"></div>
+        </div>
+        <img class="image-76" src="{%static 'app/assets/images/d3f1f6978f4c0372c0b25aca69215b7c30df034b.png' %}"></img>
+      </div>
+    </div>
+  </div>
+  <span class="introducing-clickup-ai">
+    Khoa Điện - Điện tử, Trường Đại học Sư phạm Kỹ thuật tư vấn tuyển sinh - Hướng nghiệp năm 2022
+  </span>
+  <div class="list-item-button-77">
+    <img class="image-78" src="{%static 'app/assets/images/673cdbe48bca7f6a7c75a4a262a693fce5e8c21f.png' %}"></img>
+  </div>
+  <span class="mike-fry-the-tech-guy">
+    Món quà của các Thầy Cô giáo UD-UTE gửi đến những Tân Kỹ sư, Tân Cử nhân nhân dịp Lễ trao bằng tốt nghiệp năm 2023
+  </span>
+  <div class="list-item-button-79">
+    <img class="image-7a" src="{%static 'app/assets/images/7d962f85a22f710be4f81af38c486a3a3ca07999.png' %}"></img>
+  </div>
+  <span class="the-evolution-of-gpt">
+    Trường Đại học Sư phạm Kỹ thuật, Khoa Điện - Điện tử tọa đàm " Định hướng nghề nghiệp trong thời đại Kỷ nguyên số"
+  </span>
+  <div class="list-item-button-7b">
+    <img class="image-7c" src="{%static 'app/assets/images/b902e4421f3ce68131694a759ca77bc31d43fa18.png' %}"></img>
+  </div>
+  <span class="write-better-with-clickup">
+    Khoa Điện - Điện tử, Trường Đại học Sư phạm Kỹ thuật tư vấn tuyển sinh - Hướng nghiệp năm 2022
+  </span>
+  <button class="link">
+    <span class="watch-more">Watch More</span>
+  </button>
+  
+  <img class="svg-7d" src="{%static 'app/assets/images/ed759f3f-31b4-4449-8009-8db52e33dbcd.png' %}"></img>
+  <span class="truong-dai-hoc-su-pham-ky-thuat">
+    Trường Đại học Sư phạm Kỹ thuật - Đại học Đà Nẵng
+  </span>
+  <div class="component">
+    <img class="vector-7e" src="{%static 'app/assets/images/2e970788-a9cd-4ad7-899e-f378e60f906e.png' %}"></img>
+  </div>
+  <div class="component-7f">
+    <img class="vector-80" src="{%static 'app/assets/images/51322a2a-0a85-42d7-8258-f5f6890dc4c9.png' %}"></img>
+  </div>
+  <span class="clickup">© 2024 ClickUp</span>
+  <span class="security">Security</span>
+  <span class="privacy">Privacy</span>
+  <span class="terms">Terms</span>
+  <div class="component-81">
+    <img class="vector-82" src="{%static 'app/assets/images/fec5c26e-32c0-4deb-9a9b-64472fe019cb.png' %}"></img>
+  </div>
+  <div class="component-83">
+    <img class="vector-84" src="{%static 'app/assets/images/b5ed756f-f463-4d1f-9c3a-5bd8025e7338.png' %}"></img>
+  </div>
+  <div class="component-85">
+    <img class="vector-86" src="{%static 'app/assets/images/61a9e9fa-ebfd-43f9-b5fe-2a3646b751d9.png' %}"></img>
+  </div>
+</div>
+
+  </body>
+</html>
+
