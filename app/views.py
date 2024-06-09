@@ -10,6 +10,7 @@ from django.utils import timezone
 # datetime
 from datetime import datetime
 import pytz
+import calendar
 from django.conf import settings
 # Thiết lập múi giờ cho Hồ Chí Minh
 ho_chi_minh_tz = pytz.timezone('Asia/Ho_Chi_Minh')
@@ -202,7 +203,90 @@ def base(request):
     percent_hs_invalid = round((total_hs_invalid/total_hs) * 100, 2)
     percent_hs_success = round((total_hs_success/total_hs) * 100, 2)
     percent_hs_unsuccess = round((total_hs_unsuccess/total_hs) * 100, 2)
+    
+    current_month = datetime.now().month
+    count_hs_valid = 0
+    count_hs_invalid = 0
+    count_hs_success = 0
+    count_hs_unsuccess = 0
+    count_hs_with_month1 = 0
+    count_hs_with_month2 = 0
+    count_hs_with_month3 = 0
+    count_hs_with_month4 = 0
+    hs_valid = []
+    hs_invalid = []
+    hs_success = []
+    hs_unsuccess = []
+    months_to_check = []
+    months_to_check_str = []
+
+    # Tạo danh sách các giá trị của tháng cần kiểm tra
+    months_to_check = [(current_month - i) % 12 or 12 for i in range(4)]
+    # Chuyển đổi số tháng thành tên tháng (dạng chuỗi)
+    months_to_check_str = [calendar.month_abbr[month] for month in months_to_check]
+    month1, month2, month3, month4 = months_to_check_str
+    print(months_to_check_str)
+    
+    for hs in hs_s:
+        if calendar.month_abbr[hs.Ngaydangky.month] == month1:
+            count_hs_with_month1 += 1
+        elif calendar.month_abbr[hs.Ngaydangky.month] == month2:
+            count_hs_with_month2 += 1
+        elif calendar.month_abbr[hs.Ngaydangky.month] == month3:
+            count_hs_with_month3 += 1
+        elif calendar.month_abbr[hs.Ngaydangky.month] == month4:
+            count_hs_with_month4 += 1
+                
+    count_hs_1 = 0
+    for hs in hs_s:
+        if calendar.month_abbr[hs.Ngaydangky.month] == month1:
+            count_hs_1 += 1
+    # Lặp qua các tháng cần kiểm tra
+    for month in months_to_check:
+        # Đặt lại các biến đếm
+        count_hs_valid = 0
+        count_hs_invalid = 0
+        count_hs_success = 0
+        count_hs_unsuccess = 0
         
+        for hs in hs_s:
+            if hs.Ngaydangky.month == month:
+                if hs.TrangthaiXacnhan == 0:
+                    count_hs_valid += 1
+                elif hs.TrangthaiXacnhan == 1:
+                    count_hs_invalid += 1
+                elif hs.TrangthaiXetduyet == 0:
+                    count_hs_success += 1
+                elif hs.TrangthaiXetduyet == 1:
+                    count_hs_unsuccess += 1
+        
+        hs_valid.append(count_hs_valid)
+        hs_invalid.append(count_hs_invalid)
+        hs_success.append(count_hs_success)
+        hs_unsuccess.append(count_hs_unsuccess)
+        
+    hs_invalid1, hs_invalid2, hs_invalid3, hs_invalid4 = hs_invalid
+        
+    hs_valid1, hs_valid2, hs_valid3, hs_valid4 = hs_valid
+    if hs_valid2 != 0:
+        percent_hs_valid_in_month_with_last_month = "tăng gấp " + str(round((hs_valid1 / hs_valid2) * 100, 1)) + " so với tháng trước"
+    else:
+        percent_hs_valid_in_month_with_last_month = "Không có hồ sơ nào hợp lệ tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+    
+    hs_success1, hs_success2, hs_success3, hs_success4 = hs_success
+    if hs_success2 != 0:
+        percent_hs_success_in_month_with_last_month = "tăng gấp " + round((hs_success1 / hs_success2) * 100, 1) + " so với tháng trước"
+    else:
+        percent_hs_success_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+        
+    hs_unsuccess1, hs_unsuccess2, hs_unsuccess3, hs_unsuccess4 = hs_success
+    if hs_unsuccess2 != 0:
+        percent_hs_unsuccess_in_month_with_last_month = "tăng gấp " + round((hs_unsuccess1 / hs_unsuccess2) * 100, 1) + " so với tháng trước"
+    else:
+        percent_hs_unsuccess_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+      
+    percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1)
+      
     context = {
         'hs_s' : hs_s,
         'total_hs' : total_hs,
@@ -215,7 +299,27 @@ def base(request):
         'percent_hs_success' : percent_hs_success,
         'percent_hs_unsuccess' : percent_hs_unsuccess,
         'hs_objects' : hs_objects,
-        'username' : user
+        'username' : user,
+        'hs_valid' : hs_valid,
+        'hs_invalid' : hs_invalid,
+        'hs_success' : hs_success,
+        'hs_unsuccess' : hs_unsuccess,
+        'month1' : month1,
+        'month2' : month2,
+        'month3' : month3,
+        'month4' : month4,
+        'count_hs_with_month1' : count_hs_with_month1,
+        'count_hs_with_month2' : count_hs_with_month2,
+        'count_hs_with_month3' : count_hs_with_month3,
+        'count_hs_with_month4' : count_hs_with_month4,
+        'percent_hs_in_month_with_last_month' : percent_hs_in_month_with_last_month,
+        'percent_hs_valid_in_month_with_last_month' : percent_hs_valid_in_month_with_last_month,
+        'percent_hs_success_in_month_with_last_month' : percent_hs_success_in_month_with_last_month,
+        'percent_hs_unsuccess_in_month_with_last_month' : percent_hs_unsuccess_in_month_with_last_month,
+        'hs_unsuccess1' : hs_unsuccess1,
+        'hs_valid1' : hs_valid1,
+        'hs_success1' : hs_success1,
+        'hs1' : count_hs_1,
     }
     
     return render(request, 'base.html', context)
@@ -266,6 +370,89 @@ def charts(request):
     percent_hs_invalid = round((total_hs_invalid/total_hs) * 100, 2)
     percent_hs_success = round((total_hs_success/total_hs) * 100, 2)
     percent_hs_unsuccess = round((total_hs_unsuccess/total_hs) * 100, 2)
+    
+    current_month = datetime.now().month
+    count_hs_valid = 0
+    count_hs_invalid = 0
+    count_hs_success = 0
+    count_hs_unsuccess = 0
+    count_hs_with_month1 = 0
+    count_hs_with_month2 = 0
+    count_hs_with_month3 = 0
+    count_hs_with_month4 = 0
+    hs_valid = []
+    hs_invalid = []
+    hs_success = []
+    hs_unsuccess = []
+    months_to_check = []
+    months_to_check_str = []
+
+    # Tạo danh sách các giá trị của tháng cần kiểm tra
+    months_to_check = [(current_month - i) % 12 or 12 for i in range(4)]
+    # Chuyển đổi số tháng thành tên tháng (dạng chuỗi)
+    months_to_check_str = [calendar.month_abbr[month] for month in months_to_check]
+    month1, month2, month3, month4 = months_to_check_str
+    print(months_to_check_str)
+    
+    for hs in hs_s:
+        if calendar.month_abbr[hs.Ngaydangky.month] == month1:
+            count_hs_with_month1 += 1
+        elif calendar.month_abbr[hs.Ngaydangky.month] == month2:
+            count_hs_with_month2 += 1
+        elif calendar.month_abbr[hs.Ngaydangky.month] == month3:
+            count_hs_with_month3 += 1
+        elif calendar.month_abbr[hs.Ngaydangky.month] == month4:
+            count_hs_with_month4 += 1
+                
+    count_hs_1 = 0
+    for hs in hs_s:
+        if calendar.month_abbr[hs.Ngaydangky.month] == month1:
+            count_hs_1 += 1
+    # Lặp qua các tháng cần kiểm tra
+    for month in months_to_check:
+        # Đặt lại các biến đếm
+        count_hs_valid = 0
+        count_hs_invalid = 0
+        count_hs_success = 0
+        count_hs_unsuccess = 0
+        
+        for hs in hs_s:
+            if hs.Ngaydangky.month == month:
+                if hs.TrangthaiXacnhan == 0:
+                    count_hs_valid += 1
+                elif hs.TrangthaiXacnhan == 1:
+                    count_hs_invalid += 1
+                elif hs.TrangthaiXetduyet == 0:
+                    count_hs_success += 1
+                elif hs.TrangthaiXetduyet == 1:
+                    count_hs_unsuccess += 1
+        
+        hs_valid.append(count_hs_valid)
+        hs_invalid.append(count_hs_invalid)
+        hs_success.append(count_hs_success)
+        hs_unsuccess.append(count_hs_unsuccess)
+        
+    hs_invalid1, hs_invalid2, hs_invalid3, hs_invalid4 = hs_invalid
+        
+    hs_valid1, hs_valid2, hs_valid3, hs_valid4 = hs_valid
+    if hs_valid2 != 0:
+        percent_hs_valid_in_month_with_last_month = "tăng gấp " + str(round((hs_valid1 / hs_valid2) * 100, 1)) + " so với tháng trước"
+    else:
+        percent_hs_valid_in_month_with_last_month = "Không có hồ sơ nào hợp lệ tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+    
+    hs_success1, hs_success2, hs_success3, hs_success4 = hs_success
+    if hs_success2 != 0:
+        percent_hs_success_in_month_with_last_month = "tăng gấp " + round((hs_success1 / hs_success2) * 100, 1) + " so với tháng trước"
+    else:
+        percent_hs_success_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+        
+    hs_unsuccess1, hs_unsuccess2, hs_unsuccess3, hs_unsuccess4 = hs_success
+    if hs_unsuccess2 != 0:
+        percent_hs_unsuccess_in_month_with_last_month = "tăng gấp " + round((hs_unsuccess1 / hs_unsuccess2) * 100, 1) + " so với tháng trước"
+    else:
+        percent_hs_unsuccess_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+      
+    percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1)
        
     context = {
         'hs_s' : hs_s,
@@ -279,6 +466,26 @@ def charts(request):
         'percent_hs_success' : percent_hs_success,
         'percent_hs_unsuccess' : percent_hs_unsuccess,
         'hs_objects' : hs_objects,
+        'hs_valid' : hs_valid,
+        'hs_invalid' : hs_invalid,
+        'hs_success' : hs_success,
+        'hs_unsuccess' : hs_unsuccess,
+        'month1' : month1,
+        'month2' : month2,
+        'month3' : month3,
+        'month4' : month4,
+        'count_hs_with_month1' : count_hs_with_month1,
+        'count_hs_with_month2' : count_hs_with_month2,
+        'count_hs_with_month3' : count_hs_with_month3,
+        'count_hs_with_month4' : count_hs_with_month4,
+        'percent_hs_in_month_with_last_month' : percent_hs_in_month_with_last_month,
+        'percent_hs_valid_in_month_with_last_month' : percent_hs_valid_in_month_with_last_month,
+        'percent_hs_success_in_month_with_last_month' : percent_hs_success_in_month_with_last_month,
+        'percent_hs_unsuccess_in_month_with_last_month' : percent_hs_unsuccess_in_month_with_last_month,
+        'hs_unsuccess1' : hs_unsuccess1,
+        'hs_valid1' : hs_valid1,
+        'hs_success1' : hs_success1,
+        'hs1' : count_hs_1,
     }
     
     return render(request, 'charts.html', context)

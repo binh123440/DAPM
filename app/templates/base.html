@@ -43,50 +43,6 @@
 		  }
 	</style>
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			var options = {
-			  series: [50, 60, 70, 80],
-			  chart: {
-				type: 'polarArea'
-			  },
-			  labels: ['Valid', 'Invalid', 'Success', 'Unsuccess'],
-			  colors: ['#00CCFF', '#FFCC66', '#66CC66', '#FF3333'],  // Custom colors for each label
-			  fill: {
-				opacity: 1
-			  },
-			  stroke: {
-				width: 1,
-				colors: undefined
-			  },
-			  yaxis: {
-				show: false
-			  },
-			  legend: {
-				position: 'bottom'
-			  },
-			  plotOptions: {
-				polarArea: {
-				  rings: {
-					strokeWidth: 0
-				  },
-				  spokes: {
-					strokeWidth: 0
-				  }
-				}
-			  },
-			  theme: {
-				monochrome: {
-				  enabled: false
-				}
-			  }
-			};
-		  
-			var chart = new ApexCharts(document.querySelector("#polarChart"), options);
-			chart.render();
-		  });		
-	</script>
-
 </head>
 <body>
 
@@ -368,22 +324,21 @@
 												<span>Tỷ lệ của các trường hợp đăng ký hồ sơ so với tổng số hồ sơ đăng ký</span>
 												<ul class="card-list mt-4">
 													<li data-type="Hồ sơ hợp lệ" data-value="{{ percent_hs_valid }}">
-														<span class="bg-blue circle"></span>Hợp lệ<span>{{ percent_hs_valid }}%</span>
+														<span class="circle" style="background: #496ecc;"></span>Hợp lệ<span>{{ percent_hs_valid }}%</span>
 													</li>
 													<li data-type="Hồ sơ hợp lệ" data-value="{{ percent_hs_invalid }}">
-														<span class="bg-blue circle"></span>Không hợp lệ<span>{{ percent_hs_invalid }}%</span>
+														<span class="circle" style="background: #ffa755;"></span>Không hợp lệ<span>{{ percent_hs_invalid }}%</span>
 													</li>
 													<li data-type="Hồ sơ hợp lệ" data-value="{{ percent_hs_success }}">
-														<span class="bg-blue circle"></span>Thành công<span>{{ percent_hs_success }}%</span>
+														<span class="circle" style="background: #68e365;"></span>Thành công<span>{{ percent_hs_success }}%</span>
 													</li>
 													<li data-type="Hồ sơ hợp lệ" data-value="{{ percent_hs_unsuccess }}">
-														<span class="bg-blue circle"></span>Không thành công<span>{{ percent_hs_unsuccess }}%</span>
+														<span class="circle" style="background: #c8c8c8;"></span>Không thành công<span>{{ percent_hs_unsuccess }}%</span>
 													</li>
 												</ul>
 											</div>
 											<div class="col-md-6">
-												<div id="chart-container"><div id="polarChart"></div></div>
-												{% comment %} <canvas id="polarChart"></canvas> {% endcomment %}
+												<canvas id="polarChart"></canvas>
 											</div>
 										</div>
 									</div>
@@ -645,72 +600,35 @@
 											<tbody>
 												<tr>
 													<td>
-														
+														<label for="Tháng">Tháng:</label>
+														<select id="Tháng" name="Tháng">
+															<option value="Tháng 1"><button>Tháng 1</button></option>
+															<option value="Tháng 2">Tháng 2</option>
+															<option value="Tháng 3">Tháng 3</option>
+															<option value="Tháng 4">Tháng 4</option>
+															<option value="Tháng 5">Tháng 5</option>
+															<option value="Tháng 6">Tháng 6</option>
+															<option value="Tháng 7">Tháng 7</option>
+															<option value="Tháng 8">Tháng 8</option>
+															<option value="Tháng 9">Tháng 9</option>
+															<option value="Tháng 10">Tháng 10</option>
+															<option value="Tháng 11">Tháng 11</option>
+															<option value="Tháng 12">Tháng 12</option>
+														</select>
 													</td>
 													<td>
-														<span class="fs-16 text-black font-w600">Tên sinh viên</span>
-													</td>
-													<td>
-														<span class="fs-16 text-black font-w600">Ngày đăng ký</span>
-													</td>
-													<td>
-														<span class="fs-16 text-black font-w600">Người xét duyệt</span>
-													</td>
-													<td>
-														<span class="fs-16 text-black font-w600">Ngày xét duyệt</span>
-													</td>
-													<td>
-														<span class="fs-16 text-black font-w600">Trạng thái xét duyệt</span>
+														<label for="Năm">Năm:</label>
+														<select id="Năm" name="Năm">
+															<option value="Năm 2024"><button>Năm 2024</button></option>
+															<option value="Năm 2023">Năm 2023</option>
+															<option value="Năm 2022">Năm 2022</option>
+															<option value="Năm 2021">Năm 2021</option>
+															<option value="Năm 2020">Năm 2020</option>
+															<option value="Năm 2019">Năm 2019</option>
+															<option value="Năm 2018">Năm 2018</option>															
+														</select>
 													</td>
 												</tr>
-												{% for hs in hs_objects %}
-													<tr>
-														<td>
-															{% if hs.TrangthaiXetduyet == 0 %}
-																<svg class="bgl-success tr-icon" width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-																	<g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
-																	</g>
-																</svg>
-															{% else %}
-																<svg class="bgl-danger tr-icon" width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-																	<g><path d="M35.2219 19.0125C34.8937 19.6906 35.1836 20.5109 35.8617 20.8391C37.7484 21.7469 39.3453 23.1578 40.4828 24.9242C41.6476 26.7344 42.2656 28.8344 42.2656 31C42.2656 37.2125 37.2125 42.2656 31 42.2656C24.7875 42.2656 19.7344 37.2125 19.7344 31C19.7344 28.8344 20.3523 26.7344 21.5117 24.9187C22.6437 23.1523 24.2461 21.7414 26.1328 20.8336C26.8109 20.5055 27.1008 19.6906 26.7726 19.007C26.4445 18.3289 25.6297 18.0391 24.9461 18.3672C22.6 19.4937 20.6148 21.2437 19.2094 23.4422C17.7656 25.6953 17 28.3094 17 31C17 34.7406 18.4547 38.257 21.1015 40.8984C23.743 43.5453 27.2594 45 31 45C34.7406 45 38.257 43.5453 40.8984 40.8984C43.5453 38.2516 45 34.7406 45 31C45 28.3094 44.2344 25.6953 42.7851 23.4422C41.3742 21.2492 39.389 19.4937 37.0484 18.3672C36.3648 18.0445 35.55 18.3289 35.2219 19.0125Z" fill="#FF2E2E"></path><path d="M36.3211 30.2726C36.589 30.0047 36.7203 29.6547 36.7203 29.3047C36.7203 28.9547 36.589 28.6047 36.3211 28.3367L32.8812 24.8969C32.3781 24.3937 31.7109 24.1203 31.0055 24.1203C30.3 24.1203 29.6273 24.3992 29.1297 24.8969L25.6898 28.3367C25.1539 28.8726 25.1539 29.7367 25.6898 30.2726C26.2258 30.8086 27.0898 30.8086 27.6258 30.2726L29.6437 28.2547L29.6437 36.0258C29.6437 36.7804 30.2562 37.3929 31.0109 37.3929C31.7656 37.3929 32.3781 36.7804 32.3781 36.0258L32.3781 28.2492L34.3961 30.2672C34.9211 30.8031 35.7851 30.8031 36.3211 30.2726Z" fill="#FF2E2E"></path></g>
-																</svg>
-															{% endif %}
-														</td>
-														<td>
-															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.TenSV }}</a></h6>
-															{% if hs.TrangthaiXacnhan == 0 %}
-																<span class="fs-14">Hồ sơ hợp lệ</span>
-															{% else %}
-																<span class="fs-14">Hồ sơ không hợp lệ</span>
-															{% endif %}	
-														</td>
-														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky }}</h6>
-															<span class="fs-14">{{ hs.ThoigianDangky }}</span>
-														</td>
-														<td><span class="fs-16 text-black font-w600">{{ hs.Tennhanvien }}</span></td>
-														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet }}</h6>
-															<span class="fs-14">{{ hs.ThoigianXetduyet }}</span>
-														</td>
-														<td>
-															{% if hs.TrangthaiXetduyet == 0 %}
-																<span class="text-success fs-16 font-w500 text-start d-block">Thành công</span>
-															{% else %}
-																<span class="text-light fs-16 font-w500 text-start d-block">Thất bại</span>
-															{% endif %}
-														</td>
-													</tr>
-												{% endfor %}
-											</tbody>
-										</table>
-									</div>
-								</div>
-								<div class="tab-pane" id="Today" role="tabpanel">
-									<div class="table-responsive">
-										<table class="table table-responsive-md card-table transactions-table">
-											<tbody>
 												<tr>
 													<td>
 														
@@ -765,9 +683,126 @@
 														<td>
 															{% if hs.TrangthaiXetduyet == 0 %}
 																<span class="text-success fs-16 font-w500 text-start d-block">Thành công</span>
-															{% else %}
+															{% elif hs.TrangthaiXetduyet == 1 %}
 																<span class="text-light fs-16 font-w500 text-start d-block">Thất bại</span>
+															{% else %}
+																<span class="text-light fs-16 font-w500 text-start d-block">Chưa xét</span>
 															{% endif %}
+														</td>
+														<td>
+															<div class="container-detail">
+																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MaHS }}">
+																	<span class="button-content">Chi tiết</span>
+																</button>																
+															</div>
+														</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="tab-pane" id="Today" role="tabpanel">
+									<div class="table-responsive">
+										<table class="table table-responsive-md card-table transactions-table">
+											<tbody>
+												<tr>
+													<td>
+														<label for="Tháng">Tháng:</label>
+														<select id="Tháng" name="Tháng">
+															<option value="Tháng 1"><button>Tháng 1</button></option>
+															<option value="Tháng 2">Tháng 2</option>
+															<option value="Tháng 3">Tháng 3</option>
+															<option value="Tháng 4">Tháng 4</option>
+															<option value="Tháng 5">Tháng 5</option>
+															<option value="Tháng 6">Tháng 6</option>
+															<option value="Tháng 7">Tháng 7</option>
+															<option value="Tháng 8">Tháng 8</option>
+															<option value="Tháng 9">Tháng 9</option>
+															<option value="Tháng 10">Tháng 10</option>
+															<option value="Tháng 11">Tháng 11</option>
+															<option value="Tháng 12">Tháng 12</option>
+														</select>
+													</td>
+													<td>
+														<label for="Năm">Năm:</label>
+														<select id="Năm" name="Năm">
+															<option value="Năm 2024"><button>Năm 2024</button></option>
+															<option value="Năm 2023">Năm 2023</option>
+															<option value="Năm 2022">Năm 2022</option>
+															<option value="Năm 2021">Năm 2021</option>
+															<option value="Năm 2020">Năm 2020</option>
+															<option value="Năm 2019">Năm 2019</option>
+															<option value="Năm 2018">Năm 2018</option>															
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														
+													</td>
+													<td>
+														<span class="fs-16 text-black font-w600">Tên sinh viên</span>
+													</td>
+													<td>
+														<span class="fs-16 text-black font-w600">Ngày đăng ký</span>
+													</td>
+													<td>
+														<span class="fs-16 text-black font-w600">Người xét duyệt</span>
+													</td>
+													<td>
+														<span class="fs-16 text-black font-w600">Ngày xét duyệt</span>
+													</td>
+													<td>
+														<span class="fs-16 text-black font-w600">Trạng thái xét duyệt</span>
+													</td>
+												</tr>
+												{% for hs in hs_objects %}
+													<tr>
+														<td>
+															{% if hs.TrangthaiXetduyet == 0 %}
+																<svg class="bgl-success tr-icon" width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+																	<g><path d="M35.2219 42.9875C34.8938 42.3094 35.1836 41.4891 35.8617 41.1609C37.7484 40.2531 39.3453 38.8422 40.4828 37.0758C41.6477 35.2656 42.2656 33.1656 42.2656 31C42.2656 24.7875 37.2125 19.7344 31 19.7344C24.7875 19.7344 19.7344 24.7875 19.7344 31C19.7344 33.1656 20.3523 35.2656 21.5117 37.0813C22.6437 38.8477 24.2461 40.2586 26.1328 41.1664C26.8109 41.4945 27.1008 42.3094 26.7727 42.993C26.4445 43.6711 25.6297 43.9609 24.9461 43.6328C22.6 42.5063 20.6148 40.7563 19.2094 38.5578C17.7656 36.3047 17 33.6906 17 31C17 27.2594 18.4547 23.743 21.1016 21.1016C23.743 18.4547 27.2594 17 31 17C34.7406 17 38.257 18.4547 40.8984 21.1016C43.5453 23.7484 45 27.2594 45 31C45 33.6906 44.2344 36.3047 42.7852 38.5578C41.3742 40.7508 39.3891 42.5063 37.0484 43.6328C36.3648 43.9555 35.55 43.6711 35.2219 42.9875Z" fill="#2BC155"></path><path d="M36.3211 31.7274C36.5891 31.9953 36.7203 32.3453 36.7203 32.6953C36.7203 33.0453 36.5891 33.3953 36.3211 33.6633L32.8812 37.1031C32.3781 37.6063 31.7109 37.8797 31.0055 37.8797C30.3 37.8797 29.6273 37.6008 29.1297 37.1031L25.6898 33.6633C25.1539 33.1274 25.1539 32.2633 25.6898 31.7274C26.2258 31.1914 27.0898 31.1914 27.6258 31.7274L29.6437 33.7453L29.6437 25.9742C29.6437 25.2196 30.2562 24.6071 31.0109 24.6071C31.7656 24.6071 32.3781 25.2196 32.3781 25.9742L32.3781 33.7508L34.3961 31.7328C34.9211 31.1969 35.7852 31.1969 36.3211 31.7274Z" fill="#2BC155"></path>
+																	</g>
+																</svg>
+															{% else %}
+																<svg class="bgl-danger tr-icon" width="63" height="63" viewBox="0 0 63 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+																	<g><path d="M35.2219 19.0125C34.8937 19.6906 35.1836 20.5109 35.8617 20.8391C37.7484 21.7469 39.3453 23.1578 40.4828 24.9242C41.6476 26.7344 42.2656 28.8344 42.2656 31C42.2656 37.2125 37.2125 42.2656 31 42.2656C24.7875 42.2656 19.7344 37.2125 19.7344 31C19.7344 28.8344 20.3523 26.7344 21.5117 24.9187C22.6437 23.1523 24.2461 21.7414 26.1328 20.8336C26.8109 20.5055 27.1008 19.6906 26.7726 19.007C26.4445 18.3289 25.6297 18.0391 24.9461 18.3672C22.6 19.4937 20.6148 21.2437 19.2094 23.4422C17.7656 25.6953 17 28.3094 17 31C17 34.7406 18.4547 38.257 21.1015 40.8984C23.743 43.5453 27.2594 45 31 45C34.7406 45 38.257 43.5453 40.8984 40.8984C43.5453 38.2516 45 34.7406 45 31C45 28.3094 44.2344 25.6953 42.7851 23.4422C41.3742 21.2492 39.389 19.4937 37.0484 18.3672C36.3648 18.0445 35.55 18.3289 35.2219 19.0125Z" fill="#FF2E2E"></path><path d="M36.3211 30.2726C36.589 30.0047 36.7203 29.6547 36.7203 29.3047C36.7203 28.9547 36.589 28.6047 36.3211 28.3367L32.8812 24.8969C32.3781 24.3937 31.7109 24.1203 31.0055 24.1203C30.3 24.1203 29.6273 24.3992 29.1297 24.8969L25.6898 28.3367C25.1539 28.8726 25.1539 29.7367 25.6898 30.2726C26.2258 30.8086 27.0898 30.8086 27.6258 30.2726L29.6437 28.2547L29.6437 36.0258C29.6437 36.7804 30.2562 37.3929 31.0109 37.3929C31.7656 37.3929 32.3781 36.7804 32.3781 36.0258L32.3781 28.2492L34.3961 30.2672C34.9211 30.8031 35.7851 30.8031 36.3211 30.2726Z" fill="#FF2E2E"></path></g>
+																</svg>
+															{% endif %}
+														</td>
+														<td>
+															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.TenSV }}</a></h6>
+															{% if hs.TrangthaiXacnhan == 0 %}
+																<span class="fs-14">Hồ sơ hợp lệ</span>
+															{% else %}
+																<span class="fs-14">Hồ sơ không hợp lệ</span>
+															{% endif %}	
+														</td>
+														<td>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky }}</h6>
+															<span class="fs-14">{{ hs.ThoigianDangky }}</span>
+														</td>
+														<td><span class="fs-16 text-black font-w600">{{ hs.Tennhanvien }}</span></td>
+														<td>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet }}</h6>
+															<span class="fs-14">{{ hs.ThoigianXetduyet }}</span>
+														</td>
+														<td>
+															{% if hs.TrangthaiXetduyet == 0 %}
+																<span class="text-success fs-16 font-w500 text-start d-block">Thành công</span>
+															{% elif hs.TrangthaiXetduyet == 1 %}
+																<span class="text-light fs-16 font-w500 text-start d-block">Thất bại</span>
+															{% else %}
+																<span class="text-light fs-16 font-w500 text-start d-block">Chưa xét</span>
+															{% endif %}
+														</td>
+														<td>
+															<div class="container-detail">
+																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MaHS }}">
+																	<span class="button-content">Chi tiết</span>
+																</button>																
+															</div>
 														</td>
 													</tr>
 												{% endfor %}
@@ -802,10 +837,10 @@
 										<div class="me-auto">
 											<h4 class="card-title">Tổng số hồ sơ</h4>
 											<div class="d-flex align-items-center">
-												<h2 class="fs-38 mb-0">{{ total_hs }}</h2>
+												<h2 class="fs-38 mb-0">{{ hs1 }}</h2>
 												<div class="text-success transaction-caret">
 													<i class="fas fa-sort-up"></i>
-													<p class="mb-0">+0.8%</p>
+													<p class="mb-0">+{{ percent_hs_in_month_with_last_month }}%</p>
 												</div>
 											</div>
 										</div>		
@@ -845,7 +880,7 @@
 												</div>
 												<p class="fs-16 mb-0 mt-2"><span class="text-danger">+0,8% </span>so với đợt trước đó</p>
 											</div>
-											<h2 class="fs-38">{{ total_hs_valid }}	</h2>
+											<h2 class="fs-38">{{ hs_valid1 }}	</h2>
 										</div>
 									</div>
 								</div>
@@ -855,8 +890,8 @@
 									<div class="card-body">
 										<h4 class="card-title mt-2">Tổng số hồ sơ đăng ký thành công</h4>
 										<div class="d-flex align-items-center mt-3 mb-2">
-											<h2 class="fs-38 mb-0 me-3">{{ total_hs_success }}</h2>
-											<span class="badge badge-success badge-xl">+0.5%</span>
+											<h2 class="fs-38 mb-0 me-3">{{ hs_success1 }}</h2>
+											<span class="badge badge-success badge-xl">{{ percent_hs_success_in_month_with_last_month }}</span>
 										</div>
 									</div>
 								</div>
@@ -866,8 +901,8 @@
 									<div class="card-body">
 										<h4 class="card-title mt-2">Tổng số hồ sơ đăng ký không thành công</h4>
 										<div class="d-flex align-items-center mt-3 mb-2">
-											<h2 class="fs-38 mb-0 me-3">{{ total_hs_unsuccess }}</h2>
-											<span class="badge badge-danger badge-xl">-6.4%</span>
+											<h2 class="fs-38 mb-0 me-3">{{ hs_unsuccess1 }}</h2>
+											<span class="badge badge-danger badge-xl">{{ percent_hs_unsuccess_in_month_with_last_month }}</span>
 										</div>
 									</div>
 								</div>
@@ -942,17 +977,401 @@
     ***********************************-->
     <!-- Required vendors -->
     <script src="{%static 'vendor/global/global.min.js'%}"></script>
-    {% comment %} <script src="{%static 'vendor/chart.js/Chart.bundle.min.js'%}"></script> {% endcomment %}
+    <script src="{%static 'vendor/chart.js/Chart.bundle.min.js'%}"></script>
     <script src="{%static 'vendor/jquery-nice-select/js/jquery.nice-select.min.js'%}"></script>
 	
 	<!-- Apex Chart -->
-    {% comment %} <script src="{%static 'vendor/apexchart/apexchart.js'%}"></script> {% endcomment %}
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{%static 'vendor/apexchart/apexchart.js'%}"></script>
     <script src="{%static 'vendor/nouislider/nouislider.min.js'%}"></script>
     <script src="{%static 'vendor/wnumb/wNumb.js'%}"></script>
 	
 	<!-- Dashboard 1 -->
-    <script src="{%static 'js/dashboard/dashboard-1.js'%}"></script>
+    <script>
+		(function($) {
+			/* "use strict" */
+			
+		var dlabChartlist = function(){
+			
+			var screenWidth = $(window).width();	
+			
+			var chartBar = function(){
+				
+				var options = {
+					series: [
+						{
+							name: 'Income',
+							data: [50, 18, 70, 40],
+							//radius: 12,	
+						}, 
+						{
+						name: 'Outcome',
+						data: [80, 40, 55, 20]
+						}, 
+						
+					],
+						chart: {
+						type: 'bar',
+						height: 200,
+						
+						toolbar: {
+							show: false,
+						},
+						
+					},
+					plotOptions: {
+					bar: {
+						horizontal: false,
+						columnWidth: '57%',
+						borderRadius:12
+					},
+					
+					},
+					states: {
+					hover: {
+						filter: 'none',
+					}
+					},
+					colors:['#80ec67', '#fe7d65'],
+					dataLabels: {
+					enabled: false,
+					},
+					markers: {
+				shape: "circle",
+				},
+				
+				
+					legend: {
+						position: 'top',
+						horizontalAlign: 'right', 
+						show: false,
+						fontSize: '12px',
+						labels: {
+							colors: '#000000',
+							
+							},
+						markers: {
+						width: 18,
+						height: 18,
+						strokeWidth: 0,
+						strokeColor: '#fff',
+						fillColors: undefined,
+						radius: 12,	
+						}
+					},
+					stroke: {
+					show: true,
+					width: 4,
+					colors: ['transparent']
+					},
+					grid: {
+						borderColor: '#eee',
+					},
+					xaxis: {
+						
+					categories: ['Sun', 'Mon', 'Tue', 'Wed'],
+					labels: {
+					style: {
+						colors: '#3e4954',
+						fontSize: '13px',
+						fontFamily: 'poppins',
+						fontWeight: 400,
+						cssClass: 'apexcharts-xaxis-label',
+						},
+					},
+					crosshairs: {
+					show: false,
+					}
+					},
+					yaxis: {
+						labels: {
+							offsetX:-16,
+						style: {
+							colors: '#3e4954',
+							fontSize: '13px',
+							fontFamily: 'poppins',
+							fontWeight: 400,
+							cssClass: 'apexcharts-xaxis-label',
+						},
+					},
+					},
+					fill: {
+					opacity: 1,
+					colors:['#80ec67', '#fe7d65'],
+					},
+					tooltip: {
+					y: {
+						formatter: function (val) {
+						return "$ " + val + " thousands"
+						}
+					}
+					},
+					responsive: [{
+						breakpoint: 1600,
+						options: {
+							chart: {
+								height: 400,
+							}
+						},
+					},
+					{
+						breakpoint: 575,
+						options: {
+							chart: {
+								height: 250,
+							}
+						},
+					}]
+					};
+
+					var chartBar1 = new ApexCharts(document.querySelector("#chartBar"), options);
+					chartBar1.render();
+			}	
+			
+			var chartBar2 = function(){
+				
+				var options = {
+					series: [
+						{
+							name: 'Income',
+							data: [50, 18, 70, 40, 90, 50],
+							//radius: 12,	
+						}, 
+						{
+						name: 'Outcome',
+						data: [80, 40, 55, 20, 50, 70]
+						}, 
+						
+					],
+						chart: {
+						type: 'bar',
+						height: 400,
+						
+						toolbar: {
+							show: false,
+						},
+						
+					},
+					plotOptions: {
+					bar: {
+						horizontal: false,
+						columnWidth: '70%',
+						borderRadius:10
+					},
+					
+					},
+					states: {
+					hover: {
+						filter: 'none',
+					}
+					},
+					colors:['#80ec67', '#fe7d65'],
+					dataLabels: {
+					enabled: false,
+					},
+					markers: {
+				shape: "circle",
+				},
+				
+				
+					legend: {
+						position: 'top',
+						horizontalAlign: 'right', 
+						show: false,
+						fontSize: '12px',
+						labels: {
+							colors: '#000000',
+							
+							},
+						markers: {
+						width: 18,
+						height: 18,
+						strokeWidth: 0,
+						strokeColor: '#fff',
+						fillColors: undefined,
+						radius: 12,	
+						}
+					},
+					stroke: {
+					show: true,
+					width: 5,
+					colors: ['transparent']
+					},
+					grid: {
+						borderColor: '#eee',
+					},
+					xaxis: {
+						
+					categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+					labels: {
+					style: {
+						colors: '#3e4954',
+						fontSize: '13px',
+						fontFamily: 'poppins',
+						fontWeight: 400,
+						cssClass: 'apexcharts-xaxis-label',
+						},
+					},
+					crosshairs: {
+					show: false,
+					}
+					},
+					yaxis: {
+						labels: {
+							offsetX:-16,
+						style: {
+							colors: '#3e4954',
+							fontSize: '13px',
+							fontFamily: 'poppins',
+							fontWeight: 400,
+							cssClass: 'apexcharts-xaxis-label',
+						},
+					},
+					},
+					fill: {
+					opacity: 1,
+					colors:['#80ec67', '#fe7d65'],
+					},
+					tooltip: {
+					y: {
+						formatter: function (val) {
+						return "$ " + val + " thousands"
+						}
+					}
+					},
+					responsive: [{
+						breakpoint: 575,
+						options: {
+							chart: {
+								height: 250,
+							}
+						},
+					}]
+					};
+
+					var chartBar1 = new ApexCharts(document.querySelector("#chartBar2"), options);
+					chartBar1.render();
+			}
+
+			var polarChart = function(){
+				var ctx = document.getElementById("polarChart").getContext('2d');
+					Chart.defaults.global.legend.display = false;
+					var myChart = new Chart(ctx, {
+						type: 'polarArea',
+						data: {
+							labels: ["Mon", "Tue", "Wed", "Thu"],
+							datasets: [{
+								backgroundColor: [
+									"#496ecc",
+									"#68e365",
+									"#ffa755",
+									"#c8c8c8"
+								],
+								data: [{{ percent_hs_valid }}, {{ percent_hs_success }}, {{ percent_hs_invalid }}, {{ percent_hs_unsuccess }}]
+							}]
+						},
+						options: {
+							maintainAspectRatio: false,
+							scale: {
+								scaleShowLine:false,
+								display:false,
+								pointLabels:{
+									fontSize: 0       
+								},
+							},
+							tooltips:{
+								enabled:false,
+							}
+						}
+					});
+			}	
+			
+			var handleCard = function(){
+				
+				// Vars
+				var reloadButton  = document.querySelector( '.change-btn' );
+				var reloadIcon     = document.querySelector( '.reload' );
+				var reloadEnabled = true;
+				var rotation      = 0;
+				// Events
+				reloadButton.addEventListener('click', function() { reloadClick() });
+				// Functions
+				function reloadClick() {
+				reloadEnabled = false;
+				rotation += 360;
+				// Eh, this works.
+				reloadIcon.style.webkitTransform = 'translateZ(0px) rotateZ( ' + rotation + 'deg )';
+				reloadIcon.style.MozTransform  = 'translateZ(0px) rotateZ( ' + rotation + 'deg )';
+				reloadIcon.style.transform  = 'translateZ(0px) rotateZ( ' + rotation + 'deg )';
+				}
+				// Show button.
+				setTimeout(function() {
+				reloadButton.classList.add('active');
+				}, 1);
+				
+				//Number formatting
+				var sliderFormat = document.getElementById('slider-format');
+				noUiSlider.create(sliderFormat, {
+					start: [20000],
+					step: 1000,
+					connect: [true, false],
+					range: {
+						'min': [20000],
+						'max': [80000]
+					},
+					ariaFormat: wNumb({
+						decimals: 3
+					}),
+					format: wNumb({
+						decimals: 3,
+						thousand: '.',
+						//suffix: ' (US $)'
+					})
+				});
+
+				var inputFormat = document.getElementById('input-format');
+				sliderFormat.noUiSlider.on('update', function (values, handle) {
+					inputFormat.value = values[handle];
+				});
+
+				inputFormat.addEventListener('change', function () {
+					sliderFormat.noUiSlider.set(this.value);
+				});
+				//Number formatting ^
+			}
+		
+			/* Function ============ */
+				return {
+					init:function(){
+					},
+					
+					
+					load:function(){
+						
+						chartBar();
+						chartBar2();
+						polarChart();
+						handleCard();
+					},
+					
+					resize:function(){
+					}
+				}
+			
+			}();
+
+			
+				
+			jQuery(window).on('load',function(){
+				setTimeout(function(){
+					dlabChartlist.load();
+				}, 1000); 
+				
+			});
+
+			
+
+		})(jQuery);
+	</script>
 
     <script src="{%static 'js/custom.min.js'%}"></script>
     <script src="{%static 'js/dlabnav-init.js'%}"></script>

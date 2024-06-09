@@ -265,8 +265,27 @@
 			chartBar1.render();
 	}
 
+	var chartElement_polar = document.getElementById('polarChart');
+    
+    // Get the data from data attributes
+    var percentHsValid = parseFloat(chartElement_polar.getAttribute('data-percent-hs-valid'));
+    var percentHsInvalid = parseFloat(chartElement_polar.getAttribute('data-percent-hs-invalid'));
+    var percentHsSuccess = parseFloat(chartElement_polar.getAttribute('data-percent-hs-success'));
+    var percentHsUnsuccess = parseFloat(chartElement_polar.getAttribute('data-percent-hs-unsuccess'));
+
+    console.log('Percent HS Valid:', percentHsValid);
+    console.log('Percent HS Invalid:', percentHsInvalid);
+    console.log('Percent HS Success:', percentHsSuccess);
+    console.log('Percent HS Unsuccess:', percentHsUnsuccess);
+
+    // Check if the values are valid numbers
+    if (isNaN(percentHsValid) || isNaN(percentHsInvalid) || isNaN(percentHsSuccess) || isNaN(percentHsUnsuccess)) {
+        console.error('One or more data attributes are not valid numbers.');
+        return;
+    }
+
 	var polarChart = function(){
-		 var ctx = document.getElementById("polarChart").getContext('2d');
+		var ctx = document.getElementById("polarChart").getContext('2d');
 			Chart.defaults.global.legend.display = false;
 			var myChart = new Chart(ctx, {
 				type: 'polarArea',
@@ -279,7 +298,7 @@
 							"#ffa755",
 							"#c8c8c8"
 						],
-						data: [40, 35, 30, 20]
+						data: [percentHsValid, percentHsInvalid, percentHsSuccess, percentHsUnsuccess]
 					}]
 				},
 				options: {

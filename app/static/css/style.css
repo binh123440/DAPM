@@ -6512,6 +6512,22 @@ textarea.form-control {
 .bg-gradient {
   background-image: var(--bs-gradient) !important; }
 
+.color-valid {
+  background: #496ecc;
+}
+
+.color-invalid {
+  background: #ffa755;
+}
+
+.color-success {
+  background: #68e365;
+}
+
+.color-unsuccess {
+  background: #c8c8c8;
+}
+
 .user-select-all {
   user-select: all !important; }
 
