@@ -241,14 +241,16 @@ def luu_ho_so_dang_ky(request):
         pass
         # Trích xuất văn bản từ hình ảnh
         mota_hoan_canh_kho_khan = ''
-        for anh in hinh_anh:
-            img = Image.open(anh)
-            text = pytesseract.image_to_string(img, lang='vie')
-            print(text)
-            if text == "":
-                return JsonResponse({'success': False, 'error': 'Hình ảnh không nhận được chữ'}); break
-            mota_hoan_canh_kho_khan += text
-
+        if hinh_anh:
+            for anh in hinh_anh:
+                img = Image.open(anh)
+                text = pytesseract.image_to_string(img, lang='vie')
+                print(text)
+                if text == "" or text == None:
+                    return JsonResponse({'success': False, 'error': 'Hình ảnh không nhận được chữ'}); break
+                mota_hoan_canh_kho_khan += text
+        else:
+            return JsonResponse({'success': False, 'error': 'Chưa thêm hình ảnh'})
         doi_tuong = DoiTuongChinhSach.objects.get(MDT=ma_doi_tuong)
         mdt = doi_tuong.MDT
 
@@ -505,12 +507,28 @@ def signup(request):
             email = form.cleaned_data['Email']
             password = form.cleaned_data['Pass']
             
+
+
+            sinhvien, created = SinhVien.objects.get_or_create(MSV=msv, defaults={
+                'Hoten': hoten,
+                'Email': email,
+                'Pass': password,
+            })
+
+            if not created:
+                # Nếu không tạo được đối tượng mới (MSV đã tồn tại)
+                messages.error(request, 'Mã sinh viên này đã tồn tại trong hệ thống.')
+                return render(request, 'app/signup.html', {'form': form})
+            else:
+                sinhvien = SinhVien(MSV=msv, Hoten=hoten, Email=email, Pass=password)
+                sinhvien.save()
+            
             request.session['username'] = form.cleaned_data['MSV']
             print(request.session['username'])
             
             # Tạo một instance mới của SinhVien và lưu vào cơ sở dữ liệu
-            sinhvien = SinhVien(MSV=msv, Hoten=hoten, Email=email, Pass=password)
-            sinhvien.save()
+            # sinhvien = SinhVien(MSV=msv, Hoten=hoten, Email=email, Pass=password)
+            # sinhvien.save()
             # Chuyển hướng người dùng đến trang khác sau khi đăng ký thành công
             return redirect('base')  # Thay 'base' bằng tên của URLpattern bạn muốn chuyển hướng đến
     else:
@@ -985,6 +1003,7 @@ def charts(request):
         percent_hs_unsuccess_in_month_with_last_month = "tăng gấp " + round((hs_unsuccess1 / hs_unsuccess2) * 100, 1) + " so với tháng trước"
     else:
         percent_hs_unsuccess_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+    
     if count_hs_with_month2 != 0:
         percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1)
     else:
