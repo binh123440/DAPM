@@ -51,8 +51,9 @@ def get_DangKyHoSo(request):
     doi_tuong_chinh_sach = DoiTuongChinhSach.objects.all()
 
     if request.session.get('username') is not None:
-            user_id = request.session.get('username')
-            user = SinhVien.objects.get(MSV=user_id)
+            # user_id = request.session.get('username')
+            # user = SinhVien.objects.get(MSV=user_id)
+            return redirect('base')
     else:
             user_id = None
             user = None
