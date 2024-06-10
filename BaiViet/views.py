@@ -13,7 +13,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import SinhVienForm, DaiDienPhongBanForm
 import calendar
 # Create your views here.
-pytesseract.pytesseract.tesseract_cmd = r'D:\TestWebPython\tesseract\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def get_BaiViet(request):
     hinhanhs = HinhAnh.objects.all()
@@ -21,14 +21,14 @@ def get_BaiViet(request):
     search_query = request.GET.get('search', '')
 
     if search_query:
-        Baiviets2 = BaiViet.objects.all()
-        Baiviets3 = BaiViet.objects.all()
-        baiviets2 = Baiviets2.filter(Q(TieuDe__icontains=search_query))
+        Baiviets2 = BaiViet.objects.select_related('MNV')
+        Baiviets3 = BaiViet.objects.select_related('MNV')
+        baiviets2 = Baiviets2.filter(Q(Noidung__icontains=search_query) | Q(MNV__Hoten__icontains=search_query))
         baiviets = BaiViet.objects.none()
     else:
-        baiviets = BaiViet.objects.all()[:3]
-        baiviets2 = BaiViet.objects.all()[:5]
-        Baiviets3 = BaiViet.objects.all()
+        baiviets = BaiViet.objects.select_related('MNV')[:3]
+        baiviets2 = BaiViet.objects.select_related('MNV')[:5]
+        Baiviets3 = BaiViet.objects.select_related('MNV')
 
     if request.session.get('username') is not None:
             user_id = request.session.get('username')
@@ -114,8 +114,9 @@ def index(request):
         baiviet = baiviet[:2]
 
     if request.session.get('username') is not None:
-            user_id = request.session.get('username')
-            user = SinhVien.objects.get(MSV=user_id)
+        # user_id = request.session.get('username')
+        # user = SinhVien.objects.get(MSV=user_id)
+        return redirect('base')
     else:
             user_id = None
             user = None
@@ -242,7 +243,7 @@ def luu_ho_so_dang_ky(request):
         mota_hoan_canh_kho_khan = ''
         for anh in hinh_anh:
             img = Image.open(anh)
-            text = pytesseract.image_to_string(img)
+            text = pytesseract.image_to_string(img, lang='vie')
             print(text)
             if text == "":
                 return JsonResponse({'success': False, 'error': 'Hình ảnh không nhận được chữ'}); break
@@ -504,12 +505,25 @@ def signup(request):
             email = form.cleaned_data['Email']
             password = form.cleaned_data['Pass']
             
+
+
+            sinhvien, created = SinhVien.objects.get_or_create(MSV=msv, defaults={
+                'Hoten': hoten,
+                'Email': email,
+                'Pass': password,
+            })
+
+            if not created:
+                # Nếu không tạo được đối tượng mới (MSV đã tồn tại)
+                messages.error(request, 'Mã sinh viên này đã tồn tại trong hệ thống.')
+                return render(request, 'app/signup.html', {'form': form})
+            
             request.session['username'] = form.cleaned_data['MSV']
             print(request.session['username'])
             
             # Tạo một instance mới của SinhVien và lưu vào cơ sở dữ liệu
-            sinhvien = SinhVien(MSV=msv, Hoten=hoten, Email=email, Pass=password)
-            sinhvien.save()
+            # sinhvien = SinhVien(MSV=msv, Hoten=hoten, Email=email, Pass=password)
+            # sinhvien.save()
             # Chuyển hướng người dùng đến trang khác sau khi đăng ký thành công
             return redirect('base')  # Thay 'base' bằng tên của URLpattern bạn muốn chuyển hướng đến
     else:
@@ -782,7 +796,10 @@ def base(request):
     else:
         percent_hs_unsuccess_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
       
-    percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1) 
+    if count_hs_with_month2 != 0:
+        percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1) 
+    else:
+        percent_hs_in_month_with_last_month = 0
 
     time_list_dk = []
     time_list_xd = []
@@ -983,7 +1000,10 @@ def charts(request):
     else:
         percent_hs_unsuccess_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
       
-    percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1)
+    if count_hs_with_month2 != 0:
+        percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1)
+    else:
+        percent_hs_in_month_with_last_month = 0
        
     context = {
         'hs_s' : hs_s,

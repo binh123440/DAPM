@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filter %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,12 +56,12 @@
           <div class="card-group"><image class="image" src="{{baiviet.AnhBia.url}}"></div>
           <div class="card-group-1">
             <a class="heading-link-announcing" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none"
-              >{{baiviet.TieuDe}}</a>
+              >{{baiviet.Noidung | cat_chuoi:70}}</a>
             <div class="flex-row">
               <button class="svg"><img class="icon-clock" src="{%static 'app/assets/images/7e5657f7-c444-4159-8197-cfefaa9cc0bf.png' %}"></img></button>
               <img class="image-2" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
               <span class="date">{{baiviet.Ngaydang | date:"d/m/Y"}}</span
-              ><span class="link-haris-butt">Phòng CTSV</span>
+              ><span class="link-haris-butt">{{baiviet.MNV.Hoten}}</span>
             </div>
           </div>
           <div class="before"></div>
@@ -96,14 +97,14 @@
             <div class="card-group-15">
               <span class="tin-tuc">TIN TỨC</span
                 ><a class="ngan-hang-tmcp" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none"
-                >{{baiviet.TieuDe}}</a
+                >{{baiviet.Noidung | cat_chuoi:70}}</a
               >
               <div class="after"></div>
               <div class="svg-16"><img class="icon-clock-17" src="{%static 'app/assets/images/1869067c-d976-4efa-957a-4beaad8b51f2.png' %}"></img></div>
               <span class="date-18">{{baiviet.Ngaydang | date:"d/m/Y"}}</span>
               <img class="card-group-paints" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
               <span class="trung-tam-hoc"
-                >TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span
+                >{{baiviet.MNV.Hoten}}</span
               >
             </div>
           </div>
@@ -115,13 +116,13 @@
               <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
               <div class="card-group-2e">
                   <span class="link-productivity">Sự kiện</span>
-                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.TieuDe }}</a>
+                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.Noidung | cat_chuoi:70 }}</a>
                   <div class="svg-2f">
                       <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
                   </div>
                   <span class="date-31">{{ baiviet.Ngaydang | date:"d/m/Y" }}</span>
                   <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
-                  <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
+                  <span class="link-sarah-burner-33">{{baiviet.MNV.Hoten}}</span>
               </div>
               <div class="before-34"></div>
           </div>
@@ -137,13 +138,13 @@
               <img class="image-2d" src="{{ baiviet.AnhBia.url }}"></img>
               <div class="card-group-2e">
                   <span class="link-productivity">Sự kiện</span>
-                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.TieuDe }}</a>
+                  <a class="event" href="{% url 'detail' baiviet.MBV %}" style="text-decoration:none">{{ baiviet.Noidung | cat_chuoi:70 }}</a>
                   <div class="svg-2f">
                       <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
                   </div>
                   <span class="date-31">{{ baiviet.Ngaydang | date:"d/m/Y" }}</span>
                   <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
-                  <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
+                  <span class="link-sarah-burner-33">{{baiviet.MNV.Hoten}}</span>
               </div>
               <div class="before-34"></div>
           </div>
@@ -175,11 +176,11 @@
                                       <img class="image-2d" src="${post.AnhBia}" alt="Bài viết"></img>
                                       <div class="card-group-2e">
                                           <span class="link-productivity">Sự kiện</span>
-                                          <a class="event" href="${detailUrl}" style="text-decoration:none">${post.TieuDe}</a>
+                                          <a class="event" href="${detailUrl}" style="text-decoration:none">${post.Noidung | cat_chuoi:70}</a>
                                           <div class="svg-2f"><img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}" alt="Clock"></img></div>
                                           <span class="date-31">${post.Ngaydang}</span>
                                           <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24" alt="Icon"></img>
-                                          <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
+                                          <span class="link-sarah-burner-33">${post.MNV.Hoten}</span>
                                       </div>
                                       <div class="before-34"></div>
                                   </div>`;

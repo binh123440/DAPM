@@ -3,13 +3,14 @@
 <html>
 <head>
   <meta charset="utf-8"><meta name="viewport" content="initial-scale=1, width=device-width">
-    <link rel="stylesheet" href="{% static 'app/css/style_info_sv.css' %}">
-    <link rel="stylesheet" href="{% static 'app/css/global_sv.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ABeeZee:wght@400&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;600;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap">
-    <script src="{% static 'app/js/script_sv.js' %}"></script> 
-  </head>
+  <title>Chỉnh sửa thông tin cá nhân</title>
+  <link rel="stylesheet" href="{% static 'app/css/style_info_sv.css' %}">
+  <link rel="stylesheet" href="{% static 'app/css/global_sv.css' %}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ABeeZee:wght@400&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap">
+  <script src="{% static 'app/js/script_sv.js' %}"></script> 
+</head>
 <body>
   <div class="bgr">
     <div class="header">
@@ -55,7 +56,7 @@
       <div class="nk">Niên khóa</div>
       <input class="nk-sv" name="Nienkhoa" value="{{ sinhvien.Nienkhoa }}">
       <div class="ngay-sinh">Ngày sinh</div>
-      <input class="dob-st" name="Ngaysinh" value="{{ sinhvien.Ngaysinh|date:'Y-m-d' }}">
+      <input class="dob-st" name="Ngaysinh" value="{{ sinhvien.Ngaysinh | date:"d/m/Y" }}">
       <div class="dn-tc1">Dân tộc</div>
       <div class="lp1">Lớp</div>
       <div class="khoa1">Khoa</div>

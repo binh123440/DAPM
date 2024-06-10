@@ -1,3 +1,3 @@
 import pytesseract
-pytesseract.pytesseract.tesseract_cmd = r'D:\\TestWebPython\\tesseract\\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 print(pytesseract.pytesseract.tesseract_cmd)

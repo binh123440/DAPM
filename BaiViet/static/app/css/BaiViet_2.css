@@ -66,6 +66,7 @@ button {
   margin: 14px 0 0 130px;
   background-size: cover;
   z-index: 336;
+  object-fit: cover;
 }
 .card-group-1 {
   position: relative;
@@ -1244,6 +1245,7 @@ button {
   z-index: 83;
   border-radius: 17px 17px 0 0;
   overflow: hidden;
+  object-fit: cover;
 }
 .card-group-2e {
   position: relative;
