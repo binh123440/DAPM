@@ -111,10 +111,10 @@
                         </div>
                         <ul class="navbar-nav header-right">
 							<li class="nav-item">
-								<div class="input-group search-area">
-									<input type="text" class="form-control" placeholder="Nhập từ khoá cần tìm kiếm tại đây">
-									<span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
-								</div>
+								<form method="GET" class="input-group search-area">
+									<input type="text" name="query" class="form-control" placeholder="Nhập từ khoá cần tìm kiếm tại đây">
+									<button type="submit" class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></button>
+								</form>
 							</li>
 							<li class="nav-item dropdown notification_dropdown">
                                 <a class="nav-link" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -492,32 +492,19 @@
 											<tbody>
 												<tr>
 													<td>
-														<label for="Tháng">Tháng:</label>
-														<select id="Tháng" name="Tháng">
-															<option value="Tháng 1"><button>Tháng 1</button></option>
-															<option value="Tháng 2">Tháng 2</option>
-															<option value="Tháng 3">Tháng 3</option>
-															<option value="Tháng 4">Tháng 4</option>
-															<option value="Tháng 5">Tháng 5</option>
-															<option value="Tháng 6">Tháng 6</option>
-															<option value="Tháng 7">Tháng 7</option>
-															<option value="Tháng 8">Tháng 8</option>
-															<option value="Tháng 9">Tháng 9</option>
-															<option value="Tháng 10">Tháng 10</option>
-															<option value="Tháng 11">Tháng 11</option>
-															<option value="Tháng 12">Tháng 12</option>
+														<label for="Tháng">Thời gian đăng ký</label>
+														<select id="time_dk" name="time_dk">
+															{% for time in time_list_dk %}
+																<option value="{{ time.month }} / {{ time.year }}">Tháng {{ time.month }} / {{ time.year }}</option>
+															{% endfor %}
 														</select>
 													</td>
 													<td>
-														<label for="Năm">Năm:</label>
-														<select id="Năm" name="Năm">
-															<option value="Năm 2024"><button>Năm 2024</button></option>
-															<option value="Năm 2023">Năm 2023</option>
-															<option value="Năm 2022">Năm 2022</option>
-															<option value="Năm 2021">Năm 2021</option>
-															<option value="Năm 2020">Năm 2020</option>
-															<option value="Năm 2019">Năm 2019</option>
-															<option value="Năm 2018">Năm 2018</option>															
+														<label for="Tháng">Thời gian xét duyệt</label>
+														<select id="time_xd" name="time_xd">
+															{% for time in time_list_xd %}
+																<option value="{{ time.month }} / {{ time.year }}">Tháng {{ time.month }} / {{ time.year }}</option>
+															{% endfor %}
 														</select>
 													</td>
 												</tr>
@@ -556,7 +543,7 @@
 															{% endif %}
 														</td>
 														<td>
-															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.TenSV }}</a></h6>
+															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.MSV.Hoten }}</a></h6>
 															{% if hs.TrangthaiXacnhan == 0 %}
 																<span class="fs-14">Hồ sơ hợp lệ</span>
 															{% else %}
@@ -564,13 +551,13 @@
 															{% endif %}	
 														</td>
 														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky }}</h6>
-															<span class="fs-14">{{ hs.ThoigianDangky }}</span>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky | date:"d/m/Y" }}</h6>
+															<span class="fs-14">{{ hs.Ngaydangky | date:"H:i:s" }}</span>
 														</td>
-														<td><span class="fs-16 text-black font-w600">{{ hs.Tennhanvien }}</span></td>
+														<td><span class="fs-16 text-black font-w600">{{ hs.MNV.Hoten }}</span></td>
 														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet }}</h6>
-															<span class="fs-14">{{ hs.ThoigianXetduyet }}</span>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet | date:"d/m/Y" }}</h6>
+															<span class="fs-14">{{ hs.Ngayxetduyet | date:"H:i:s" }}</span>
 														</td>
 														<td>
 															{% if hs.TrangthaiXetduyet == 0 %}
@@ -583,7 +570,7 @@
 														</td>
 														<td>
 															<div class="container-detail">
-																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MaHS }}">
+																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MHSDK }}">
 																	<span class="button-content">Chi tiết</span>
 																</button>																
 															</div>
@@ -600,32 +587,19 @@
 											<tbody>
 												<tr>
 													<td>
-														<label for="Tháng">Tháng:</label>
-														<select id="Tháng" name="Tháng">
-															<option value="Tháng 1"><button>Tháng 1</button></option>
-															<option value="Tháng 2">Tháng 2</option>
-															<option value="Tháng 3">Tháng 3</option>
-															<option value="Tháng 4">Tháng 4</option>
-															<option value="Tháng 5">Tháng 5</option>
-															<option value="Tháng 6">Tháng 6</option>
-															<option value="Tháng 7">Tháng 7</option>
-															<option value="Tháng 8">Tháng 8</option>
-															<option value="Tháng 9">Tháng 9</option>
-															<option value="Tháng 10">Tháng 10</option>
-															<option value="Tháng 11">Tháng 11</option>
-															<option value="Tháng 12">Tháng 12</option>
+														<label for="Tháng">Thời gian đăng ký</label>
+														<select id="time_dk" name="time_dk">
+															{% for time in time_list_dk %}
+																<option value="{{ time.month }} / {{ time.year }}">Tháng {{ time.month }} / {{ time.year }}</option>
+															{% endfor %}
 														</select>
 													</td>
 													<td>
-														<label for="Năm">Năm:</label>
-														<select id="Năm" name="Năm">
-															<option value="Năm 2024"><button>Năm 2024</button></option>
-															<option value="Năm 2023">Năm 2023</option>
-															<option value="Năm 2022">Năm 2022</option>
-															<option value="Năm 2021">Năm 2021</option>
-															<option value="Năm 2020">Năm 2020</option>
-															<option value="Năm 2019">Năm 2019</option>
-															<option value="Năm 2018">Năm 2018</option>															
+														<label for="Tháng">Thời gian xét duyệt</label>
+														<select id="time_xd" name="time_xd">
+															{% for time in time_list_xd %}
+																<option value="{{ time.month }} / {{ time.year }}">Tháng {{ time.month }} / {{ time.year }}</option>
+															{% endfor %}
 														</select>
 													</td>
 												</tr>
@@ -664,7 +638,7 @@
 															{% endif %}
 														</td>
 														<td>
-															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.TenSV }}</a></h6>
+															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.MSV.Hoten }}</a></h6>
 															{% if hs.TrangthaiXacnhan == 0 %}
 																<span class="fs-14">Hồ sơ hợp lệ</span>
 															{% else %}
@@ -672,13 +646,13 @@
 															{% endif %}	
 														</td>
 														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky }}</h6>
-															<span class="fs-14">{{ hs.ThoigianDangky }}</span>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky | date:"d/m/Y" }}</h6>
+															<span class="fs-14">{{ hs.Ngaydangky | date:"H:i:s" }}</span>
 														</td>
-														<td><span class="fs-16 text-black font-w600">{{ hs.Tennhanvien }}</span></td>
+														<td><span class="fs-16 text-black font-w600">{{ hs.MNV.Hoten }}</span></td>
 														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet }}</h6>
-															<span class="fs-14">{{ hs.ThoigianXetduyet }}</span>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet | date:"d/m/Y" }}</h6>
+															<span class="fs-14">{{ hs.Ngayxetduyet | date:"H:i:s" }}</span>
 														</td>
 														<td>
 															{% if hs.TrangthaiXetduyet == 0 %}
@@ -691,7 +665,7 @@
 														</td>
 														<td>
 															<div class="container-detail">
-																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MaHS }}">
+																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MHSDK }}">
 																	<span class="button-content">Chi tiết</span>
 																</button>																
 															</div>
@@ -708,32 +682,19 @@
 											<tbody>
 												<tr>
 													<td>
-														<label for="Tháng">Tháng:</label>
-														<select id="Tháng" name="Tháng">
-															<option value="Tháng 1"><button>Tháng 1</button></option>
-															<option value="Tháng 2">Tháng 2</option>
-															<option value="Tháng 3">Tháng 3</option>
-															<option value="Tháng 4">Tháng 4</option>
-															<option value="Tháng 5">Tháng 5</option>
-															<option value="Tháng 6">Tháng 6</option>
-															<option value="Tháng 7">Tháng 7</option>
-															<option value="Tháng 8">Tháng 8</option>
-															<option value="Tháng 9">Tháng 9</option>
-															<option value="Tháng 10">Tháng 10</option>
-															<option value="Tháng 11">Tháng 11</option>
-															<option value="Tháng 12">Tháng 12</option>
+														<label for="Tháng">Thời gian đăng ký</label>
+														<select id="time_dk" name="time_dk">
+															{% for time in time_list_dk %}
+																<option value="{{ time.month }} / {{ time.year }}">Tháng {{ time.month }} / {{ time.year }}</option>
+															{% endfor %}
 														</select>
 													</td>
 													<td>
-														<label for="Năm">Năm:</label>
-														<select id="Năm" name="Năm">
-															<option value="Năm 2024"><button>Năm 2024</button></option>
-															<option value="Năm 2023">Năm 2023</option>
-															<option value="Năm 2022">Năm 2022</option>
-															<option value="Năm 2021">Năm 2021</option>
-															<option value="Năm 2020">Năm 2020</option>
-															<option value="Năm 2019">Năm 2019</option>
-															<option value="Năm 2018">Năm 2018</option>															
+														<label for="Tháng">Thời gian xét duyệt</label>
+														<select id="time_xd" name="time_xd">
+															{% for time in time_list_xd %}
+																<option value="{{ time.month }} / {{ time.year }}">Tháng {{ time.month }} / {{ time.year }}</option>
+															{% endfor %}
 														</select>
 													</td>
 												</tr>
@@ -772,7 +733,7 @@
 															{% endif %}
 														</td>
 														<td>
-															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.TenSV }}</a></h6>
+															<h6 class="fs-16 font-w600 mb-0"><a href="javascript:void(0);" class="text-black">{{ hs.MSV.Hoten }}</a></h6>
 															{% if hs.TrangthaiXacnhan == 0 %}
 																<span class="fs-14">Hồ sơ hợp lệ</span>
 															{% else %}
@@ -780,13 +741,13 @@
 															{% endif %}	
 														</td>
 														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky }}</h6>
-															<span class="fs-14">{{ hs.ThoigianDangky }}</span>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngaydangky | date:"d/m/Y" }}</h6>
+															<span class="fs-14">{{ hs.Ngaydangky | date:"H:i:s" }}</span>
 														</td>
-														<td><span class="fs-16 text-black font-w600">{{ hs.Tennhanvien }}</span></td>
+														<td><span class="fs-16 text-black font-w600">{{ hs.MNV.Hoten }}</span></td>
 														<td>
-															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet }}</h6>
-															<span class="fs-14">{{ hs.ThoigianXetduyet }}</span>
+															<h6 class="fs-16 text-black font-w600 mb-0">{{ hs.Ngayxetduyet | date:"d/m/Y" }}</h6>
+															<span class="fs-14">{{ hs.Ngayxetduyet | date:"H:i:s" }}</span>
 														</td>
 														<td>
 															{% if hs.TrangthaiXetduyet == 0 %}
@@ -799,7 +760,7 @@
 														</td>
 														<td>
 															<div class="container-detail">
-																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MaHS }}">
+																<button class="btn" onclick="showModal(this)" data-mahs="{{ hs.MHSDK }}">
 																	<span class="button-content">Chi tiết</span>
 																</button>																
 															</div>
@@ -955,7 +916,7 @@
 					document.querySelector('.overlay-detail').style.display = 'block';
 				}
 			};
-			xhttp.open("GET", "/staff/view_detail/" + mahs + "/", true);
+			xhttp.open("GET", "/view_detail/" + mahs + "/", true);
 			xhttp.send();
 		}
 		

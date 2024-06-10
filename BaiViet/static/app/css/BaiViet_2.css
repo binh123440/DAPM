@@ -154,7 +154,7 @@ button {
   justify-content: flex-start;
   position: absolute;
   height: 19.5px;
-  top: 3.25px;
+  top: 9.25px;
   left: 501.02px;
   color: #7c828d;
   font-family: Roboto, var(--default-font-family);
@@ -2240,8 +2240,8 @@ button {
   position: absolute;
   height: 488px;
   top: 203px;
-  right: 540.34px;
-  left: 150px;
+  right: 655.34px;
+  left: 162px;
   background: #ffffff;
   z-index: 150;
   border-radius: 9px;
@@ -2468,7 +2468,7 @@ button {
   width: 156px;
   height: 52px;
   top: 639px;
-  left: 930.66px;
+  left: 970.66px;
   cursor: pointer;
   background: #7b68ee;
   border: none;

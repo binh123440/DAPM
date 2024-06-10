@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_filter %}
 <!DOCTYPE html>
 <html>
 
@@ -95,7 +96,7 @@
                   <img class="logo-ute-1-icon" loading="lazy" alt="" src="{{bai.AnhBia.url}}"  />
                 </div>
                 <div class="divcard-group1">
-                  <h1 class="heading-21">{{ bai.Noidung }}</h1>
+                  <h1 class="heading-21">{{ bai.Noidung | cat_chuoi:70 }}</h1>
                   <div class="divcard-group-inner">
                     <div class="frame-div">
                       <div class="frame-wrapper1">

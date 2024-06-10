@@ -27722,7 +27722,8 @@ table.dataTable.display tbody td {
   border-radius: 1.25rem; }
 
 .transactions-table tr td:first-child {
-  width: 50px; }
+  /* width: 50px;  */
+}
 
 .card-tabs .nav-tabs {
   width: max-content;

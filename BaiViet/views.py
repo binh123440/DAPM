@@ -638,40 +638,48 @@ def base(request):
         except DaiDienPhongBan.MultipleObjectsReturned:
             print("Có nhiều hơn 1 nv tồn tại với mnv")
     
-    hs_objects = []
-    for hs in hs_s:
-        mahs = hs.MHSDK
-        sinh_vien = hs.MSV
-        ten_sinh_vien = sinh_vien.Hoten
-        trang_thai_xac_nhan = hs.TrangthaiXacnhan
-        ngay_dang_ky = hs.Ngaydangky.date()
-        thoi_gian_dang_ky = hs.Ngaydangky.time()
-        nhan_vien = hs.MNV
-        ten_nhan_vien = nhan_vien.Hoten
-        if hs.Ngayxetduyet is not None:
-            ngay_xet_duyet = hs.Ngayxetduyet.date()
-            thoi_gian_xet_duyet = hs.Ngayxetduyet.time()
-        else:
-            ngay_xet_duyet = None
-            thoi_gian_xet_duyet = None
-        if hs.TrangthaiXetduyet is not None:
-            trang_thai_xet_duyet = hs.TrangthaiXetduyet
-        else:
-            trang_thai_xet_duyet = None
-        
+    hs_objects = HoSoDangKy.objects.select_related('MSV', 'MNV')
+    query = request.GET.get('query')
+    if query:
+        keywords = query.split()
+        query_filter = Q()
+        for keyword in keywords:
+            query_filter |= Q(MSV__Hoten__icontains=keyword) | Q(MNV__Hoten__icontains=keyword)
+        hs_objects = hs_objects.filter(query_filter)  
 
+    
+    # for hs in hs_s:
+    #     mahs = hs.MHSDK
+    #     sinh_vien = hs.MSV
+    #     ten_sinh_vien = sinh_vien.Hoten
+    #     trang_thai_xac_nhan = hs.TrangthaiXacnhan
+    #     ngay_dang_ky = hs.Ngaydangky.date()
+    #     thoi_gian_dang_ky = hs.Ngaydangky.time()
+    #     nhan_vien = hs.MNV
+    #     ten_nhan_vien = nhan_vien.Hoten
+    #     if hs.Ngayxetduyet is not None:
+    #         ngay_xet_duyet = hs.Ngayxetduyet.date()
+    #         thoi_gian_xet_duyet = hs.Ngayxetduyet.time()
+    #     else:
+    #         ngay_xet_duyet = None
+    #         thoi_gian_xet_duyet = None
+    #     if hs.TrangthaiXetduyet is not None:
+    #         trang_thai_xet_duyet = hs.TrangthaiXetduyet
+    #     else:
+    #         trang_thai_xet_duyet = None
 
-        hs_objects.append({
-            'MaHS' : mahs,
-            'TenSV' : ten_sinh_vien,
-            'TrangthaiXacnhan' : trang_thai_xac_nhan,
-            'Ngaydangky' : ngay_dang_ky,
-            'ThoigianDangky' : thoi_gian_dang_ky,
-            'Tennhanvien' : ten_nhan_vien,
-            'Ngayxetduyet' : ngay_xet_duyet,
-            'ThoigianXetduyet' : thoi_gian_xet_duyet,
-            'TrangthaiXetduyet' : trang_thai_xet_duyet,
-        })
+    #     hs_objects.append({
+    #         'MaHS' : mahs,
+    #         'TenSV' : ten_sinh_vien,
+    #         'TrangthaiXacnhan' : trang_thai_xac_nhan,
+    #         'Ngaydangky' : ngay_dang_ky,
+    #         'ThoigianDangky' : thoi_gian_dang_ky,
+    #         'Tennhanvien' : ten_nhan_vien,
+    #         'Ngayxetduyet' : ngay_xet_duyet,
+    #         'ThoigianXetduyet' : thoi_gian_xet_duyet,
+    #         'TrangthaiXetduyet' : trang_thai_xet_duyet,
+    #     })
+    
     
     total_hs_valid = 0
     total_hs_invalid = 0
@@ -774,7 +782,31 @@ def base(request):
     else:
         percent_hs_unsuccess_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
       
-    percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1)
+    percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1) 
+
+    time_list_dk = []
+    time_list_xd = []
+    for hs in hs_s:
+        if hs.Ngaydangky:
+            # Tạo một từ điển với tháng và năm
+            month_year = {
+                'month': hs.Ngaydangky.month,
+                'year': hs.Ngaydangky.year
+            }
+            
+            # Kiểm tra xem month_year đã tồn tại trong time_list chưa
+            if month_year not in time_list_dk:
+                time_list_dk.append(month_year)
+        if hs.Ngayxetduyet:
+            # Tạo một từ điển với tháng và năm
+            month_year = {
+                'month': hs.Ngayxetduyet.month,
+                'year': hs.Ngayxetduyet.year
+            }
+            
+            # Kiểm tra xem month_year đã tồn tại trong time_list chưa
+            if month_year not in time_list_xd:
+                time_list_xd.append(month_year)
       
     context = {
         'hs_s' : hs_s,
@@ -809,6 +841,8 @@ def base(request):
         'hs_valid1' : hs_valid1,
         'hs_success1' : hs_success1,
         'hs1' : count_hs_1,
+        'time_list_dk' : time_list_dk,
+        'time_list_xd' : time_list_xd,
     }
     
     return render(request, 'app/base.html', context)

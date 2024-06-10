@@ -59,7 +59,7 @@
             <div class="flex-row">
               <button class="svg"><img class="icon-clock" src="{%static 'app/assets/images/7e5657f7-c444-4159-8197-cfefaa9cc0bf.png' %}"></img></button>
               <img class="image-2" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}"></img>
-              <span class="date">{{baiviet.Ngaydang}}</span
+              <span class="date">{{baiviet.Ngaydang | date:"d/m/Y"}}</span
               ><span class="link-haris-butt">Phòng CTSV</span>
             </div>
           </div>
@@ -100,7 +100,7 @@
               >
               <div class="after"></div>
               <div class="svg-16"><img class="icon-clock-17" src="{%static 'app/assets/images/1869067c-d976-4efa-957a-4beaad8b51f2.png' %}"></img></div>
-              <span class="date-18">{{baiviet.Ngaydang}}</span>
+              <span class="date-18">{{baiviet.Ngaydang | date:"d/m/Y"}}</span>
               <img class="card-group-paints" src="{%static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
               <span class="trung-tam-hoc"
                 >TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span
@@ -119,7 +119,7 @@
                   <div class="svg-2f">
                       <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
                   </div>
-                  <span class="date-31">{{ baiviet.Ngaydang }}</span>
+                  <span class="date-31">{{ baiviet.Ngaydang | date:"d/m/Y" }}</span>
                   <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
                   <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
               </div>
@@ -141,7 +141,7 @@
                   <div class="svg-2f">
                       <img class="icon-clock-30" src="{% static 'app/assets/images/e5eaa414-76bf-44d4-8167-4fa8ec056fc2.png' %}"></img>
                   </div>
-                  <span class="date-31">{{ baiviet.Ngaydang }}</span>
+                  <span class="date-31">{{ baiviet.Ngaydang | date:"d/m/Y" }}</span>
                   <img class="card-group-paints-32" src="{% static 'app/assets/images/6bc40a024ca56fc9c0eb9ba8b6675471998cf6e2.png' %}" width="24" height="24"></img>
                   <span class="link-sarah-burner-33">TRUNG TÂM HỌC LIỆU VÀ TRUYỀN THÔNG</span>
               </div>
@@ -151,7 +151,7 @@
           {% endfor %}
         </div>
         <button class="button-6b">
-          <span class="load-more">Load More</span>
+          <span class="load-more">Xem thêm</span>
           <div class="before-6c"></div>
         </button>
 
@@ -245,7 +245,7 @@
     Khoa Điện - Điện tử, Trường Đại học Sư phạm Kỹ thuật tư vấn tuyển sinh - Hướng nghiệp năm 2022
   </span>
   <button class="link">
-    <span class="watch-more">Watch More</span>
+    <span class="watch-more">Xem thêm</span>
   </button>
   
   <img class="svg-7d" src="{%static 'app/assets/images/ed759f3f-31b4-4449-8009-8db52e33dbcd.png' %}"></img>

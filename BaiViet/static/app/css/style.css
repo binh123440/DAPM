@@ -473,14 +473,12 @@ main {
 
 .logo-ute-1-icon {
   position: absolute;
-  display: flex;
-  align-items: center;
-  top: 29px;
-  left: 250px;
-  width: 261px;
-  height: 261px;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  height: auto;
   object-fit: cover;
-  z-index: 2;
+  transform: translate(-50%,-50%);
 }
 
 .divcard-group {
@@ -497,7 +495,7 @@ main {
 .heading-21 {
   margin: 0;
   width: max-content;
-  height: 250px;
+  height: 100%;
   position: relative;
   font-size: inherit;
   line-height: 42.28px;
