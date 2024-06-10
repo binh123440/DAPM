@@ -782,6 +782,7 @@ def base(request):
         percent_hs_unsuccess_in_month_with_last_month = "tăng gấp " + round((hs_unsuccess1 / hs_unsuccess2) * 100, 1) + " so với tháng trước"
     else:
         percent_hs_unsuccess_in_month_with_last_month = "Không có hồ sơ nào thành công tháng trước đó"  # Hoặc một giá trị nào đó bạn thấy hợp lý
+    
     if count_hs_with_month2 != 0:
         percent_hs_in_month_with_last_month = round((count_hs_with_month1 / count_hs_with_month2) * 100, 1) 
     else:

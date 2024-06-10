@@ -34,18 +34,18 @@ class SinhVien(models.Model):
     ]  # Định nghĩa choices cho giới tính
     MSV = models.CharField(max_length=15, primary_key=True)
     Hoten = models.CharField(max_length=50)
-    Ngaysinh = models.DateField()
+    Ngaysinh = models.DateField(null=True, blank=True)
     Gioitinh = models.IntegerField(choices=GIOI_TINH_CHOICES, null=True, blank=True)  # 0: Nam, 1: Nữ
-    CCCD = models.CharField(max_length=12)
-    Quequan = models.CharField(max_length=255)
+    CCCD = models.CharField(max_length=12,null=True, blank=True)
+    Quequan = models.CharField(max_length=255,null=True, blank=True)
     SDT = models.CharField(max_length=12, null=True, blank=True)
     Email = models.EmailField(null=True, blank=True)
-    Lopsinhhoat = models.CharField(max_length=10)
-    Nganhhoc = models.CharField(max_length=50)
-    Khoa = models.CharField(max_length=50)
-    Nienkhoa = models.CharField(max_length=9)
-    Dantoc = models.CharField(max_length=255)
-    Pass = models.CharField(max_length=50)
+    Lopsinhhoat = models.CharField(max_length=10,null=True, blank=True)
+    Nganhhoc = models.CharField(max_length=50,null=True, blank=True)
+    Khoa = models.CharField(max_length=50,null=True, blank=True)
+    Nienkhoa = models.CharField(max_length=9,null=True, blank=True)
+    Dantoc = models.CharField(max_length=255,null=True, blank=True)
+    Pass = models.CharField(max_length=50,null=True, blank=True)
     Image = models.ImageField( null=True, blank=True)
 
 class HinhAnh(models.Model):
