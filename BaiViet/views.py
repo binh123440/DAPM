@@ -243,7 +243,7 @@ def luu_ho_so_dang_ky(request):
         mota_hoan_canh_kho_khan = ''
         for anh in hinh_anh:
             img = Image.open(anh)
-            text = pytesseract.image_to_string(img)
+            text = pytesseract.image_to_string(img, lang='vie')
             print(text)
             if text == "":
                 return JsonResponse({'success': False, 'error': 'Hình ảnh không nhận được chữ'}); break
